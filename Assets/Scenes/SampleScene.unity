@@ -153,8 +153,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152884156}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.99988985, z: 0.014843415, w: 0}
-  m_LocalPosition: {x: -3.6, y: 17.06, z: 13.77}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 2.8749, y: 8.6015, z: 13.5416}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -162,7 +162,7 @@ Transform:
   - {fileID: 1209021348}
   - {fileID: 1174553125}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -1.701, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!135 &152884158
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -478,6 +478,10 @@ PrefabInstance:
       propertyPath: texture
       value: 
       objectReference: {fileID: 2800000, guid: 1c1912ea8e6dc2347932f410915bfb5b, type: 3}
+    - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
+      propertyPath: childNoOfSeeds
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -543,6 +547,10 @@ PrefabInstance:
       propertyPath: texture
       value: 
       objectReference: {fileID: 2800000, guid: 631567fc47598fc4987912a3c6d823ec, type: 3}
+    - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
+      propertyPath: childNoOfSeeds
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.04
@@ -1237,6 +1245,10 @@ PrefabInstance:
       propertyPath: texture
       value: 
       objectReference: {fileID: 2800000, guid: e45d2015da5597441ae7145b1553952e, type: 3}
+    - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
+      propertyPath: childNoOfSeeds
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.94
@@ -1454,13 +1466,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15065694, y: 0, z: 0, w: 0.9885861}
-  m_LocalPosition: {x: 0, y: 0.22, z: -0.522}
+  m_LocalRotation: {x: 0.15600345, y: 0, z: 0, w: 0.9877565}
+  m_LocalPosition: {x: 0, y: 0.399, z: -0.787}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 152884157}
-  m_LocalEulerAnglesHint: {x: 17.33, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 17.95, y: 0, z: 0}
 --- !u!1 &1152811031
 GameObject:
   m_ObjectHideFlags: 0
@@ -2290,6 +2302,10 @@ PrefabInstance:
       propertyPath: texture
       value: 
       objectReference: {fileID: 2800000, guid: 349a29553aa132a4a920bafa257314c8, type: 3}
+    - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
+      propertyPath: childNoOfSeeds
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.12
@@ -2383,6 +2399,10 @@ PrefabInstance:
       propertyPath: texture
       value: 
       objectReference: {fileID: 2800000, guid: f4053fa52221dcb47ac59f0ef96a54be, type: 3}
+    - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
+      propertyPath: childNoOfSeeds
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
