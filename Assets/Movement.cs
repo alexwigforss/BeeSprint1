@@ -11,7 +11,8 @@ public class Movement : MonoBehaviour
     Rigidbody rb;
     [SerializeField] float moveSpeed;
     Vector3 moveForce = Vector3.zero;
-    void Start()
+	Vector3 rotateForce = Vector3.zero;
+	void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
@@ -21,7 +22,7 @@ public class Movement : MonoBehaviour
         {
             Vector3 worldMoveForce = rb.transform.TransformDirection(moveForce);
             rb.velocity += worldMoveForce;
-
+            //rb.transform.Rotate(rotateForce);
         }
     }
 
@@ -46,17 +47,24 @@ public class Movement : MonoBehaviour
         if (context.performed) { moveForce.y = -moveSpeed; }
         else if (context.canceled) { moveForce.y = 0; }
     }
+
     public void HandleMoveRight(InputAction.CallbackContext context)
     {
-        if (context.performed) { moveForce.x = moveSpeed; }
-        else if (context.canceled) { moveForce.x = 0; }
-    }
+        //if (context.performed) { rotateForce.y += moveSpeed; }
+		//else if (context.canceled) { rotateForce.y = 0; }
+		if (context.performed) { moveForce.x = moveSpeed; }
+		else if (context.canceled) { moveForce.x = 0; }
+	}
+
     public void HandleMoveLeft(InputAction.CallbackContext context)
     {
-        if (context.performed) { moveForce.x = -moveSpeed; }
-        else if (context.canceled) { moveForce.x = 0; }
-    }
-    public void HandleMoveForward(InputAction.CallbackContext context)
+		//if (context.performed) { rotateForce.y -= moveSpeed; }
+		//else if (context.canceled) { rotateForce.y = 0; }
+		if (context.performed) { moveForce.x = -moveSpeed; }
+		else if (context.canceled) { moveForce.x = 0; }
+	}
+
+	public void HandleMoveForward(InputAction.CallbackContext context)
     {
         if (context.performed) { moveForce.z = moveSpeed * 2; }
         else if (context.canceled) { moveForce.z = 0; }
