@@ -27,19 +27,23 @@ public class Collision : MonoBehaviour
 			transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Flapper>().enabled = false;
 			transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Flapper>().enabled = false;
 		}
-    }
+	}
 	public void OnTriggerEnter(Collider other)
 	{
-		pollen++;
-		Debug.Log("Pollen = " + pollen);
-		// Set the text
-		if (tmpText != null)
+		if (other.CompareTag("FlowerHitZone"))
 		{
-			tmpText.text = "" + pollen;
-		}
-		else
-		{
-			Debug.LogError("TMP_Text component not found!");
+			pollen++;
+			Debug.Log("Pollen = " + pollen);
+			// Set the text
+			if (tmpText != null)
+			{
+				tmpText.text = "" + pollen;
+			}
+			else
+			{
+				Debug.LogError("TMP_Text component not found!");
+			}
+
 		}
 	}
 	public void OnCollisionExit(UnityEngine.Collision collision)
