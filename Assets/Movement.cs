@@ -11,11 +11,17 @@ public class Movement : MonoBehaviour
 	Rigidbody rb;
 	[SerializeField] float acceleration;
 	[SerializeField] float moveSpeed;
+	[SerializeField] float rotateSpeed;
+	float fwdspeed, strspeed, risespeed = 0.0f;
 	Vector3 moveForce = Vector3.zero;
 	Vector3 rotateForce = Vector3.zero;
 	Boolean accelerate = false;
 	Boolean reverse = false;
-	Boolean slowdown = false;
+	Boolean ascend = false;
+	Boolean descend = false;
+	Boolean strleft = false;
+	Boolean strright = false;
+
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
@@ -24,40 +30,27 @@ public class Movement : MonoBehaviour
 	{
 		if (rb != null)
 		{
+			// Apply rotation
+			//rb.transform.Rotate(rotateForce);
+			rb.transform.Rotate(rotateForce * Time.deltaTime);
+
+			// Apply movement
 			Vector3 worldMoveForce = rb.transform.TransformDirection(moveForce);
-			rb.velocity += worldMoveForce;
+			rb.velocity += worldMoveForce * Time.deltaTime;
 		}
 
-        if (accelerate && moveSpeed < 10.0f)
-        {
-			moveSpeed += acceleration;
-			moveForce.z = moveSpeed;
-        }
-        else if (!accelerate && moveSpeed > 0.0f)
-        {
-			moveSpeed -= acceleration;
-			moveForce.z = moveSpeed;
-		}
-        //else
-        //{
-        //    moveForce.z = 0.0f;
-        //}
+		if (accelerate && fwdspeed < 10.0f) { fwdspeed += acceleration; moveForce.z = fwdspeed; }
+		else if (!accelerate && fwdspeed > 0.0f) { fwdspeed -= acceleration; moveForce.z = fwdspeed; }
+		if (reverse && fwdspeed > -10.0f) { fwdspeed -= acceleration; moveForce.z = fwdspeed; }
+		else if (!reverse && fwdspeed < 0.0f) { fwdspeed += acceleration; moveForce.z = fwdspeed; }
+		if (fwdspeed > -0.1 && fwdspeed < 0.1) { fwdspeed = moveForce.z = 0.0f; }
 
-		if (reverse && moveSpeed > -10.0f)
-			{
-				moveSpeed -= acceleration;
-				moveForce.z = moveSpeed;
-			}
-			else if (!reverse && moveSpeed < 0.0f)
-			{
-				moveSpeed += acceleration;
-				moveForce.z = moveSpeed;
-			}
-			//else
-			//{
-			//	moveForce.z = 0.0f;
-			//}
-		}
+		if (ascend && risespeed < 10.0f) { risespeed += acceleration; moveForce.y = risespeed; }
+		else if (!ascend && risespeed > 0.0f) { risespeed -= acceleration; moveForce.y = risespeed; }
+		if (descend && risespeed > -10.0f) { risespeed -= acceleration; moveForce.y = risespeed; }
+		else if (!descend && risespeed < 0.0f) { risespeed += acceleration; moveForce.y = risespeed; }
+		if (risespeed > -0.1 && risespeed < 0.1) { risespeed = moveForce.y = 0.0f; }
+	}
 
 	public void HandleX()
 	{
@@ -72,55 +65,54 @@ public class Movement : MonoBehaviour
 
 	public void HandleMoveUp(InputAction.CallbackContext context)
 	{
-		if (context.performed) { moveForce.y = moveSpeed; }
-		else if (context.canceled) { moveForce.y = 0; }
+		if (context.performed) { ascend = true; }
+		else if (context.canceled) { ascend = false; }
 	}
 	public void HandleMoveDown(InputAction.CallbackContext context)
 	{
-		if (context.performed) { moveForce.y = -moveSpeed; }
-		else if (context.canceled) { moveForce.y = 0; }
+		if (context.performed) { descend = true; }
+		else if (context.canceled) { descend = false; }
 	}
 
 	public void HandleMoveRight(InputAction.CallbackContext context)
 	{
-		//if (context.performed) { rotateForce.y += moveSpeed; }
+		//if (context.performed) { rotateForce.y += rotateSpeed; }
 		//else if (context.canceled) { rotateForce.y = 0; }
-		if (context.performed) { moveForce.x = moveSpeed; }
+		// strife
+		if (context.performed) { moveForce.x = moveSpeed * 10; }
 		else if (context.canceled) { moveForce.x = 0; }
 	}
 
 	public void HandleMoveLeft(InputAction.CallbackContext context)
 	{
-		//if (context.performed) { rotateForce.y -= moveSpeed; }
+		//if (context.performed) { rotateForce.y -= rotateSpeed; }
 		//else if (context.canceled) { rotateForce.y = 0; }
-		if (context.performed) { moveForce.x = -moveSpeed; }
+		// strife
+		if (context.performed) { moveForce.x = -moveSpeed * 10; }
 		else if (context.canceled) { moveForce.x = 0; }
+	}
+
+	// TODO Bygg ut eventsystemet med 
+	public void HandleSpinRight(InputAction.CallbackContext context)
+	{
+		if (context.performed) { rotateForce.z -= rotateSpeed; }
+		else if (context.canceled) { rotateForce.z = 0; }
+	}
+
+	public void HandleSpinLeft(InputAction.CallbackContext context)
+	{
+		if (context.performed) { rotateForce.z += rotateSpeed; }
+		else if (context.canceled) { rotateForce.z = 0; }
 	}
 
 	public void HandleMoveForward(InputAction.CallbackContext context)
 	{
-		//moveSpeed += acceleration;
-		if (context.performed)
-		{
-			accelerate = true;
-		}
-        else if (context.canceled)
-        {
-			accelerate = false;
-        }
-    }
+		if (context.performed) { accelerate = true; }
+		else if (context.canceled) { accelerate = false; }
+	}
 	public void HandleMoveBackward(InputAction.CallbackContext context)
 	{
-		//moveSpeed += acceleration;
-		if (context.performed)
-		{
-			reverse = true;
-		}
-		else if (context.canceled)
-		{
-			reverse = false;
-		}
-		//if (context.performed) { moveForce.z = -moveSpeed * 2; }
-		//else if (context.canceled) { moveForce.z = 0; }
+		if (context.performed) { reverse = true; }
+		else if (context.canceled) { reverse = false; }
 	}
 }
