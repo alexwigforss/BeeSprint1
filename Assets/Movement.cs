@@ -116,4 +116,25 @@ public class Movement : MonoBehaviour
 		if (context.performed) { reverse = true; }
 		else if (context.canceled) { reverse = false; }
 	}
+	public void HandleNumPadLockUp(InputAction.CallbackContext context)
+	{
+		if (context.performed) { rotateForce.x += rotateSpeed; }
+		else if (context.canceled) { rotateForce.x = 0; }
+	}
+	public void HandleNumPadLockLeft(InputAction.CallbackContext context)
+	{
+		if (context.performed) { rotateForce.z += rotateSpeed; }
+		else if (context.canceled) { rotateForce.z = 0; }
+	}
+	public void HandleNumPadLockDown(InputAction.CallbackContext context)
+	{
+		if (context.performed) { rotateForce.x -= rotateSpeed; }
+		else if (context.canceled) { rotateForce.x = 0; }
+	}
+	public void HandleNumPadLockRight(InputAction.CallbackContext context)
+	{
+		if (context.performed) { rotateForce.z -= rotateSpeed; }
+		else if (context.canceled) { rotateForce.z = 0; }
+	}
+
 }

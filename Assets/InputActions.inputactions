@@ -94,6 +94,42 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "NumLockPad8",
+                    "type": "Value",
+                    "id": "a45d285e-aed2-4f83-a7d8-b1f2905e4e0b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "NumLockPad4",
+                    "type": "Value",
+                    "id": "cbd59206-d17f-40ec-84bc-fabca8cc4a11",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "NumLockPad5",
+                    "type": "Value",
+                    "id": "14c5c38b-8f2b-4b0f-b50b-3039befeb642",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "NumLockPad6",
+                    "type": "Value",
+                    "id": "64975ec3-5170-40db-a249-3c11d06cea6d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -204,6 +240,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "SpinRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fe452473-db72-4ef0-b5aa-b9cbd0e093ce",
+                    "path": "<Keyboard>/numpad8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NumLockPad8",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd4031c7-9a65-4ef0-9a2a-f955599fb3a6",
+                    "path": "<Keyboard>/numpad4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NumLockPad4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6204c8e4-2e87-41fb-99f0-56a15624a4b2",
+                    "path": "<Keyboard>/numpad5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NumLockPad5",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f925b721-28d0-4404-a905-f799ee6bed74",
+                    "path": "<Keyboard>/numpad6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NumLockPad6",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
