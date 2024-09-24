@@ -38,19 +38,21 @@ public class Movement : MonoBehaviour
 			// Apply movement
 			Vector3 worldMoveForce = rb.transform.TransformDirection(moveForce);
 			rb.velocity += worldMoveForce * Time.deltaTime;
+
+			// Apply movement with Acceleration / Deceleration
+			if (accelerate && fwdspeed < maxSpeed) { fwdspeed += acceleration; moveForce.z = fwdspeed; }
+			else if (!accelerate && fwdspeed > 0.0f) { fwdspeed -= acceleration; moveForce.z = fwdspeed; }
+			if (reverse && fwdspeed > -maxSpeed) { fwdspeed -= acceleration; moveForce.z = fwdspeed; }
+			else if (!reverse && fwdspeed < 0.0f) { fwdspeed += acceleration; moveForce.z = fwdspeed; }
+			if (fwdspeed > -0.1 && fwdspeed < 0.1) { fwdspeed = moveForce.z = 0.0f; }
+
+			if (ascend && risespeed < maxSpeed / 2) { risespeed += acceleration; moveForce.y = risespeed; }
+			else if (!ascend && risespeed > 0.0f) { risespeed -= acceleration; moveForce.y = risespeed; }
+			if (descend && risespeed > -maxSpeed / 2) { risespeed -= acceleration; moveForce.y = risespeed; }
+			else if (!descend && risespeed < 0.0f) { risespeed += acceleration; moveForce.y = risespeed; }
+			if (risespeed > -0.1 && risespeed < 0.1) { risespeed = moveForce.y = 0.0f; }
 		}
 
-		if (accelerate && fwdspeed < maxSpeed) { fwdspeed += acceleration; moveForce.z = fwdspeed; }
-		else if (!accelerate && fwdspeed > 0.0f) { fwdspeed -= acceleration; moveForce.z = fwdspeed; }
-		if (reverse && fwdspeed > -maxSpeed) { fwdspeed -= acceleration; moveForce.z = fwdspeed; }
-		else if (!reverse && fwdspeed < 0.0f) { fwdspeed += acceleration; moveForce.z = fwdspeed; }
-		if (fwdspeed > -0.1 && fwdspeed < 0.1) { fwdspeed = moveForce.z = 0.0f; }
-
-		if (ascend && risespeed < maxSpeed / 2 ) { risespeed += acceleration; moveForce.y = risespeed; }
-		else if (!ascend && risespeed > 0.0f) { risespeed -= acceleration; moveForce.y = risespeed; }
-		if (descend && risespeed > -maxSpeed / 2) { risespeed -= acceleration; moveForce.y = risespeed; }
-		else if (!descend && risespeed < 0.0f) { risespeed += acceleration; moveForce.y = risespeed; }
-		if (risespeed > -0.1 && risespeed < 0.1) { risespeed = moveForce.y = 0.0f; }
 	}
 
 	public void HandleX()
@@ -79,31 +81,25 @@ public class Movement : MonoBehaviour
 	{
 		if (context.performed) { rotateForce.y += rotateSpeed; }
 		else if (context.canceled) { rotateForce.y = 0; }
-		// strife
-		// if (context.performed) { moveForce.x = moveSpeed * 10; }
-		// else if (context.canceled) { moveForce.x = 0; }
 	}
 
 	public void HandleMoveLeft(InputAction.CallbackContext context)
 	{
-		 if (context.performed) { rotateForce.y -= rotateSpeed; }
-		 else if (context.canceled) { rotateForce.y = 0; }
-		// strife
-		//if (context.performed) { moveForce.x = -moveSpeed * 10; }
-		// else if (context.canceled) { moveForce.x = 0; }
+		if (context.performed) { rotateForce.y -= rotateSpeed; }
+		else if (context.canceled) { rotateForce.y = 0; }
 	}
 
-	// TODO Bygg ut eventsystemet med 
+	// TODO Rename to strife
 	public void HandleSpinRight(InputAction.CallbackContext context)
 	{
-		if (context.performed) { rotateForce.z -= rotateSpeed; }
-		else if (context.canceled) { rotateForce.z = 0; }
-	}
+		if (context.performed) { moveForce.x = moveSpeed * 20; }
+		else if (context.canceled) { moveForce.x = 0; }	}
 
+	// TODO Rename to strife
 	public void HandleSpinLeft(InputAction.CallbackContext context)
 	{
-		if (context.performed) { rotateForce.z += rotateSpeed; }
-		else if (context.canceled) { rotateForce.z = 0; }
+		if (context.performed) { moveForce.x = -moveSpeed * 20; }
+		else if (context.canceled) { moveForce.x = 0; }
 	}
 
 	public void HandleMoveForward(InputAction.CallbackContext context)
