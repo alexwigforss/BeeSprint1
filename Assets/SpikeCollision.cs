@@ -19,8 +19,7 @@ public class SpikeCollision : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		Debug.Log("Triggered Something");
-
+		// Debug.Log("Triggered Something");
 		if (parentScript != null)
 		{
 			// Notify the parent about the trigger event

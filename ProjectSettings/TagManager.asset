@@ -8,6 +8,7 @@ TagManager:
   - SpikeZone
   - Flower
   - FlowerHitZone
+  - Nest
   layers:
   - Default
   - TransparentFX

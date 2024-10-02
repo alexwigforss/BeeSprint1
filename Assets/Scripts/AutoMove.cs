@@ -51,7 +51,7 @@ public class AutoMove : MonoBehaviour
             {
 				MoveForward(false);
             }
-			Debug.Log(Vector3.Distance(rb.transform.position, HiveLocation.position));
+			// Debug.Log(Vector3.Distance(rb.transform.position, HiveLocation.position));
             // MoveRight(true);
 
             // Apply rotation
@@ -75,7 +75,7 @@ public class AutoMove : MonoBehaviour
 			else if (!descend && risespeed < 0.0f) { risespeed += acceleration; moveForce.y = risespeed; }
 			if (risespeed > -0.1 && risespeed < 0.1) { risespeed = moveForce.y = 0.0f; }
 
-			Debug.Log(rotateForce.y);
+			// Debug.Log(rotateForce.y);
 		}
 
 	}

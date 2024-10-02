@@ -6,11 +6,16 @@ using System.Xml;
 
 public class Collision : MonoBehaviour
 {
-	int pollen = 0;
+	// public Resources resourceManager;
+	int pollen = 10;
 	private TMP_Text tmpText;
+
+	bool hasLeftNest = false;
+	private Coroutine decreaseCoroutine;
 	// Start is called before the first frame update
 	void Start()
 	{
+		// resourceManager = FindObjectOfType<Resources>();
 		Debug.Log(transform.childCount);
 		tmpText = GetComponentInChildren<Canvas>().GetComponentInChildren<TMP_Text>();
 	}
@@ -33,22 +38,61 @@ public class Collision : MonoBehaviour
 		if (other.CompareTag("FlowerHitZone"))
 		{
 			pollen++;
-			Debug.Log("Pollen = " + pollen);
-			// Set the text
-			if (tmpText != null)
+			UpdatePlayerText();
+		}
+		else if (other.CompareTag("Nest"))
+		{
+			Debug.Log("Boom Hit Nest");
+			if (decreaseCoroutine != null)
 			{
-				tmpText.text = "" + pollen;
+				StopCoroutine(decreaseCoroutine);
 			}
-			else
-			{
-				Debug.LogError("TMP_Text component not found!");
-			}
+			decreaseCoroutine = StartCoroutine(DecreaseVariableOverTime());
+		}
+    }
 
+	public void OnTriggerExit(Collider other)
+	{
+		if (other.CompareTag("Nest"))
+		{
+			hasLeftNest = true;
+			Debug.Log("Boom Left Nest");
+			StopCoroutine(DecreaseVariableOverTime());
 		}
 	}
+
+	private void UpdatePlayerText()
+	{
+		if (tmpText != null)
+		{
+			tmpText.text = "" + pollen;
+		}
+		else
+		{
+			Debug.LogError("TMP_Text component not found!");
+		}
+	}
+
+
 	public void OnCollisionExit(UnityEngine.Collision collision)
 	{
 		transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Flapper>().enabled = true;
 		transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Flapper>().enabled = true;
+	}
+
+	IEnumerator DecreaseVariableOverTime()
+	{
+		while (pollen > 0)
+		{
+            if (hasLeftNest)
+            {
+				hasLeftNest = false;
+				break;
+            }
+            yield return new WaitForSeconds(1);
+			pollen--;
+			UpdatePlayerText();
+			Resources.resources++;
+		}
 	}
 }
