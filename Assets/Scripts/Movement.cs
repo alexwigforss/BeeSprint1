@@ -26,6 +26,7 @@ public class Movement : MonoBehaviour
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
+		CursorLockMode cursorLockMode = CursorLockMode.Locked;
 	}
 	private void Update()
 	{

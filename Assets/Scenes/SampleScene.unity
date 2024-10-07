@@ -591,6 +591,7 @@ GameObject:
   - component: {fileID: 174278550}
   - component: {fileID: 174278549}
   - component: {fileID: 174278548}
+  - component: {fileID: 174278551}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -859,6 +860,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 64975ec3-5170-40db-a249-3c11d06cea6d
     m_ActionName: IngameBeePov/NumLockPad6[/Keyboard/numpad6]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8f386c17-ea00-43c7-8653-cac531f4e8ef
+    m_ActionName: IngameClicks/LeftButton[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 288107c2-7d49-480d-be57-a54ce165eda5
+    m_ActionName: IngameClicks/RightButton[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: IngameBeePov
@@ -879,6 +888,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &174278551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174278547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1e12d9d966f1bd46b08ff450661beb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &188154920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
@@ -4230,23 +4251,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3355707779176605318, guid: 78de3efac15038a48b66be9b9775bd9f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.8438
+      value: -15.01
       objectReference: {fileID: 0}
     - target: {fileID: 3355707779176605318, guid: 78de3efac15038a48b66be9b9775bd9f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.16934976
       objectReference: {fileID: 0}
     - target: {fileID: 3355707779176605318, guid: 78de3efac15038a48b66be9b9775bd9f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3355707779176605318, guid: 78de3efac15038a48b66be9b9775bd9f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.98555607
       objectReference: {fileID: 0}
     - target: {fileID: 3355707779176605318, guid: 78de3efac15038a48b66be9b9775bd9f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3355707779176605318, guid: 78de3efac15038a48b66be9b9775bd9f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4254,7 +4275,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3355707779176605318, guid: 78de3efac15038a48b66be9b9775bd9f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -160.5
       objectReference: {fileID: 0}
     - target: {fileID: 3355707779176605318, guid: 78de3efac15038a48b66be9b9775bd9f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -4880,6 +4901,7 @@ GameObject:
   - component: {fileID: 1888581628}
   - component: {fileID: 1888581627}
   - component: {fileID: 1888581629}
+  - component: {fileID: 1888581630}
   m_Layer: 5
   m_Name: RightPanel
   m_TagString: Untagged
@@ -4965,6 +4987,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f4053fa52221dcb47ac59f0ef96a54be, type: 3}
   - {fileID: 21300000, guid: 349a29553aa132a4a920bafa257314c8, type: 3}
   - {fileID: 21300000, guid: e45d2015da5597441ae7145b1553952e, type: 3}
+--- !u!114 &1888581630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888581625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19f337b5a04b514996eba575f435aa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1993476581
 GameObject:
   m_ObjectHideFlags: 0
@@ -5478,9 +5512,9 @@ SceneRoots:
   - {fileID: 3533263452039954321}
   - {fileID: 949876673}
   - {fileID: 1612861786}
+  - {fileID: 1509991122}
   - {fileID: 1697589992}
   - {fileID: 1385130005}
   - {fileID: 1778388862}
   - {fileID: 32951057}
   - {fileID: 508575337}
-  - {fileID: 1509991122}
