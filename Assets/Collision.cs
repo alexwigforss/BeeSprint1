@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Xml;
+using System;
 
 public class Collision : MonoBehaviour
 {
 	// public Resources resourceManager;
-	int pollen = 10;
+	int pollen = 0;
 	private TMP_Text tmpText;
 
 	bool hasLeftNest = false;
 	private Coroutine decreaseCoroutine;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -42,12 +44,8 @@ public class Collision : MonoBehaviour
 		}
 		else if (other.CompareTag("Nest"))
 		{
-			Debug.Log("Boom Hit Nest");
-			if (decreaseCoroutine != null)
-			{
-				StopCoroutine(decreaseCoroutine);
-			}
-			decreaseCoroutine = StartCoroutine(DecreaseVariableOverTime());
+			hasLeftNest = false;
+			decreaseCoroutine ??= StartCoroutine(DecreaseVariableOverTime());
 		}
     }
 
@@ -56,8 +54,11 @@ public class Collision : MonoBehaviour
 		if (other.CompareTag("Nest"))
 		{
 			hasLeftNest = true;
-			Debug.Log("Boom Left Nest");
-			StopCoroutine(DecreaseVariableOverTime());
+			if (decreaseCoroutine != null)
+			{
+				StopCoroutine(decreaseCoroutine);
+				decreaseCoroutine = null;
+			}
 		}
 	}
 
@@ -73,26 +74,26 @@ public class Collision : MonoBehaviour
 		}
 	}
 
+	IEnumerator DecreaseVariableOverTime()
+	{
+		while (pollen > 0)
+		{
+			if (hasLeftNest)
+			{
+				hasLeftNest = false;
+				break;
+			}
+			pollen--;
+			UpdatePlayerText();
+			Resources.resources++;
+			yield return new WaitForSeconds(1);
+		}
+		decreaseCoroutine = null;
+	}
 
 	public void OnCollisionExit(UnityEngine.Collision collision)
 	{
 		transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Flapper>().enabled = true;
 		transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Flapper>().enabled = true;
-	}
-
-	IEnumerator DecreaseVariableOverTime()
-	{
-		while (pollen > 0)
-		{
-            if (hasLeftNest)
-            {
-				hasLeftNest = false;
-				break;
-            }
-            yield return new WaitForSeconds(1);
-			pollen--;
-			UpdatePlayerText();
-			Resources.resources++;
-		}
 	}
 }
