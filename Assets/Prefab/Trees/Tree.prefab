@@ -85,7 +85,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -118,19 +118,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpSpecMap:
-        m_Texture: {fileID: 2800000, guid: 4f1ef4950eafb5447a44ecd556ada738, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6b7653b820723354a8624064c93c3095, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e56102488573da445ac9de0e8fc4f714, type: 3}
+        m_Texture: {fileID: 2800000, guid: b7a4c74b9457a6444906961561037d71, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadowTex:
-        m_Texture: {fileID: 2800000, guid: 00b48c99810cb944d80b865d3dfda3eb, type: 3}
+        m_Texture: {fileID: 2800000, guid: a8941c8a45f41a74ebad0ca800e7580a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TranslucencyMap:
-        m_Texture: {fileID: 2800000, guid: ba73316ba57d968499292ee05b0cb590, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6361547639fd83b4780aebace74d79ac, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -170,15 +170,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpSpecMap:
-        m_Texture: {fileID: 2800000, guid: 4f1ef4950eafb5447a44ecd556ada738, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6b7653b820723354a8624064c93c3095, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e56102488573da445ac9de0e8fc4f714, type: 3}
+        m_Texture: {fileID: 2800000, guid: b7a4c74b9457a6444906961561037d71, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TranslucencyMap:
-        m_Texture: {fileID: 2800000, guid: ba73316ba57d968499292ee05b0cb590, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6361547639fd83b4780aebace74d79ac, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
