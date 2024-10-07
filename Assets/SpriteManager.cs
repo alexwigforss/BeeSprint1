@@ -17,10 +17,4 @@ public class SpriteManager : MonoBehaviour
 			newSprite.GetComponent<Image>().sprite = sprite;
 		}
 	}
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
