@@ -49,13 +49,19 @@ public class CameraChooser : MonoBehaviour
 		if (manageMode) {
 			tbAudioListener.enabled = false;
 			TopDownCamera.enabled = true;
+			TopDownCamera.tag = "MainCamera";
+
 			ThirdBeePerspectiveCamera.enabled = false;
+			ThirdBeePerspectiveCamera.tag = "Untagged";
 			tdAudioListener.enabled = true;
 			return;
 		}
 		tdAudioListener.enabled=true;
 		ThirdBeePerspectiveCamera.enabled = true;
+		ThirdBeePerspectiveCamera.tag = "MainCamera";
+
 		TopDownCamera.enabled = false;
+		TopDownCamera.tag = "Untagged";
 		tbAudioListener.enabled=false;
 	}
 
