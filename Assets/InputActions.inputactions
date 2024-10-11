@@ -130,6 +130,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "TabPressed",
+                    "type": "Button",
+                    "id": "9ec56a79-9029-4da6-8c8c-346f41a8998d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "O_Pressed",
+                    "type": "Value",
+                    "id": "6f426e68-bdad-43bd-b254-ec599e82ffd2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -286,6 +304,28 @@
                     "action": "NumLockPad6",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cd1e0737-6c59-4177-9b28-371a0fd1fa6c",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TabPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9906a519-13f0-423f-9a8e-bef7c170b421",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "O_Pressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -336,6 +376,12 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "GuiButtons",
+            "id": "9258951d-8ab0-44cb-a410-cf448b61e184",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": []

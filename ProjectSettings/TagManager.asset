@@ -43,6 +43,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: PlayerBeeGui
+    uniqueID: 3604002413
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

@@ -6,8 +6,8 @@ public class Growth : MonoBehaviour
 {
 	[SerializeReference]
 	Transform petalTrans;
-	[SerializeReference]
-	Transform lockAtCam;
+	//[SerializeReference]
+	//Transform lockAtCam;
 	[SerializeReference]
 	SphereCollider OvaryColide;
 
@@ -42,9 +42,10 @@ public class Growth : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		Vector3 targetPosition = Camera.main.transform.position;
-		targetPosition.y = transform.position.y; // Preserve the plane's Y position
-		transform.LookAt(targetPosition); if (phase == 0)
+		// Vector3 targetPosition = Camera.main.transform.position;
+		// targetPosition.y = transform.position.y; // Preserve the plane's Y position
+		// transform.LookAt(targetPosition);
+		if (phase == 0)
 		{
 			OvaryColide.enabled = false;
 			if (transform.localScale.x < 1f)

@@ -54,7 +54,6 @@ public class Movement : MonoBehaviour
 		}
 
 	}
-
 	public void HandleX()
 	{
 		Vector2 mouseDelta = Mouse.current.delta.ReadValue();
