@@ -585,6 +585,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8122285428891605386}
   - component: {fileID: 1042215067628007464}
+  - component: {fileID: 7182878733739156910}
   m_Layer: 0
   m_Name: Flower 1
   m_TagString: Untagged
@@ -622,10 +623,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   petalTrans: {fileID: 4169285735628355224}
-  lockAtCam: {fileID: 0}
   OvaryColide: {fileID: 3264682383036506368}
   targetTag: Spike
   radius: 0
+--- !u!114 &7182878733739156910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277929396154415327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8517033d3c2df12489cf495b3c966833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2317673187409146214
 GameObject:
   m_ObjectHideFlags: 0
