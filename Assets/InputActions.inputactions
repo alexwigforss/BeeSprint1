@@ -6,7 +6,7 @@
             "id": "e1628650-a717-4843-be75-a5c9b394b7aa",
             "actions": [
                 {
-                    "name": "FlyUp",
+                    "name": "W_Key",
                     "type": "Value",
                     "id": "52c7522e-3edf-4598-9a5f-3acaca460ee5",
                     "expectedControlType": "Button",
@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "FlyDown",
+                    "name": "S_Key",
                     "type": "Value",
                     "id": "f7561dc3-0aa3-400e-83e2-dd00fc45f587",
                     "expectedControlType": "Button",
@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "FlyLeft",
+                    "name": "A_Key",
                     "type": "Value",
                     "id": "66a370f6-acac-4723-818a-27fa95802b52",
                     "expectedControlType": "Button",
@@ -33,7 +33,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "FlyRight",
+                    "name": "D_Key",
                     "type": "Value",
                     "id": "8aedeb68-e421-4ac9-b0d9-232c6509c1f2",
                     "expectedControlType": "Button",
@@ -42,7 +42,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "FlyForward",
+                    "name": "L_Shift_Key",
                     "type": "Value",
                     "id": "fd474475-dbe2-4f8e-9f13-4207c37c1af9",
                     "expectedControlType": "Button",
@@ -51,7 +51,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "FlyBackward",
+                    "name": "L_Ctrl_Key",
                     "type": "Value",
                     "id": "fc5daeb8-c4aa-49ae-a2b0-b75a068c7f30",
                     "expectedControlType": "Button",
@@ -78,7 +78,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "SpinLeft",
+                    "name": "Q_Key",
                     "type": "Value",
                     "id": "cc5503ae-76f9-42b1-aca2-5874cc64dd5c",
                     "expectedControlType": "",
@@ -87,7 +87,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "SpinRight",
+                    "name": "E_Key",
                     "type": "Value",
                     "id": "3cb5c4f7-4c87-403f-908f-9bc9941c64b4",
                     "expectedControlType": "",
@@ -132,18 +132,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "TabPressed",
+                    "name": "Tab_Key",
                     "type": "Button",
                     "id": "9ec56a79-9029-4da6-8c8c-346f41a8998d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "O_Pressed",
-                    "type": "Value",
-                    "id": "6f426e68-bdad-43bd-b254-ec599e82ffd2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -158,7 +149,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FlyUp",
+                    "action": "W_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -169,7 +160,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FlyDown",
+                    "action": "S_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -180,7 +171,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FlyLeft",
+                    "action": "A_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -191,7 +182,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FlyRight",
+                    "action": "D_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -202,7 +193,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FlyForward",
+                    "action": "L_Shift_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -213,7 +204,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FlyBackward",
+                    "action": "L_Ctrl_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -246,7 +237,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpinLeft",
+                    "action": "Q_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -257,7 +248,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpinRight",
+                    "action": "E_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -312,18 +303,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TabPressed",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9906a519-13f0-423f-9a8e-bef7c170b421",
-                    "path": "<Keyboard>/o",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "O_Pressed",
+                    "action": "Tab_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
