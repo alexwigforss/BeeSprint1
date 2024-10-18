@@ -65,7 +65,6 @@ public class Movement : MonoBehaviour
 		Vector2 mouseDelta = Mouse.current.delta.ReadValue();
 		rb.rotation = Quaternion.Euler(rb.rotation.eulerAngles + new Vector3(mouseDelta.y / 10, 0f, 0f));
 	}
-
 	public void HandleAscend(InputAction.CallbackContext context)
 	{
 		if (context.performed) { ascend = true; }
@@ -76,30 +75,25 @@ public class Movement : MonoBehaviour
 		if (context.performed) { descend = true; }
 		else if (context.canceled) { descend = false; }
 	}
-
 	public void HandleSteerRight(InputAction.CallbackContext context)
 	{
 		if (context.performed) { rotateForce.y += rotateSpeed; }
 		else if (context.canceled) { rotateForce.y = 0; }
 	}
-
 	public void HandleSteerLeft(InputAction.CallbackContext context)
 	{
 		if (context.performed) { rotateForce.y -= rotateSpeed; }
 		else if (context.canceled) { rotateForce.y = 0; }
 	}
-
 	public void HandleStrifeRight(InputAction.CallbackContext context)
 	{
 		if (context.performed) { moveForce.x = moveSpeed * 20; }
 		else if (context.canceled) { moveForce.x = 0; }	}
-
 	public void HandleStrifeLeft(InputAction.CallbackContext context)
 	{
 		if (context.performed) { moveForce.x = -moveSpeed * 20; }
 		else if (context.canceled) { moveForce.x = 0; }
 	}
-
 	public void HandleMoveForward(InputAction.CallbackContext context)
 	{
 		if (context.performed) { accelerate = true; }
