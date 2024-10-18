@@ -46,6 +46,7 @@ public class Movement : MonoBehaviour
 			else if (!reverse && fwdspeed < 0.0f) { fwdspeed += acceleration; moveForce.z = fwdspeed; }
 			if (fwdspeed > -0.1 && fwdspeed < 0.1) { fwdspeed = moveForce.z = 0.0f; }
 
+			// Apply movement with Ascending / Descending
 			if (ascend && risespeed < maxSpeed / 2) { risespeed += acceleration; moveForce.y = risespeed; }
 			else if (!ascend && risespeed > 0.0f) { risespeed -= acceleration; moveForce.y = risespeed; }
 			if (descend && risespeed > -maxSpeed / 2) { risespeed -= acceleration; moveForce.y = risespeed; }
@@ -54,48 +55,46 @@ public class Movement : MonoBehaviour
 		}
 
 	}
-	public void HandleX()
+	public void HandleMouseX()
 	{
 		Vector2 mouseDelta = Mouse.current.delta.ReadValue();
 		rb.rotation = Quaternion.Euler(rb.rotation.eulerAngles + new Vector3(0f, mouseDelta.x / 10, 0f));
 	}
-	public void HandleY()
+	public void HandleMouseY()
 	{
 		Vector2 mouseDelta = Mouse.current.delta.ReadValue();
 		rb.rotation = Quaternion.Euler(rb.rotation.eulerAngles + new Vector3(mouseDelta.y / 10, 0f, 0f));
 	}
 
-	public void HandleMoveUp(InputAction.CallbackContext context)
+	public void HandleAscend(InputAction.CallbackContext context)
 	{
 		if (context.performed) { ascend = true; }
 		else if (context.canceled) { ascend = false; }
 	}
-	public void HandleMoveDown(InputAction.CallbackContext context)
+	public void HandleDescend(InputAction.CallbackContext context)
 	{
 		if (context.performed) { descend = true; }
 		else if (context.canceled) { descend = false; }
 	}
 
-	public void HandleMoveRight(InputAction.CallbackContext context)
+	public void HandleSteerRight(InputAction.CallbackContext context)
 	{
 		if (context.performed) { rotateForce.y += rotateSpeed; }
 		else if (context.canceled) { rotateForce.y = 0; }
 	}
 
-	public void HandleMoveLeft(InputAction.CallbackContext context)
+	public void HandleSteerLeft(InputAction.CallbackContext context)
 	{
 		if (context.performed) { rotateForce.y -= rotateSpeed; }
 		else if (context.canceled) { rotateForce.y = 0; }
 	}
 
-	// TODO Rename to strife
-	public void HandleSpinRight(InputAction.CallbackContext context)
+	public void HandleStrifeRight(InputAction.CallbackContext context)
 	{
 		if (context.performed) { moveForce.x = moveSpeed * 20; }
 		else if (context.canceled) { moveForce.x = 0; }	}
 
-	// TODO Rename to strife
-	public void HandleSpinLeft(InputAction.CallbackContext context)
+	public void HandleStrifeLeft(InputAction.CallbackContext context)
 	{
 		if (context.performed) { moveForce.x = -moveSpeed * 20; }
 		else if (context.canceled) { moveForce.x = 0; }
@@ -111,25 +110,31 @@ public class Movement : MonoBehaviour
 		if (context.performed) { reverse = true; }
 		else if (context.canceled) { reverse = false; }
 	}
-	public void HandleNumPadLockUp(InputAction.CallbackContext context)
-	{
-		if (context.performed) { rotateForce.x += rotateSpeed; }
-		else if (context.canceled) { rotateForce.x = 0; }
-	}
-	public void HandleNumPadLockLeft(InputAction.CallbackContext context)
-	{
-		if (context.performed) { rotateForce.z += rotateSpeed; }
-		else if (context.canceled) { rotateForce.z = 0; }
-	}
-	public void HandleNumPadLockDown(InputAction.CallbackContext context)
+	public void HandleTiltBack(InputAction.CallbackContext context)
 	{
 		if (context.performed) { rotateForce.x -= rotateSpeed; }
 		else if (context.canceled) { rotateForce.x = 0; }
 	}
-	public void HandleNumPadLockRight(InputAction.CallbackContext context)
+	public void HandleTiltLeft(InputAction.CallbackContext context)
+	{
+		if (context.performed) { rotateForce.z += rotateSpeed; }
+		else if (context.canceled) { rotateForce.z = 0; }
+	}
+	public void HandleTiltForward(InputAction.CallbackContext context)
+	{
+		if (context.performed) { rotateForce.x += rotateSpeed; }
+		else if (context.canceled) { rotateForce.x = 0; }
+	}
+	public void HandleTiltRight(InputAction.CallbackContext context)
 	{
 		if (context.performed) { rotateForce.z -= rotateSpeed; }
 		else if (context.canceled) { rotateForce.z = 0; }
 	}
-
+	public void HandleRealign(InputAction.CallbackContext context)
+	{
+		if (context.performed)
+		{
+			Debug.Log(rb.transform);
+		}
+	}
 }
