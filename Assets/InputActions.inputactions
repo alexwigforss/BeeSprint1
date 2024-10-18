@@ -443,6 +443,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Plus_Key_Td",
+                    "type": "Button",
+                    "id": "0c74f8cb-3d86-4756-b933-10f7dd08a821",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Minus_Key_Td",
+                    "type": "Button",
+                    "id": "f56ae5af-e583-4e5f-809b-e97c4630b290",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -520,6 +538,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Tab_Key_Td",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fa0fc322-da42-4b22-b86b-c3b337745fc2",
+                    "path": "<Keyboard>/numpadPlus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Plus_Key_Td",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "29cafd67-35ec-4437-a2e3-054a1c128cc2",
+                    "path": "<Keyboard>/numpadMinus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Minus_Key_Td",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -313,7 +313,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.35
+  m_fontSize: 21
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -951,7 +951,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 187439561}
         m_TargetAssemblyTypeName: TopDownCamMove, Assembly-CSharp
-        m_MethodName: HandleCamRotateCounterClock
+        m_MethodName: HandleCamRotateClockwise
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -967,7 +967,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 187439561}
         m_TargetAssemblyTypeName: TopDownCamMove, Assembly-CSharp
-        m_MethodName: HandleCamRotateClockwise
+        m_MethodName: HandleCamRotateCounterClock
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -995,6 +995,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b0f8f1d0-a293-4bf1-9fe8-7645e810b07f
     m_ActionName: GuiButtons/Tab_Key_Td[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 187439561}
+        m_TargetAssemblyTypeName: TopDownCamMove, Assembly-CSharp
+        m_MethodName: HandleZoomIn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0c74f8cb-3d86-4756-b933-10f7dd08a821
+    m_ActionName: GuiButtons/Plus_Key_Td[/Keyboard/numpadPlus]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 187439561}
+        m_TargetAssemblyTypeName: TopDownCamMove, Assembly-CSharp
+        m_MethodName: HandleZoomOut
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f56ae5af-e583-4e5f-809b-e97c4630b290
+    m_ActionName: GuiButtons/Minus_Key_Td[/Keyboard/numpadMinus]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: IngameBeePov
@@ -1161,7 +1193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe1a67f72fe7694e99dd44fad271643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
+  moveSpeed: 10
+  rotoSpeed: 10
 --- !u!4 &188154920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
