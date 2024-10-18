@@ -36,7 +36,7 @@ public class TopDownCamMove : MonoBehaviour
 	{
 		if (context.performed)
 		{
-			Debug.Log("Left");
+			//Debug.Log("Left");
 			moveForce.x = -moveSpeed;
 		}
 		else if (context.canceled) { moveForce.x = 0; }
@@ -46,7 +46,7 @@ public class TopDownCamMove : MonoBehaviour
 	{
 		if (context.performed)
 		{
-			Debug.Log("Right");
+			//Debug.Log("Right");
 			moveForce.x = moveSpeed;
 		}
 		else if (context.canceled) { moveForce.x = 0; }
@@ -55,7 +55,7 @@ public class TopDownCamMove : MonoBehaviour
 	{
 		if (context.performed)
 		{
-			Debug.Log("Up");
+			//Debug.Log("Up");
 			moveForce.y = moveSpeed;
 		}
 		else if (context.canceled) { moveForce.y = 0; }
@@ -64,7 +64,7 @@ public class TopDownCamMove : MonoBehaviour
 	{
 		if (context.performed)
 		{
-			Debug.Log("Down");
+			//Debug.Log("Down");
 			moveForce.y = -moveSpeed;
 		}
 		else if (context.canceled) { moveForce.y = 0; }
@@ -73,7 +73,7 @@ public class TopDownCamMove : MonoBehaviour
 	{
 		if (context.performed)
 		{
-			Debug.Log("In");
+			//Debug.Log("In");
 			moveForce.z = moveSpeed;
 		}
 		else if (context.canceled) { moveForce.z = 0; }
@@ -82,7 +82,7 @@ public class TopDownCamMove : MonoBehaviour
 	{
 		if (context.performed)
 		{
-			Debug.Log("Out");
+			//Debug.Log("Out");
 			moveForce.z = -moveSpeed;
 		}
 		else if (context.canceled) { moveForce.z = 0; }
@@ -91,7 +91,7 @@ public class TopDownCamMove : MonoBehaviour
 	{
 		if (context.performed)
 		{
-			Debug.Log("CC");
+			//Debug.Log("CC");
 			rotoForce = -rotoSpeed;
 		}
 		else if (context.canceled) { rotoForce = 0; }
@@ -100,7 +100,7 @@ public class TopDownCamMove : MonoBehaviour
 	{
 		if (context.performed)
 		{
-			Debug.Log("CW");
+			//Debug.Log("CW");
 			rotoForce = rotoSpeed;
 		}
 		else if (context.canceled) { rotoForce = 0; }
