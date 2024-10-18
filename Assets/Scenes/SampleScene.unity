@@ -286,9 +286,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Resource
-
-    0'
+  m_text: Resource 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -310,17 +308,17 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 97690656
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 21
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 16
+  m_fontSizeMax: 48
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
@@ -657,7 +655,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 152884162}
         m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: HandleMoveLeft
+        m_MethodName: HandleSteerLeft
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -673,7 +671,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 152884162}
         m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: HandleMoveRight
+        m_MethodName: HandleSteerRight
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -689,7 +687,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 152884162}
         m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: HandleMoveUp
+        m_MethodName: HandleAscend
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -705,7 +703,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 152884162}
         m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: HandleMoveDown
+        m_MethodName: HandleDescend
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -721,7 +719,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 152884162}
         m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: HandleX
+        m_MethodName: HandleMouseX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -737,7 +735,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 152884162}
         m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: HandleY
+        m_MethodName: HandleMouseY
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -753,7 +751,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 152884162}
         m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: HandleSpinLeft
+        m_MethodName: HandleStrifeLeft
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -769,7 +767,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 152884162}
         m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: HandleSpinRight
+        m_MethodName: HandleStrifeRight
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -785,7 +783,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 152884162}
         m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: HandleNumPadLockUp
+        m_MethodName: HandleTiltForward
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -801,7 +799,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 152884162}
         m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: HandleNumPadLockLeft
+        m_MethodName: HandleTiltLeft
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -817,7 +815,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 152884162}
         m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: HandleNumPadLockDown
+        m_MethodName: HandleTiltBack
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -833,7 +831,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 152884162}
         m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: HandleNumPadLockRight
+        m_MethodName: HandleTiltRight
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -870,9 +868,21 @@ MonoBehaviour:
     m_ActionId: 9ec56a79-9029-4da6-8c8c-346f41a8998d
     m_ActionName: IngameBeePov/TabPressed[/Keyboard/tab]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6f426e68-bdad-43bd-b254-ec599e82ffd2
-    m_ActionName: IngameBeePov/O_Pressed[/Keyboard/o]
+      m_Calls:
+      - m_Target: {fileID: 152884162}
+        m_TargetAssemblyTypeName: Movement, Assembly-CSharp
+        m_MethodName: HandleRealign
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0e4a719a-afe0-4a3a-a59f-ed2e5452f8a2
+    m_ActionName: IngameBeePov/NumLockPad0[/Keyboard/numpad0]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: IngameBeePov
