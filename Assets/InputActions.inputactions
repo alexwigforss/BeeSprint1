@@ -382,7 +382,7 @@
             "id": "9258951d-8ab0-44cb-a410-cf448b61e184",
             "actions": [
                 {
-                    "name": "W_Key_Gui",
+                    "name": "W_Key_Td",
                     "type": "Value",
                     "id": "61826031-d10d-4d72-9cc3-625cdae79cca",
                     "expectedControlType": "Button",
@@ -391,7 +391,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "S_Key_Gui",
+                    "name": "S_Key_Td",
                     "type": "Value",
                     "id": "756f3960-c031-4a86-b8ec-3b8194bbfd64",
                     "expectedControlType": "Button",
@@ -400,7 +400,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "A_Key_Gui",
+                    "name": "A_Key_Td",
                     "type": "Value",
                     "id": "4c0710f6-b2f6-4e32-834f-37b3e8cf02a7",
                     "expectedControlType": "Button",
@@ -409,7 +409,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "D_Key_Gui",
+                    "name": "D_Key_Td",
                     "type": "Value",
                     "id": "c953234c-efb7-4731-b7bf-6ed77417d792",
                     "expectedControlType": "Button",
@@ -418,7 +418,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Q_Key_Gui",
+                    "name": "Q_Key_Td",
                     "type": "Value",
                     "id": "a40b058e-06c4-4304-bb43-d406d6545232",
                     "expectedControlType": "",
@@ -427,10 +427,19 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "E_Key_Gui",
+                    "name": "E_Key_Td",
                     "type": "Value",
                     "id": "f5065f17-6b15-432c-b23d-f3196afb2c3d",
                     "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Tab_Key_Td",
+                    "type": "Button",
+                    "id": "b0f8f1d0-a293-4bf1-9fe8-7645e810b07f",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -444,7 +453,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "W_Key_Gui",
+                    "action": "W_Key_Td",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -455,7 +464,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "S_Key_Gui",
+                    "action": "S_Key_Td",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -466,7 +475,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "A_Key_Gui",
+                    "action": "A_Key_Td",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -477,7 +486,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "D_Key_Gui",
+                    "action": "D_Key_Td",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -488,7 +497,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Q_Key_Gui",
+                    "action": "Q_Key_Td",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -499,7 +508,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "E_Key_Gui",
+                    "action": "E_Key_Td",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d35135ed-c5da-4068-b0f0-43f41d84691e",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tab_Key_Td",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

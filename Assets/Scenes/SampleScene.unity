@@ -313,7 +313,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21
+  m_fontSize: 20.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -883,6 +883,118 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0e4a719a-afe0-4a3a-a59f-ed2e5452f8a2
     m_ActionName: IngameBeePov/NumLockPad0[/Keyboard/numpad0]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 187439561}
+        m_TargetAssemblyTypeName: TopDownCamMove, Assembly-CSharp
+        m_MethodName: HandleCamUp
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 61826031-d10d-4d72-9cc3-625cdae79cca
+    m_ActionName: GuiButtons/W_Key_Gui[/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 187439561}
+        m_TargetAssemblyTypeName: TopDownCamMove, Assembly-CSharp
+        m_MethodName: HandleCamDown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 756f3960-c031-4a86-b8ec-3b8194bbfd64
+    m_ActionName: GuiButtons/S_Key_Gui[/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 187439561}
+        m_TargetAssemblyTypeName: TopDownCamMove, Assembly-CSharp
+        m_MethodName: HandleCamLeft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4c0710f6-b2f6-4e32-834f-37b3e8cf02a7
+    m_ActionName: GuiButtons/A_Key_Gui[/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 187439561}
+        m_TargetAssemblyTypeName: TopDownCamMove, Assembly-CSharp
+        m_MethodName: HandleCamRight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c953234c-efb7-4731-b7bf-6ed77417d792
+    m_ActionName: GuiButtons/D_Key_Gui[/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 187439561}
+        m_TargetAssemblyTypeName: TopDownCamMove, Assembly-CSharp
+        m_MethodName: HandleCamRotateCounterClock
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a40b058e-06c4-4304-bb43-d406d6545232
+    m_ActionName: GuiButtons/Q_Key_Gui[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 187439561}
+        m_TargetAssemblyTypeName: TopDownCamMove, Assembly-CSharp
+        m_MethodName: HandleCamRotateClockwise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f5065f17-6b15-432c-b23d-f3196afb2c3d
+    m_ActionName: GuiButtons/E_Key_Gui[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 174278553}
+        m_TargetAssemblyTypeName: CameraChooser, Assembly-CSharp
+        m_MethodName: HandleTabPressed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b0f8f1d0-a293-4bf1-9fe8-7645e810b07f
+    m_ActionName: GuiButtons/Tab_Key_Td[/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: IngameBeePov
@@ -943,6 +1055,7 @@ MonoBehaviour:
   tdAudioListener: {fileID: 187439559}
   ThirdBeePerspectiveCamera: {fileID: 963194227}
   tbAudioListener: {fileID: 963194226}
+  playerInput: {fileID: 174278549}
 --- !u!1 &187439557
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,6 +1067,7 @@ GameObject:
   - component: {fileID: 187439558}
   - component: {fileID: 187439560}
   - component: {fileID: 187439559}
+  - component: {fileID: 187439561}
   m_Layer: 3
   m_Name: TopDownCamera
   m_TagString: Untagged
@@ -1035,6 +1149,19 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &187439561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187439557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe1a67f72fe7694e99dd44fad271643, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
 --- !u!4 &188154920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}

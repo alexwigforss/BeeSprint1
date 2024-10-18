@@ -16,32 +16,38 @@ public class CameraChooser : MonoBehaviour
 	Camera ThirdBeePerspectiveCamera;
 	[SerializeField]
 	AudioListener tbAudioListener;
+	public PlayerInput playerInput;
 
 	Transform toptrans;
 	Transform beetrans;
 
 	bool manageMode;
 
-	// Start is called before the first frame update
+	bool canSwitch = true;
+	float switchCooldown = 0.5f; // Cooldown time in seconds
+
 	void Start()
     {
 		manageMode = false;
 		Debug.Log("Camera choose started");
 		toptrans = TopDownCamera.transform;
 		beetrans = ThirdBeePerspectiveCamera.transform;
+
+		if (playerInput == null)
+		{
+			playerInput = GetComponent<PlayerInput>();
+		}
+		playerInput.SwitchCurrentActionMap("InGameBeePov");
+
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 	public void HandleTabPressed(InputAction.CallbackContext context)
 	{
-		if (context.phase == InputActionPhase.Started)
+		if (context.started && canSwitch)
 		{
 			manageMode = !manageMode;
 			ChangeCamera();
+			StartCoroutine(SwitchCooldown());
 		}
 	}
 
@@ -54,6 +60,8 @@ public class CameraChooser : MonoBehaviour
 			ThirdBeePerspectiveCamera.enabled = false;
 			ThirdBeePerspectiveCamera.tag = "Untagged";
 			tdAudioListener.enabled = true;
+
+			playerInput.SwitchCurrentActionMap("GuiButtons");
 			return;
 		}
 		tdAudioListener.enabled=true;
@@ -63,6 +71,19 @@ public class CameraChooser : MonoBehaviour
 		TopDownCamera.enabled = false;
 		TopDownCamera.tag = "Untagged";
 		tbAudioListener.enabled=false;
+
+		playerInput.SwitchCurrentActionMap("InGameBeePov");
 	}
 
+	private IEnumerator SwitchCooldown()
+	{
+		canSwitch = false;
+		yield return new WaitForSeconds(switchCooldown);
+		canSwitch = true;
+	}
+
+	public void SwitchToActionMap(string actionMapName)
+	{
+		playerInput.SwitchCurrentActionMap(actionMapName);
+	}
 }
