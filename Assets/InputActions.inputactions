@@ -132,6 +132,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "NumLockPad0",
+                    "type": "Value",
+                    "id": "0e4a719a-afe0-4a3a-a59f-ed2e5452f8a2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Tab_Key",
                     "type": "Button",
                     "id": "9ec56a79-9029-4da6-8c8c-346f41a8998d",
@@ -304,6 +313,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Tab_Key",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f178c792-5860-4c7b-a352-e3d1841bd980",
+                    "path": "<Keyboard>/numpad0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NumLockPad0",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
