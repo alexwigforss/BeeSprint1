@@ -6,7 +6,7 @@
             "id": "e1628650-a717-4843-be75-a5c9b394b7aa",
             "actions": [
                 {
-                    "name": "FlyUp",
+                    "name": "W_Key",
                     "type": "Value",
                     "id": "52c7522e-3edf-4598-9a5f-3acaca460ee5",
                     "expectedControlType": "Button",
@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "FlyDown",
+                    "name": "S_Key",
                     "type": "Value",
                     "id": "f7561dc3-0aa3-400e-83e2-dd00fc45f587",
                     "expectedControlType": "Button",
@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "FlyLeft",
+                    "name": "A_Key",
                     "type": "Value",
                     "id": "66a370f6-acac-4723-818a-27fa95802b52",
                     "expectedControlType": "Button",
@@ -33,7 +33,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "FlyRight",
+                    "name": "D_Key",
                     "type": "Value",
                     "id": "8aedeb68-e421-4ac9-b0d9-232c6509c1f2",
                     "expectedControlType": "Button",
@@ -42,7 +42,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "FlyForward",
+                    "name": "L_Shift_Key",
                     "type": "Value",
                     "id": "fd474475-dbe2-4f8e-9f13-4207c37c1af9",
                     "expectedControlType": "Button",
@@ -51,7 +51,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "FlyBackward",
+                    "name": "L_Ctrl_Key",
                     "type": "Value",
                     "id": "fc5daeb8-c4aa-49ae-a2b0-b75a068c7f30",
                     "expectedControlType": "Button",
@@ -78,7 +78,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "SpinLeft",
+                    "name": "Q_Key",
                     "type": "Value",
                     "id": "cc5503ae-76f9-42b1-aca2-5874cc64dd5c",
                     "expectedControlType": "",
@@ -87,7 +87,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "SpinRight",
+                    "name": "E_Key",
                     "type": "Value",
                     "id": "3cb5c4f7-4c87-403f-908f-9bc9941c64b4",
                     "expectedControlType": "",
@@ -132,18 +132,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "TabPressed",
-                    "type": "Button",
-                    "id": "9ec56a79-9029-4da6-8c8c-346f41a8998d",
-                    "expectedControlType": "Button",
+                    "name": "NumLockPad0",
+                    "type": "Value",
+                    "id": "0e4a719a-afe0-4a3a-a59f-ed2e5452f8a2",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
-                    "name": "O_Pressed",
-                    "type": "Value",
-                    "id": "6f426e68-bdad-43bd-b254-ec599e82ffd2",
+                    "name": "Tab_Key",
+                    "type": "Button",
+                    "id": "9ec56a79-9029-4da6-8c8c-346f41a8998d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -158,7 +158,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FlyUp",
+                    "action": "W_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -169,7 +169,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FlyDown",
+                    "action": "S_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -180,7 +180,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FlyLeft",
+                    "action": "A_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -191,7 +191,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FlyRight",
+                    "action": "D_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -202,7 +202,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FlyForward",
+                    "action": "L_Shift_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -213,7 +213,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FlyBackward",
+                    "action": "L_Ctrl_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -246,7 +246,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpinLeft",
+                    "action": "Q_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -257,7 +257,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpinRight",
+                    "action": "E_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -312,18 +312,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TabPressed",
+                    "action": "Tab_Key",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "9906a519-13f0-423f-9a8e-bef7c170b421",
-                    "path": "<Keyboard>/o",
+                    "id": "f178c792-5860-4c7b-a352-e3d1841bd980",
+                    "path": "<Keyboard>/numpad0",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "O_Pressed",
+                    "action": "NumLockPad0",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -380,8 +380,190 @@
         {
             "name": "GuiButtons",
             "id": "9258951d-8ab0-44cb-a410-cf448b61e184",
-            "actions": [],
-            "bindings": []
+            "actions": [
+                {
+                    "name": "W_Key_Td",
+                    "type": "Value",
+                    "id": "61826031-d10d-4d72-9cc3-625cdae79cca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "S_Key_Td",
+                    "type": "Value",
+                    "id": "756f3960-c031-4a86-b8ec-3b8194bbfd64",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "A_Key_Td",
+                    "type": "Value",
+                    "id": "4c0710f6-b2f6-4e32-834f-37b3e8cf02a7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "D_Key_Td",
+                    "type": "Value",
+                    "id": "c953234c-efb7-4731-b7bf-6ed77417d792",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Q_Key_Td",
+                    "type": "Value",
+                    "id": "a40b058e-06c4-4304-bb43-d406d6545232",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "E_Key_Td",
+                    "type": "Value",
+                    "id": "f5065f17-6b15-432c-b23d-f3196afb2c3d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Tab_Key_Td",
+                    "type": "Button",
+                    "id": "b0f8f1d0-a293-4bf1-9fe8-7645e810b07f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Plus_Key_Td",
+                    "type": "Button",
+                    "id": "0c74f8cb-3d86-4756-b933-10f7dd08a821",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Minus_Key_Td",
+                    "type": "Button",
+                    "id": "f56ae5af-e583-4e5f-809b-e97c4630b290",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c9e6780c-5683-472f-a4a8-def97e5f3e83",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "W_Key_Td",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "67eae150-f715-40a1-b25b-0817d11c38e7",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "S_Key_Td",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fd716503-5573-402c-a862-11774b6b42b8",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "A_Key_Td",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3b30f130-82f2-4b45-9b4e-d96144b1ec3c",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "D_Key_Td",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be7cef26-a1bb-4e07-bb82-439eed742611",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Q_Key_Td",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "adaa1848-2c07-424a-9064-65688e044ee6",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "E_Key_Td",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d35135ed-c5da-4068-b0f0-43f41d84691e",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tab_Key_Td",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fa0fc322-da42-4b22-b86b-c3b337745fc2",
+                    "path": "<Keyboard>/numpadPlus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Plus_Key_Td",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "29cafd67-35ec-4437-a2e3-054a1c128cc2",
+                    "path": "<Keyboard>/numpadMinus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Minus_Key_Td",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
