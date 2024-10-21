@@ -44,12 +44,21 @@ public class Realigner : MonoBehaviour
 		float zAngle = Mathf.LerpAngle(transform.eulerAngles.z, 0, Time.deltaTime * 1.0f);
 		transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, zAngle);
 	}
-	public void AlignXZ(bool startstop)
+	public bool AlignXZ(bool startstop)
 	{
-		Debug.Log("Aligning");
 		float xAngle = Mathf.LerpAngle(transform.eulerAngles.x, 0, Time.deltaTime * 2.0f);
 		float zAngle = Mathf.LerpAngle(transform.eulerAngles.z, 0, Time.deltaTime * 2.0f);
+        if (xAngle < 0.001 && xAngle > -0.001)
+        {
+			if (zAngle < 0.001 && zAngle > -0.001)
+			{
+				transform.eulerAngles = new Vector3(0.0f, transform.eulerAngles.y, 0.0f);
+				return true;
+			}
+		}
+        Debug.Log("Aligning " + transform.rotation.x + " " + transform.rotation.z);
 		transform.eulerAngles = new Vector3(xAngle, transform.eulerAngles.y, zAngle);
+		return false;
 	}
 	public bool IsXzAligned()
 	{

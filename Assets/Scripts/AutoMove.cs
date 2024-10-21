@@ -107,14 +107,14 @@ public class AutoMove : MonoBehaviour
 		if (startstop) { descend = true; }
 		else if (!startstop) { descend = false; }
 	}
-	public void MoveRight(bool startstop)
+	public void MoveRight(bool startstop, int multi = 1)
 	{
-		if (startstop && rotateForce.y < maxRotateSpeed) { rotateForce.y += rotateSpeed; }
+		if (startstop && rotateForce.y < maxRotateSpeed) { rotateForce.y += rotateSpeed * multi; }
 		else if (!startstop) { rotateForce.y = 0; }
 	}
-	public void MoveLeft(bool startstop)
+	public void MoveLeft(bool startstop, int multi = 1)
 	{
-		if (startstop && rotateForce.y > -maxRotateSpeed) { rotateForce.y -= rotateSpeed; }
+		if (startstop && rotateForce.y > -maxRotateSpeed) { rotateForce.y -= rotateSpeed * multi; }
 		else if (!startstop) { rotateForce.y = 0; }
 	}
 	public void StrifeRight(bool startstop)
@@ -185,9 +185,9 @@ public class AutoMove : MonoBehaviour
 		//transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotateSpeed);
 		rb.transform.LookAt(goal);
 	}
-	public void rotateTowards(Vector3 to)
+	public void rotateTowards(Vector3 to, float turn_speed = 2.0f)
 	{
-		float turn_speed = 2.0f;
+		
 		Quaternion _lookRotation =
 			Quaternion.LookRotation((to - transform.position).normalized);
 

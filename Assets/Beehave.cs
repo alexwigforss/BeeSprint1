@@ -8,55 +8,147 @@ using static UnityEngine.GraphicsBuffer;
 public class Beehave : MonoBehaviour
 {
 	[SerializeField]
-	Transform goal;// = null;
-	AutoMove engine;// = AddCo;
+	Transform goal;
+	Transform stashedGoal;
+	[SerializeField]
+	Collider goalCollider;
+	AutoMove engine;
 	Realigner re;
-	// bool tilted = false;
-
+	bool closer = false;
+	bool selected = true;
 	public Transform HiveLocation;
-
+	Transform target;
 	private float prioDist;
 	private float postDist;
 
-	private bool fwd = true;
+	bool aligned = false;
 
+	private bool fwd = true;
+	int state;
+	float timer = 0f;
+	float second, twosec = 0f;
+	private enum States
+	{
+		home,
+		idle,
+		search,
+		collect
+	}
 	// Start is called before the first frame update
 	void Start()
 	{
+		target = goal.transform;
 		engine = GetComponent<AutoMove>();
 		re = GetComponent<Realigner>();
 		engine.ResetAll();
-		prioDist = Vector3.Distance(transform.position, goal.transform.position);
-
+		postDist = Vector3.Distance(transform.position, goal.transform.position);
+		state = (int)States.idle;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-
-		engine.rotateTowards(goal.transform.position);
-        if (fwd)
+		timer += Time.deltaTime;
+		switch (state)
+		{
+			case (int)States.home:
+				aligned = false;
+				transform.position = HiveLocation.transform.position;
+				break;
+			case (int)States.idle:
+				if (!aligned) { aligned = re.AlignXZ(true); }
+				if (timer >= 0.8f) { engine.MoveForward(true); }
+				else { engine.MoveForward(false); }
+				engine.MoveRight(true, 2);
+				break;
+			case (int)States.search:
+				if (!aligned) { aligned = re.AlignXZ(true); }
+				engine.MoveForward(true);
+				if (timer >= 2f) { RandomDirection(); }
+				break;
+			case (int)States.collect:
+				MoveTowards(target);
+				break;
+			default:
+				Debug.Log("Not moving!");
+				break;
+		}
+		if (second >= 1f) { second -= 1f; }
+		if (twosec >= 2f) { twosec -= 2f; }
+        if (timer > 2)
         {
-			engine.MoveForward(true);
-        }
+			state = (int)States.collect;
+		}
+        //while (true)
+        //{
+        //	Debug.Log("hoolding");
+        //}
+    }
+	public void OnTriggerEnter(Collider other)
+	{
+		if (other == goalCollider)
+		{
+			stashedGoal = goal;
+			goal = HiveLocation;
+			Debug.Log("Colliding with goalCollider!");
+		}
+		else if (other.CompareTag("Nest"))
+		{
+			goal = stashedGoal;
+		}
+		target = goal.transform;
+
+	}
+
+	private void MoveTowards(Transform t)
+	{
+		prioDist = postDist;
+		postDist = Vector3.Distance(transform.position, t.position);
+		// Debug.Log("Distance Before " + prioDist + " Distance After " + postDist);
+		//engine.rotateTowards(t.position);
+		engine.rotateTowards(t.position);
+		engine.MoveForward(true);
+		engine.rotateTowards(t.position);
+        if (postDist < 0.9)
+        {
+			engine.rotateTowards(t.position * 8);
+		}
+    }
+
+	private void RandomDirection()
+	{
+		int randomInt = Random.Range(0, 2);
+		Debug.Log(randomInt);
+		if (randomInt == 0)
+		{
+			engine.MoveRight(false);
+			engine.MoveLeft(true, 4);
+			return;
+		}
+		else if (randomInt == 1)
+		{
+			engine.MoveLeft(false);
+			engine.MoveRight(true, 4);
+			return;
+		}
+		engine.MoveLeft(false);
+		engine.MoveLeft(false);
 	}
 
 	private void LateUpdate()
 	{
-		postDist = Vector3.Distance(transform.position, goal.transform.position);
-		Debug.Log("Distance Before " + prioDist + " Distance After " + postDist);
-  //      if (postDist < prioDist)
-  //      {
+		//      if (postDist < prioDist)
+		//      {
 		//	fwd = true;
 		//	return;
-  //      }
+		//      }
 		//fwd = false;
-    }
+	}
 }
-		//else
-		//{
-		//	if (!re.IsXzAligned())
-		//	{
-		//		re.AlignXZ(true);
-		//	}
-		//}
+//else
+//{
+//	if (!re.IsXzAligned())
+//	{
+//		re.AlignXZ(true);
+//	}
+//}
