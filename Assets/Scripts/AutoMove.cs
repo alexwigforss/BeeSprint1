@@ -178,10 +178,24 @@ public class AutoMove : MonoBehaviour
 	}
 	public void TurnTowards(Transform goal)
 	{
-		Vector3 direction = goal.position - transform.position;
-		// Calculate the rotation needed to look at the target
-		Quaternion targetRotation = Quaternion.LookRotation(direction);
-		// Smoothly rotate towards the target rotation
-		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotateSpeed);
+		//Vector3 direction = goal.position - transform.position;
+		//// Calculate the rotation needed to look at the target
+		//Quaternion targetRotation = Quaternion.LookRotation(direction);
+		//// Smoothly rotate towards the target rotation
+		//transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotateSpeed);
+		rb.transform.LookAt(goal);
 	}
+	public void rotateTowards(Vector3 to)
+	{
+		float turn_speed = 2.0f;
+		Quaternion _lookRotation =
+			Quaternion.LookRotation((to - transform.position).normalized);
+
+		transform.rotation =
+			Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * turn_speed);
+
+		//instant
+		//transform.rotation = _lookRotation;
+	}
+
 }
