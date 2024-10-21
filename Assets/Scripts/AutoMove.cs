@@ -16,20 +16,20 @@ public class AutoMove : MonoBehaviour
 	[SerializeField] float moveSpeed;
 	[SerializeField] float rotateSpeed;
 	[SerializeField] float maxSpeed = 2.0f;
+	[SerializeField] float maxRotateSpeed;
 
 	float fwdspeed, strspeed, risespeed = 0.0f;
-	float maxRotateSpeed;
 	float maxMoveSpeed;
 
 	Vector3 moveForce = Vector3.zero;
 	Vector3 rotateForce = Vector3.zero;
-	Boolean accelerate = false;
-	Boolean reverse = false;
-	Boolean ascend = false;
-	Boolean descend = false;
-	Boolean strleft = false;
-	Boolean strright = false;
-	Boolean parked = false;
+	bool accelerate = false;
+	bool reverse = false;
+	bool ascend = false;
+	bool descend = false;
+	bool strleft = false;
+	bool strright = false;
+	bool parked = false;
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
@@ -41,7 +41,6 @@ public class AutoMove : MonoBehaviour
 	{
 		if (rb != null)
 		{
-			//RotateAround();
 			// Apply movement
 			rb.transform.Rotate(rotateForce * Time.deltaTime);
 			Vector3 worldMoveForce = rb.transform.TransformDirection(moveForce);
@@ -177,79 +176,12 @@ public class AutoMove : MonoBehaviour
 		}
 		else if (!startstop) { rotateForce.z = 0; }
 	}
-	public void Realign(bool startstop)
+	public void TurnTowards(Transform goal)
 	{
-		if (startstop)
-		{
-			Debug.Log("Rotation " + rb.transform.rotation);
-			// Gradually reduce the rotation forces to zero
-			if (rb.transform.rotation.x > 0.0f)
-			{
-				if (rotateForce.x < maxRotateSpeed)
-				{
-					rotateForce.x -= rotateSpeed;
-				}
-			}
-			else if (rb.transform.rotation.x < 0.0f)
-			{
-				if (rotateForce.x < maxRotateSpeed)
-				{
-					rotateForce.x += rotateSpeed;
-				}
-			}
-
-			if (rb.transform.rotation.y > 0.0f)
-			{
-				if (rotateForce.y < maxRotateSpeed)
-				{
-					rotateForce.y -= rotateSpeed;
-				}
-			}
-			else if (rb.transform.rotation.y < 0.0f)
-			{
-				if (rotateForce.y < maxRotateSpeed)
-				{
-					rotateForce.y += rotateSpeed;
-				}
-			}
-
-			if (rb.transform.rotation.z > 0.0f)
-			{
-				if (rotateForce.z < maxRotateSpeed)
-				{
-					rotateForce.z -= rotateSpeed;
-				}
-			}
-			else if (rb.transform.rotation.z < 0.0f)
-			{
-				if (rotateForce.z < maxRotateSpeed)
-				{
-					rotateForce.z += rotateSpeed;
-				}
-			}
-
-			// Clamp the values to zero to avoid overshooting
-			if (Mathf.Abs(rb.rotation.x) < 0.1f)
-			{
-				rotateForce.x = 0;
-				rb.transform.rotation = Quaternion.Euler(0, rb.transform.rotation.eulerAngles.y, rb.transform.rotation.eulerAngles.z);
-			}
-			if (Mathf.Abs(rb.rotation.y) < 0.1f)
-			{
-				rotateForce.y = 0;
-				rb.transform.rotation = Quaternion.Euler(rb.transform.rotation.eulerAngles.x, 0, rb.transform.rotation.eulerAngles.z);
-			}
-			if (Mathf.Abs(rb.rotation.z) < 0.1f)
-			{
-				rotateForce.z = 0;
-				rb.transform.rotation = Quaternion.Euler(rb.transform.rotation.eulerAngles.x, rb.transform.rotation.eulerAngles.y, 0);
-			}
-		}
-		else
-		{
-			// Stop the realignment process
-			rotateForce = Vector3.zero;
-		}
+		Vector3 direction = goal.position - transform.position;
+		// Calculate the rotation needed to look at the target
+		Quaternion targetRotation = Quaternion.LookRotation(direction);
+		// Smoothly rotate towards the target rotation
+		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotateSpeed);
 	}
 }
-
