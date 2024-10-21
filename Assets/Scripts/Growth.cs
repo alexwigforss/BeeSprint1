@@ -20,6 +20,8 @@ public class Growth : MonoBehaviour
 	private Vector3 petalsStartScale;
 	private int fc;
 	public float radius;
+	public bool imortal = false;
+
 	// Start is called before the first frame update
 	private bool wilt = false;
 	Material material;
@@ -27,10 +29,14 @@ public class Growth : MonoBehaviour
 
 	void Start()
 	{
-		scaleChange = new Vector3(0.01f, 0.01f, 0.01f);
+        if (!imortal)
+        {
+        scaleChange = new Vector3(0.01f, 0.01f, 0.01f);
 		petalsStartScale = new Vector3(0.1f, 0.1f, 0.1f);
 		transform.localScale = scaleChange;
 		petalTrans.localScale = scaleChange;
+            
+        }
 		fc = 0;
 
 		targetObject = FindChildWithTag(transform, targetTag);
@@ -65,25 +71,29 @@ public class Growth : MonoBehaviour
 				phase++;
 			}
 		}
-		else if (phase == 2 && !wilt)
-		{
-			InitWilt();
-			wilt = true;
-		}
+        if (imortal)
+        {
+			return;
+        }
+        else if (phase == 2 && !wilt)
+        {
+            InitWilt();
+            wilt = true;
+        }
 
-		else if (phase == 2)
-		{
-			OvaryColide.enabled = false;
-			if (transform.localScale.x > 0f)
-			{
-				transform.localScale -= scaleChange * 5 * Time.deltaTime;
-			}
-			else
-			{
-				Destroy(gameObject);
-			}
-		}
-	}
+        else if (phase == 2)
+        {
+            OvaryColide.enabled = false;
+            if (transform.localScale.x > 0f)
+            {
+                transform.localScale -= scaleChange * 5 * Time.deltaTime;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
 
 	private void InitWilt()
 	{
