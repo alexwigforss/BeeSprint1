@@ -15,7 +15,8 @@ public class flowerSpawner : MonoBehaviour
     private Transform spawnDest;
     public bool spawningbool = true;
     public float spawnTime;
-    float windX, windZ;
+	public float betweenSpawnTimeMillis = 1000;
+	float windX, windZ;
 	float globalradius = 1.0f;
 	public float minSpawndDist = 1.0f;
 	public float maxSpawndDist = 2.0f;
@@ -27,6 +28,16 @@ public class flowerSpawner : MonoBehaviour
 		windZ = 0;
 		globalradius = UnityEngine.Random.Range(0.5f, 2f);
 		StartCoroutine(Spawning());
+	}
+	void Update()
+	{
+		//Debug.Log(Time.frameCount);
+		if (Time.frameCount % betweenSpawnTimeMillis == 0 && childNoOfSeeds > 0)
+		{
+			spawningbool = true;
+			StartCoroutine(Spawning());
+			childNoOfSeeds--;
+		}
 	}
 
 	GameObject FindChildWithTag(Transform parent, string tag)
@@ -52,7 +63,7 @@ public class flowerSpawner : MonoBehaviour
 		{
 			yield return new WaitForSeconds(spawnTime);
 			randNum = 0;
-
+			Debug.Log("BOOM Spawntime = " + spawnTime);
 			// Calculate a new random position for each spawn
 			float windX, windZ;
 			GetRandomInCircle(out windX, out windZ);
@@ -117,15 +128,6 @@ public class flowerSpawner : MonoBehaviour
 		float r = UnityEngine.Random.Range(minSpawndDist, maxSpawndDist * 2);
 		x = r * Mathf.Cos(angle);
 		y = r * Mathf.Sin(angle);
-	}
-	void Update()
-	{
-		if (Time.frameCount % 80 == 0 && childNoOfSeeds > 0)
-		{
-			spawningbool = true;
-			StartCoroutine(Spawning());
-			childNoOfSeeds--;
-		}
 	}
 	public void OnChildTrigger() 
 	{

@@ -10,6 +10,9 @@ public class Growth : MonoBehaviour
 	[SerializeReference]
 	SphereCollider OvaryColide;
 
+	[SerializeReference]
+	GameObject hitzone;
+
 	// Find the GameObject with the specified tag
 	// GameObject targetObject = GameObject.FindWithTag("Spike");
 	public string targetTag = "Spike"; // Set this to the tag of your target GameObject
@@ -21,7 +24,6 @@ public class Growth : MonoBehaviour
 	private int fc;
 	public float radius;
 	public bool imortal = false;
-
 	// Start is called before the first frame update
 	private bool wilt = false;
 	Material material;
@@ -42,6 +44,7 @@ public class Growth : MonoBehaviour
 		targetObject = FindChildWithTag(transform, targetTag);
 		renderer = targetObject.GetComponent<Renderer>();
 		material = renderer.material;
+		hitzone.SetActive(false);
 	}
 
 	// Update is called once per frame
@@ -61,6 +64,7 @@ public class Growth : MonoBehaviour
 		}
 		else if (phase == 1)
 		{
+			hitzone.SetActive(true);
 			OvaryColide.enabled = true;
 			if (petalTrans.localScale.x < 1f)
 			{
@@ -99,6 +103,7 @@ public class Growth : MonoBehaviour
 	{
 		if (targetObject != null)
 		{
+			hitzone.SetActive(false);
 			// Get the Renderer component from the target GameObject
 
 			if (renderer != null)
