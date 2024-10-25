@@ -56,7 +56,7 @@ public class Realigner : MonoBehaviour
 				return true;
 			}
 		}
-        Debug.Log("Aligning " + transform.rotation.x + " " + transform.rotation.z);
+        // Debug.Log("Aligning " + transform.rotation.x + " " + transform.rotation.z);
 		transform.eulerAngles = new Vector3(xAngle, transform.eulerAngles.y, zAngle);
 		return false;
 	}
