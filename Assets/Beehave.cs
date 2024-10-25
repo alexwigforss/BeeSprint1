@@ -128,7 +128,7 @@ public class Beehave : MonoBehaviour
 
 	private void RandomDirection()
 	{
-		Debug.Log("Change Direction");
+		// Debug.Log("Change Direction");
 		turndirection = Random.Range(0, 2);
 		engine.MoveRight(false);
 		engine.MoveLeft(false);
