@@ -27,6 +27,7 @@ public class Beehave : MonoBehaviour
 	int state;
 	float timer = 0f;
 	float second, twosec = 0f;
+	int turndirection = 0;
 	private enum States
 	{
 		home,
@@ -42,13 +43,14 @@ public class Beehave : MonoBehaviour
 		re = GetComponent<Realigner>();
 		engine.ResetAll();
 		postDist = Vector3.Distance(transform.position, goal.transform.position);
-		state = (int)States.idle;
+		state = (int)States.search;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
 		timer += Time.deltaTime;
+		twosec += Time.deltaTime;
 		switch (state)
 		{
 			case (int)States.home:
@@ -61,10 +63,19 @@ public class Beehave : MonoBehaviour
 				else { engine.MoveForward(false); }
 				engine.MoveRight(true, 2);
 				break;
+
 			case (int)States.search:
 				if (!aligned) { aligned = re.AlignXZ(true); }
 				engine.MoveForward(true);
-				if (timer >= 2f) { RandomDirection(); }
+				if (turndirection == 0)
+				{
+					engine.MoveRight(true);
+				}
+				else
+				{
+					engine.MoveLeft(true);
+				}
+				if (twosec >= 2f) { RandomDirection(); }
 				break;
 			case (int)States.collect:
 				MoveTowards(target);
@@ -74,16 +85,16 @@ public class Beehave : MonoBehaviour
 				break;
 		}
 		if (second >= 1f) { second -= 1f; }
-		if (twosec >= 2f) { twosec -= 2f; }
-        if (timer > 2)
-        {
-			state = (int)States.collect;
-		}
-        //while (true)
-        //{
-        //	Debug.Log("hoolding");
-        //}
-    }
+		//if (twosec >= 2f) { twosec -= 2f; }
+		//if (timer > 2)
+		//{
+		//	state = (int)States.collect;
+		//}
+		//while (true)
+		//{
+		//	Debug.Log("hoolding");
+		//}
+	}
 	public void OnTriggerEnter(Collider other)
 	{
 		if (other == goalCollider)
@@ -109,30 +120,19 @@ public class Beehave : MonoBehaviour
 		engine.rotateTowards(t.position);
 		engine.MoveForward(true);
 		engine.rotateTowards(t.position);
-        if (postDist < 0.9)
-        {
+		if (postDist < 0.9)
+		{
 			engine.rotateTowards(t.position * 8);
 		}
-    }
+	}
 
 	private void RandomDirection()
 	{
-		int randomInt = Random.Range(0, 2);
-		Debug.Log(randomInt);
-		if (randomInt == 0)
-		{
-			engine.MoveRight(false);
-			engine.MoveLeft(true, 4);
-			return;
-		}
-		else if (randomInt == 1)
-		{
-			engine.MoveLeft(false);
-			engine.MoveRight(true, 4);
-			return;
-		}
+		Debug.Log("Change Direction");
+		turndirection = Random.Range(0, 2);
+		engine.MoveRight(false);
 		engine.MoveLeft(false);
-		engine.MoveLeft(false);
+		twosec -= 2f;
 	}
 
 	private void LateUpdate()
