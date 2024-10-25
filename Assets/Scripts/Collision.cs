@@ -18,8 +18,8 @@ public class Collision : MonoBehaviour
 	void Start()
 	{
 		// resourceManager = FindObjectOfType<Resources>();
-		Debug.Log(transform.childCount);
-		// tmpText = GetComponentInChildren<Canvas>().GetComponentInChildren<TMP_Text>();
+		//Debug.Log(transform.childCount);
+		tmpText = GetComponentInChildren<Canvas>().GetComponentInChildren<TMP_Text>();
 	}
 
 	// Update is called once per frame
@@ -40,7 +40,7 @@ public class Collision : MonoBehaviour
 		if (other.CompareTag("FlowerHitZone"))
 		{
 			pollen++;
-			// UpdatePlayerText();
+			UpdatePlayerText();
 			Debug.Log("Drone collected pollen " + pollen);
 		}
 		else if (other.CompareTag("Nest"))
