@@ -63,7 +63,7 @@ public class flowerSpawner : MonoBehaviour
 		{
 			yield return new WaitForSeconds(spawnTime);
 			randNum = 0;
-			Debug.Log("BOOM Spawntime = " + spawnTime);
+			// Debug.Log("BOOM Spawntime = " + spawnTime);
 			// Calculate a new random position for each spawn
 			float windX, windZ;
 			GetRandomInCircle(out windX, out windZ);

@@ -1485,7 +1485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1087079097969785150, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: flower
@@ -3032,7 +3032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1087079097969785150, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: texture
@@ -5288,7 +5288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1087079097969785150, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: texture
@@ -5623,7 +5623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1087079097969785150, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: texture
