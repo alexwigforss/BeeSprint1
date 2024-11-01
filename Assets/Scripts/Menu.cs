@@ -6,7 +6,7 @@ public abstract class Menu : MonoBehaviour
 {
 	public GameObject spritePrefab;
 	public Transform layoutGroup;
-	public Transform flowerSpawnersParent; // Assign this in the Inspector
+	public Transform spawnersParent; // Assign this in the Inspector
 	internal int spritesadded = 0;
 	void Start()
 	{

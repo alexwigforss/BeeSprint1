@@ -8,7 +8,7 @@ public class RPanel : Menu
 	{
 		List<Sprite> sprites = new List<Sprite>();
 
-		foreach (Transform SpawnLocation in flowerSpawnersParent)
+		foreach (Transform SpawnLocation in spawnersParent)
 		{
 			Transform flowerSpawner = SpawnLocation.Find("FlowerSpawner");
 			if (flowerSpawner != null)
@@ -28,7 +28,7 @@ public class RPanel : Menu
 				}
 			}
 		}
-		Debug.Log(spritesadded + " Sprites added");
+		//Debug.Log(spritesadded + " Sprites added");
 		return sprites;
 	}
 }
