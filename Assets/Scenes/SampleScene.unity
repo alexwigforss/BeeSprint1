@@ -1499,6 +1499,10 @@ PrefabInstance:
       propertyPath: childNoOfSeeds
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
+      propertyPath: betweenSpawnTimeMillis
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 21.98
@@ -1685,7 +1689,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4292921393
   m_fontColor: {r: 0.19077952, g: 0.7829179, b: 0.8792453, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -2942,7 +2946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &871245995
 Transform:
   m_ObjectHideFlags: 0
@@ -2966,7 +2970,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871245994}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &871245997
 Camera:
   m_ObjectHideFlags: 0
@@ -2974,7 +2978,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871245994}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -3041,6 +3045,10 @@ PrefabInstance:
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: childNoOfSeeds
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
+      propertyPath: betweenSpawnTimeMillis
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3191,7 +3199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &963194226
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3199,7 +3207,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!20 &963194227
 Camera:
   m_ObjectHideFlags: 0
@@ -3207,7 +3215,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -5298,6 +5306,10 @@ PrefabInstance:
       propertyPath: childNoOfSeeds
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
+      propertyPath: betweenSpawnTimeMillis
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 20.06
@@ -5632,6 +5644,10 @@ PrefabInstance:
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: childNoOfSeeds
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
+      propertyPath: betweenSpawnTimeMillis
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_LocalPosition.x

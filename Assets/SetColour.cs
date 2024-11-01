@@ -31,19 +31,22 @@ public class SetColour : MonoBehaviour
 				if (texture != null)
 				{
 					// Get all colors from the texture
-					Color[] colors = texture.GetPixels();
-					List<Color> uniqueColors = new List<Color>();
+					Debug.Log("Texture dimensions: " + texture.width + " , " + texture.height);
 
-					foreach (Color color in colors)
+					Color color = texture.GetPixel(132,33);
+					//Color colors = texture.GetPixels(132,66);
+
+					//List<Color> uniqueColors = new List<Color>();
+
+					Material newMaterial = new Material(material);
+					newMaterial.SetColor("_Color", color);
+
+					// Assign the new material to this object's renderer
+					Renderer thisRenderer = GetComponent<Renderer>();
+					if (thisRenderer != null)
 					{
-						if (!uniqueColors.Contains(color))
-						{
-							uniqueColors.Add(color);
-						}
+						thisRenderer.material = newMaterial;
 					}
-
-					Debug.Log("Unique colors count: " + uniqueColors.Count);
-					material.SetColor("_Color", uniqueColors[100]);
 				}
 
 
