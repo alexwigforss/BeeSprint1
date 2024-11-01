@@ -5431,6 +5431,7 @@ GameObject:
   - component: {fileID: 1888581627}
   - component: {fileID: 1888581629}
   - component: {fileID: 1888581630}
+  - component: {fileID: 1888581631}
   m_Layer: 5
   m_Name: RightPanel
   m_TagString: Untagged
@@ -5503,7 +5504,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1888581625}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7320528532155bd42819661d3e81f6b4, type: 3}
   m_Name: 
@@ -5523,6 +5524,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19f337b5a04b514996eba575f435aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1888581631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888581625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 415f8f7a725a8bc4caad36c4fe19aff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spritePrefab: {fileID: 3881935524205956972, guid: bf6414cc069ac454ebc001f193fd694f, type: 3}
+  layoutGroup: {fileID: 437343280}
+  flowerSpawnersParent: {fileID: 1697589992}
 --- !u!1 &1993476581
 GameObject:
   m_ObjectHideFlags: 0
