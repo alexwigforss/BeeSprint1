@@ -8,7 +8,7 @@ public abstract class Menu : MonoBehaviour
 	public Transform layoutGroup;
 	public Transform spawnersParent; // Assign this in the Inspector
 	internal int spritesadded = 0;
-	void Start()
+	protected virtual void Start()
 	{
 		List<Sprite> sprites = GetSprites();
 		foreach (Sprite sprite in sprites)
@@ -23,5 +23,4 @@ public abstract class Menu : MonoBehaviour
 		List<Sprite> sprites = new List<Sprite>();
 		return sprites;
 	}
-
 }

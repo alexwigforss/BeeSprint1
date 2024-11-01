@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class RPanel : Menu
 {
+	private void Start()
+	{
+		base.Start();
+	}
 	protected override List<Sprite> GetSprites()
 	{
 		List<Sprite> sprites = new List<Sprite>();

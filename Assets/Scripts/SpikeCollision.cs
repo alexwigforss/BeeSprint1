@@ -13,7 +13,7 @@ public class SpikeCollision : MonoBehaviour
 
 		if (parentScript == null)
 		{
-			Debug.LogError("flowerSpawner component not found in parent hierarchy.");
+			//Debug.LogError("flowerSpawner component not found in parent hierarchy.");
 		}
 	}
 
@@ -27,7 +27,7 @@ public class SpikeCollision : MonoBehaviour
 		}
 		else
 		{
-			Debug.LogError("Cannot call OnChildTrigger because parentScript is null.");
+			//Debug.LogError("Cannot call OnChildTrigger because parentScript is null.");
 		}
 	}
 }
