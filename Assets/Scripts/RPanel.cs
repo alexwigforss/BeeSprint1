@@ -1,28 +1,18 @@
-using UnityEngine;
-using UnityEngine.UI;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class SpriteManager : MonoBehaviour
+public class RPanel : Menu
 {
-	public GameObject spritePrefab;
-	public Transform layoutGroup;
-	public Transform flowerSpawnersParent; // Assign this in the Inspector
-	int spritesadded = 0;
-	void Start()
+	private void Start()
 	{
-		List<Sprite> sprites = GetSpritesFromHierarchy();
-		foreach (Sprite sprite in sprites)
-		{
-			GameObject newSprite = Instantiate(spritePrefab, layoutGroup);
-			newSprite.GetComponent<Image>().sprite = sprite;
-		}
+		base.Start();
 	}
-
-	List<Sprite> GetSpritesFromHierarchy()
+	protected override List<Sprite> GetSprites()
 	{
 		List<Sprite> sprites = new List<Sprite>();
 
-		foreach (Transform SpawnLocation in flowerSpawnersParent)
+		foreach (Transform SpawnLocation in spawnersParent)
 		{
 			Transform flowerSpawner = SpawnLocation.Find("FlowerSpawner");
 			if (flowerSpawner != null)
@@ -42,7 +32,7 @@ public class SpriteManager : MonoBehaviour
 				}
 			}
 		}
-		Debug.Log(spritesadded + " Sprites added");
+		//Debug.Log(spritesadded + " Sprites added");
 		return sprites;
 	}
 }

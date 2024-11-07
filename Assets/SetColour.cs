@@ -31,7 +31,7 @@ public class SetColour : MonoBehaviour
 				if (texture != null)
 				{
 					// Get all colors from the texture
-					Debug.Log("Texture dimensions: " + texture.width + " , " + texture.height);
+					//Debug.Log("Texture dimensions: " + texture.width + " , " + texture.height);
 
 					Color color = texture.GetPixel(132,33);
 					//Color colors = texture.GetPixels(132,66);

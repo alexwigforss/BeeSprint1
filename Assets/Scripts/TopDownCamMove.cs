@@ -18,7 +18,7 @@ public class TopDownCamMove : MonoBehaviour
 	void Start()
 	{
 		cam = GetComponent<Camera>();
-		cam.transform.position = new Vector3(0, 50, 0);
+		cam.transform.position = new Vector3(0, 45, 0);
 	}
 	private void Update()
 	{
