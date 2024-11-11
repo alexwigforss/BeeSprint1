@@ -9,6 +9,7 @@ TagManager:
   - Flower
   - FlowerHitZone
   - Nest
+  - Water
   layers:
   - Default
   - TransparentFX
