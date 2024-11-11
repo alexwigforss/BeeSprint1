@@ -2981,6 +2981,7 @@ MonoBehaviour:
   goal: {fileID: 546031011}
   goalCollider: {fileID: 546031007}
   HiveLocation: {fileID: 1593979350}
+  state: 0
 --- !u!114 &605284858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4294,6 +4295,7 @@ MonoBehaviour:
   goal: {fileID: 546031011}
   goalCollider: {fileID: 546031007}
   HiveLocation: {fileID: 1593979350}
+  state: 0
 --- !u!114 &1049083528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6126,6 +6128,7 @@ MonoBehaviour:
   goal: {fileID: 546031011}
   goalCollider: {fileID: 546031007}
   HiveLocation: {fileID: 1593979350}
+  state: 3
 --- !u!114 &1427477021
 MonoBehaviour:
   m_ObjectHideFlags: 0

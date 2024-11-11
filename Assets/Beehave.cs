@@ -24,7 +24,7 @@ public class Beehave : MonoBehaviour
 	bool aligned = false;
 
 	private bool fwd = true;
-	int state;
+	public int state = (int)States.search;
 	float timer = 0f;
 	float second, twosec = 0f;
 	int turndirection = 0;
@@ -43,7 +43,6 @@ public class Beehave : MonoBehaviour
 		re = GetComponent<Realigner>();
 		engine.ResetAll();
 		postDist = Vector3.Distance(transform.position, goal.transform.position);
-		state = (int)States.search;
 	}
 
 	// Update is called once per frame
