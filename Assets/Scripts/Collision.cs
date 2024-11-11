@@ -9,10 +9,13 @@ public class Collision : MonoBehaviour
 {
 	// public Resources resourceManager;
 	int pollen = 0;
+	int water = 0;
 	private TMP_Text tmpText;
 
+	bool hasLeft = false;
 	bool hasLeftNest = false;
 	private Coroutine decreaseCoroutine;
+	private Coroutine increaseCoroutine;
 
 	// Start is called before the first frame update
 	void Start()
@@ -29,12 +32,38 @@ public class Collision : MonoBehaviour
 	}
 	public void OnCollisionEnter(UnityEngine.Collision collision)
 	{
-		if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+		if (collision.gameObject.name.Equals("World"))
 		{
 			transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Flapper>().enabled = false;
 			transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Flapper>().enabled = false;
 		}
+        else if (collision.gameObject.name.Equals("Water"))
+        {
+			hasLeft = false;
+			increaseCoroutine ??= StartCoroutine(CollectWaterOverTime());
+			//Debug.Log("SPLASH water hit ");
+		}
 	}
+
+	public void OnCollisionExit(UnityEngine.Collision collision)
+	{
+		if (collision.gameObject.name.Equals("World"))
+		{
+			transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Flapper>().enabled = true;
+			transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Flapper>().enabled = true;
+		}
+		else if (collision.gameObject.name.Equals("Water"))
+		{
+			hasLeft = true;
+			if (increaseCoroutine != null)
+			{
+				StopCoroutine(increaseCoroutine);
+				increaseCoroutine = null;
+			}
+			//Debug.Log("SPLASH water hit ");
+		}
+	}
+
 	public void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("FlowerHitZone"))
@@ -46,7 +75,7 @@ public class Collision : MonoBehaviour
 		else if (other.CompareTag("Nest"))
 		{
 			hasLeftNest = false;
-			decreaseCoroutine ??= StartCoroutine(DecreaseVariableOverTime());
+			decreaseCoroutine ??= StartCoroutine(UnloadResources());
 		}
     }
 
@@ -67,7 +96,7 @@ public class Collision : MonoBehaviour
 	{
 		if (tmpText != null)
 		{
-			tmpText.text = "" + pollen;
+			tmpText.text = "" + pollen + "," + water;
 		}
 		else
 		{
@@ -75,26 +104,48 @@ public class Collision : MonoBehaviour
 		}
 	}
 
-	IEnumerator DecreaseVariableOverTime()
+	IEnumerator CollectWaterOverTime()
 	{
-		while (pollen > 0)
+		Debug.Log("Increasing" + water);
+		while (water < 10)
+		{
+			if (hasLeft)
+			{
+				hasLeft = false;
+				break;
+			}
+			water++;
+			UpdatePlayerText();
+			Debug.Log("Post Increasing" + water);
+			yield return new WaitForSeconds(1);
+		}
+		increaseCoroutine = null;
+	}
+
+	IEnumerator UnloadResources()
+	{
+		while (pollen > 0 || water > 0)
 		{
 			if (hasLeftNest)
 			{
 				hasLeftNest = false;
 				break;
 			}
-			pollen--;
+            if (pollen > 0)
+            {
+				pollen--;
+				Resources.pol++;
+            }
+            if (water > 0)
+            {
+				water--;
+				Resources.wat++;
+            }
 			UpdatePlayerText();
-			Resources.resources++;
 			yield return new WaitForSeconds(1);
 		}
 		decreaseCoroutine = null;
 	}
 
-	public void OnCollisionExit(UnityEngine.Collision collision)
-	{
-		transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Flapper>().enabled = true;
-		transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Flapper>().enabled = true;
-	}
+
 }
