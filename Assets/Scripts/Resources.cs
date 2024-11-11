@@ -57,7 +57,7 @@ public class Resources : MonoBehaviour
 		if (resourceText != null)
 		{
 			// resourceText.text = "" + resources;
-			resourceText.text = "Po:" + pol + " Pr:" + pro + " Ne:" + nec + " Wa:" + wat;
+			resourceText.text = "Po:" + pol + " Ne:" + nec + " Pr:" + pro +  " Wa:" + wat;
 		}
 		else
 		{
