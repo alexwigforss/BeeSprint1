@@ -26,8 +26,13 @@ public class Beehave : MonoBehaviour
 	private bool fwd = true;
 	public int state = (int)States.search;
 	float timer = 0f;
-	float second, twosec = 0f;
+	float twosec = 0f;
 	int turndirection = 0;
+
+	public GameObject flowerSpawners;
+	int selectedSpecie = 0;
+	List<Transform> hitList = new List<Transform>();
+
 	private enum States
 	{
 		home,
@@ -35,7 +40,7 @@ public class Beehave : MonoBehaviour
 		search,
 		collect
 	}
-	// Start is called before the first frame update
+
 	void Start()
 	{
 		target = goal.transform;
@@ -45,7 +50,6 @@ public class Beehave : MonoBehaviour
 		postDist = Vector3.Distance(transform.position, goal.transform.position);
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
 		timer += Time.deltaTime;
@@ -83,17 +87,8 @@ public class Beehave : MonoBehaviour
 				Debug.Log("Not moving!");
 				break;
 		}
-		if (second >= 1f) { second -= 1f; }
-		//if (twosec >= 2f) { twosec -= 2f; }
-		//if (timer > 2)
-		//{
-		//	state = (int)States.collect;
-		//}
-		//while (true)
-		//{
-		//	Debug.Log("hoolding");
-		//}
 	}
+
 	public void OnTriggerEnter(Collider other)
 	{
 		if (other == goalCollider)
@@ -114,8 +109,6 @@ public class Beehave : MonoBehaviour
 	{
 		prioDist = postDist;
 		postDist = Vector3.Distance(transform.position, t.position);
-		// Debug.Log("Distance Before " + prioDist + " Distance After " + postDist);
-		//engine.rotateTowards(t.position);
 		engine.rotateTowards(t.position);
 		engine.MoveForward(true);
 		engine.rotateTowards(t.position);
@@ -136,18 +129,7 @@ public class Beehave : MonoBehaviour
 
 	private void LateUpdate()
 	{
-		//      if (postDist < prioDist)
-		//      {
-		//	fwd = true;
-		//	return;
-		//      }
-		//fwd = false;
+
 	}
 }
-//else
-//{
-//	if (!re.IsXzAligned())
-//	{
-//		re.AlignXZ(true);
-//	}
-//}
+
