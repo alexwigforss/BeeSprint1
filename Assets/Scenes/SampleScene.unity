@@ -1455,7 +1455,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1087079097969785150, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_Name
-      value: SpawnLocation
+      value: SpawnLocation (1)
       objectReference: {fileID: 0}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: texture
@@ -1479,7 +1479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: betweenSpawnTimeMillis
-      value: 1000
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1757,11 +1757,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1087079097969785150, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_Name
-      value: SpawnLocation
+      value: SpawnLocation (2)
       objectReference: {fileID: 0}
     - target: {fileID: 1087079097969785150, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: flower
@@ -2982,6 +2982,7 @@ MonoBehaviour:
   goalCollider: {fileID: 546031007}
   HiveLocation: {fileID: 1593979350}
   state: 0
+  flowerSpawners: {fileID: 0}
 --- !u!114 &605284858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3873,7 +3874,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1087079097969785150, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: texture
@@ -4296,6 +4297,7 @@ MonoBehaviour:
   goalCollider: {fileID: 546031007}
   HiveLocation: {fileID: 1593979350}
   state: 0
+  flowerSpawners: {fileID: 0}
 --- !u!114 &1049083528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4777,6 +4779,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1085851896}
   - component: {fileID: 1085851895}
+  - component: {fileID: 1085851897}
   m_Layer: 0
   m_Name: ResourceManager
   m_TagString: Untagged
@@ -4812,6 +4815,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1085851897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085851894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6783cb73a476e3542a4c8596233f9579, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1089115809
 GameObject:
   m_ObjectHideFlags: 0
@@ -6129,6 +6144,7 @@ MonoBehaviour:
   goalCollider: {fileID: 546031007}
   HiveLocation: {fileID: 1593979350}
   state: 3
+  flowerSpawners: {fileID: 1697589991}
 --- !u!114 &1427477021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7453,7 +7469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1087079097969785150, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: texture
@@ -7906,7 +7922,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1087079097969785150, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: texture
