@@ -28,7 +28,7 @@ public class Growth : MonoBehaviour
 	private bool wilt = false;
 	Material material;
 	Color color = Color.black;
-	public int spawnId = -1;
+	public int spawnById = -1;
 
 	void Start()
 	{

@@ -21,8 +21,12 @@ public class flowerSpawner : MonoBehaviour
 	public float minSpawndDist = 1.0f;
 	public float maxSpawndDist = 2.0f;
 	public string targetTag = "Spike"; // Set this to the tag of your target GameObject
+	static int enumerator = 0;
+	int ID = 0;
 	void Start()
 	{
+		ID = enumerator++;
+		Debug.Log("Flower Spaner id: " + ID + "has entered the scene");
 		spawnDest = motherDest;
 		windX = 0;
 		windZ = 0;
