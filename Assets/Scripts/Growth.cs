@@ -28,24 +28,31 @@ public class Growth : MonoBehaviour
 	private bool wilt = false;
 	Material material;
 	Color color = Color.black;
+	public int spawnId = -1;
 
 	void Start()
 	{
-        if (!imortal)
-        {
-        scaleChange = new Vector3(0.01f, 0.01f, 0.01f);
-		petalsStartScale = new Vector3(0.1f, 0.1f, 0.1f);
-		transform.localScale = scaleChange;
-		petalTrans.localScale = scaleChange;
-            
-        }
+		if (!imortal)
+		{
+			scaleChange = new Vector3(0.01f, 0.01f, 0.01f);
+			petalsStartScale = new Vector3(0.1f, 0.1f, 0.1f);
+			transform.localScale = scaleChange;
+			petalTrans.localScale = scaleChange;
+
+		}
 		fc = 0;
 
 		targetObject = FindChildWithTag(transform, targetTag);
 		renderer = targetObject.GetComponent<Renderer>();
 		material = renderer.material;
 		hitzone.SetActive(false);
+		//spawnId = getIdBySpawnLocation();
 	}
+
+	//private static int getIdBySpawnLocation()
+	//{
+	//	return getIdBySpawnLocation();
+	//}
 
 	// Update is called once per frame
 	void Update()
@@ -64,7 +71,13 @@ public class Growth : MonoBehaviour
 		}
 		else if (phase == 1)
 		{
-			hitzone.SetActive(true);
+			if (hitzone.activeSelf == false)
+            {
+	            hitzone.SetActive(true);
+				Hitzones.hitList.Enqueue(hitzone.transform);
+				Hitzones.PtrintHitListCount();
+            }
+
 			OvaryColide.enabled = true;
 			if (petalTrans.localScale.x < 1f)
 			{
@@ -104,6 +117,9 @@ public class Growth : MonoBehaviour
 		if (targetObject != null)
 		{
 			hitzone.SetActive(false);
+			Hitzones.hitList.Dequeue();
+			Hitzones.PtrintHitListCount();
+
 			//Hitzones.hitList.Add(0,hitzone.transform);
 			// Get the Renderer component from the target GameObject
 
