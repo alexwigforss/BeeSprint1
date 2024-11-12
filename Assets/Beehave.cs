@@ -31,7 +31,7 @@ public class Beehave : MonoBehaviour
 
 	public GameObject flowerSpawners;
 	int selectedSpecie = 0;
-	List<Transform> hitList = new List<Transform>();
+	Queue<Transform> internalHitList = new Queue<Transform>();
 
 	private enum States
 	{
@@ -50,6 +50,14 @@ public class Beehave : MonoBehaviour
 		postDist = Vector3.Distance(transform.position, goal.transform.position);
 	}
 
+	private void OnValidate()
+	{
+        if (Application.isPlaying)
+        {
+			getGoalQueue();
+        }
+	}
+
 	void Update()
 	{
 		timer += Time.deltaTime;
@@ -66,18 +74,11 @@ public class Beehave : MonoBehaviour
 				else { engine.MoveForward(false); }
 				engine.MoveRight(true, 2);
 				break;
-
 			case (int)States.search:
 				if (!aligned) { aligned = re.AlignXZ(true); }
 				engine.MoveForward(true);
-				if (turndirection == 0)
-				{
-					engine.MoveRight(true);
-				}
-				else
-				{
-					engine.MoveLeft(true);
-				}
+				if (turndirection == 0) { engine.MoveRight(true); }
+				else { engine.MoveLeft(true); }
 				if (twosec >= 2f) { RandomDirection(); }
 				break;
 			case (int)States.collect:
@@ -89,17 +90,46 @@ public class Beehave : MonoBehaviour
 		}
 	}
 
+	private void getGoalQueue()
+	{
+		Debug.Log("Getting Queue");
+		internalHitList = Hitzones.hitList;
+	}
+
+	private void getNextGoal()
+	{
+		goal = internalHitList.Dequeue();
+
+		Debug.Log("Getting Goal, hit list size = " + internalHitList.Count);
+	}
+
 	public void OnTriggerEnter(Collider other)
 	{
-		if (other == goalCollider)
+		// TBD Implement return to home when fully loaded.
+		//if (other == goalCollider)
+		if (other.tag == "FlowerHitZone")
 		{
-			stashedGoal = goal;
-			goal = HiveLocation;
-			Debug.Log("Colliding with goalCollider!");
+            if (internalHitList.Count > 0)
+            {
+				// stashedGoal = goal;
+				getNextGoal();
+				//return;
+			}
+            else
+            {
+				Debug.Log("hitListWas ZERO");
+	            stashedGoal = goal;
+				goal = HiveLocation;
+				// Debug.Log("Colliding with goalCollider!");
+				//return;
+            }
 		}
 		else if (other.CompareTag("Nest"))
 		{
-			goal = stashedGoal;
+			Debug.Log("Hit nest");
+			getGoalQueue();
+			getNextGoal();
+			//goal = stashedGoal;
 		}
 		target = goal.transform;
 

@@ -24,9 +24,19 @@ public class Collision : MonoBehaviour
 	private Coroutine increaseCoroutine;
 	private Coroutine incPropCoroutine;
 
-	void Start()
+	void OnValidate()
 	{
-		tmpText = GetComponentInChildren<Canvas>().GetComponentInChildren<TMP_Text>();
+		if (Application.isPlaying)
+		{
+			try
+			{
+				tmpText = GetComponentInChildren<Canvas>().GetComponentInChildren<TMP_Text>();
+			}
+			catch (Exception)
+			{
+				Debug.LogError("No text on this bee");
+			}
+		}
 	}
 
 	// Update is called once per frame
@@ -93,7 +103,7 @@ public class Collision : MonoBehaviour
 			}
 			calcTotalLoad();
 			UpdatePlayerText();
-			Debug.Log("Drone collected pollen " + pollen);
+			//Debug.Log("Drone collected pollen " + pollen);
 		}
 		else if (other.CompareTag("Nest"))
 		{

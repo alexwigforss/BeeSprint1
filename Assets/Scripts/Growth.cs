@@ -116,10 +116,12 @@ public class Growth : MonoBehaviour
 	{
 		if (targetObject != null)
 		{
-			hitzone.SetActive(false);
-			Hitzones.hitList.Dequeue();
-			Hitzones.PtrintHitListCount();
-
+			if (hitzone.activeSelf == true)
+			{
+				hitzone.SetActive(false);
+				Hitzones.hitList.Dequeue();
+				Hitzones.PtrintHitListCount();
+			}
 			//Hitzones.hitList.Add(0,hitzone.transform);
 			// Get the Renderer component from the target GameObject
 

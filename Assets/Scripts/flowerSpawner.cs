@@ -76,6 +76,8 @@ public class flowerSpawner : MonoBehaviour
 			GameObject spawnedObject = Instantiate(flower, spawnPosition, spawnDest.rotation);
 			spawnedObject.transform.SetParent(transform);
 			spawnedObject.GetComponent<Growth>().radius = globalradius;
+			spawnedObject.GetComponent<Growth>().spawnById = ID;
+			
 
 			// Find the target GameObject by tag
 			GameObject targetObject = FindChildWithTag(spawnedObject.transform, targetTag);
