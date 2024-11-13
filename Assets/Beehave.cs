@@ -31,7 +31,7 @@ public class Beehave : MonoBehaviour
 
 	public GameObject flowerSpawners;
 	int selectedSpecie = 0;
-	Queue<Transform> internalHitList = new Queue<Transform>();
+	List<Transform> internalHitList = new List<Transform>();
 
 	private enum States
 	{
@@ -98,8 +98,7 @@ public class Beehave : MonoBehaviour
 
 	private void getNextGoal()
 	{
-		goal = internalHitList.Dequeue();
-
+		goal = internalHitList[0];
 		Debug.Log("Getting Goal, hit list size = " + internalHitList.Count);
 	}
 

@@ -5,10 +5,10 @@ using UnityEngine;
 public class Hitzones : MonoBehaviour
 {
 
-	public static Queue<Transform> hitList = new Queue<Transform>();
+	public static List<Transform> hitList = new List<Transform>();
 
 	public static void PtrintHitListCount()
 	{
-		//Debug.Log("Nr of hitzones = " + hitList.Count);
+		Debug.Log("Nr of hitzones = " + hitList.Count);
 	}
 }

@@ -74,7 +74,7 @@ public class Growth : MonoBehaviour
 			if (hitzone.activeSelf == false)
             {
 	            hitzone.SetActive(true);
-				Hitzones.hitList.Enqueue(hitzone.transform);
+				Hitzones.hitList.Add(hitzone.transform);
 				Hitzones.PtrintHitListCount();
             }
 
@@ -119,7 +119,7 @@ public class Growth : MonoBehaviour
 			if (hitzone.activeSelf == true)
 			{
 				hitzone.SetActive(false);
-				Hitzones.hitList.Dequeue();
+				Hitzones.hitList.Remove(hitzone.transform);
 				Hitzones.PtrintHitListCount();
 			}
 			//Hitzones.hitList.Add(0,hitzone.transform);
