@@ -82,7 +82,7 @@ public class Beehave : MonoBehaviour
 				if (turndirection == 0) { engine.MoveRight(true); }
 				else { engine.MoveLeft(true); }
 				if (twosec >= 2f) { RandomDirection(); }
-				if (Hitzones.hitList.Count > 0)
+				if (Hitzones.HitList.Count > 0)
 				{
 					getGoalList();
 					getNextGoal();
@@ -110,8 +110,8 @@ public class Beehave : MonoBehaviour
 
 	private void getGoalList()
 	{
-		Debug.Log("Getting Queue");
-		internalHitList = Hitzones.hitList;
+		Debug.Log("Getting HitZone List");
+		internalHitList = Hitzones.HitList;
 	}
 
 	private void getNextGoal()
@@ -139,17 +139,13 @@ public class Beehave : MonoBehaviour
 		{
 			if (internalHitList.Count > 0)
 			{
-				// stashedGoal = goal;
 				getNextGoal();
-				//return;
 			}
 			else
 			{
 				Debug.Log("hitListWas ZERO");
 				stashedGoal = goal;
 				goal = HiveLocation;
-				// Debug.Log("Colliding with goalCollider!");
-				//return;
 			}
 		}
 		else if (other.CompareTag("Nest"))
@@ -157,7 +153,6 @@ public class Beehave : MonoBehaviour
 			Debug.Log("Hit nest");
 			getGoalList();
 			getNextGoal();
-			//goal = stashedGoal;
 		}
 		target = goal.transform;
 
@@ -190,11 +185,6 @@ public class Beehave : MonoBehaviour
 		engine.MoveRight(false);
 		engine.MoveLeft(false);
 		twosec -= 2f;
-	}
-
-	private void LateUpdate()
-	{
-
 	}
 }
 

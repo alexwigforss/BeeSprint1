@@ -78,8 +78,7 @@ public class Growth : MonoBehaviour
 			if (hitzone.activeSelf == false)
             {
 	            hitzone.SetActive(true);
-				Hitzones.hitList.Add(hitzone.transform);
-				//Hitzones.PtrintHitListCount();
+				Hitzones.HitList.Add(hitzone.transform);
 				statsText.text = Hitzones.PtrintHitListCount().ToString();
 
 			}
@@ -125,8 +124,7 @@ public class Growth : MonoBehaviour
 			if (hitzone.activeSelf == true)
 			{
 				hitzone.SetActive(false);
-				Hitzones.hitList.Remove(hitzone.transform);
-				//Hitzones.PtrintHitListCount();
+				Hitzones.HitList.Remove(hitzone.transform);
 				statsText.text = Hitzones.PtrintHitListCount().ToString();
 			}
 			//Hitzones.hitList.Add(0,hitzone.transform);

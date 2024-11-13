@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 
@@ -23,19 +24,32 @@ public class flowerSpawner : MonoBehaviour
 	public float maxSpawndDist = 2.0f;
 	public string targetTag = "Spike"; // Set this to the tag of your target GameObject
 	static int enumerator = 0;
-	int ID = 0;
+	public int ID = 0;
 
 	[SerializeReference]
 	public TMP_Text statsText;
 	void Start()
 	{
-		ID = enumerator++;
+		ID = getIdByName();
+		
 		Debug.Log("Flower Spaner id: " + ID + "has entered the scene");
 		spawnDest = motherDest;
 		windX = 0;
 		windZ = 0;
 		globalradius = UnityEngine.Random.Range(0.5f, 2f);
 		StartCoroutine(Spawning());
+	}
+
+	private int getIdByName()
+	{
+		{
+			string parentName = transform.parent.name; int r = 0;
+			// Use regular expression to find the number within parentheses
+			Match match = Regex.Match(parentName, @"\((\d+)\)");
+			if (match.Success) { r = int.Parse(match.Groups[1].Value); }
+			Debug.Log("Parent name is: " + parentName + " My number is: " + r);
+			return r;
+		}
 	}
 	void Update()
 	{
