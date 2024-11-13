@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Hitzones : MonoBehaviour
 {
-
+	public static List<List<Transform>> hitLists = new List<List<Transform>>();
 	public static List<Transform> hitList = new List<Transform>();
 
 	public static int PtrintHitListCount()

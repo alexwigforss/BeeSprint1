@@ -24,7 +24,7 @@ public class Beehave : MonoBehaviour
 	bool aligned = false;
 
 	private bool fwd = true;
-	public int state = (int)States.search;
+	public int state;
 	float timer = 0f;
 	float twosec = 0f;
 	int turndirection = 0;
@@ -49,6 +49,7 @@ public class Beehave : MonoBehaviour
 		re = GetComponent<Realigner>();
 		engine.ResetAll();
 		postDist = Vector3.Distance(transform.position, goal.transform.position);
+		state = (int)States.search;
 	}
 
 	private void OnValidate()
@@ -81,19 +82,26 @@ public class Beehave : MonoBehaviour
 				if (turndirection == 0) { engine.MoveRight(true); }
 				else { engine.MoveLeft(true); }
 				if (twosec >= 2f) { RandomDirection(); }
-				break;
-			case (int)States.collect:
-				//Debug.Log(target);
-                if (target != null)
-                {
-					MoveTowards(target);
-                }
-                else
-                {
+				if (Hitzones.hitList.Count > 0)
+				{
+					getGoalList();
 					getNextGoal();
 					target = goal;
-                }
-                break;
+					state = (int)States.collect;
+				}
+				break;
+			case (int)States.collect:
+				Debug.Log("BAM COLLECT");
+				if (target != null)
+				{
+					MoveTowards(target);
+				}
+				else
+				{
+					getNextGoal();
+					target = goal;
+				}
+				break;
 			default:
 				Debug.Log("Not moving!");
 				break;
@@ -110,7 +118,7 @@ public class Beehave : MonoBehaviour
 	{
 		if (internalHitList.Count > 0)
 		{
-			if (goalItterator < internalHitList.Count -1)
+			if (goalItterator < internalHitList.Count - 1)
 			{
 				goalItterator++;
 			}
@@ -166,13 +174,13 @@ public class Beehave : MonoBehaviour
 		{
 			engine.rotateTowards(t.position * 8);
 			// Hack wich i hope prevent from chasing dead targets
-            if (!Hitzones.Contain(t))
-            {
+			if (!Hitzones.Contain(t))
+			{
 				Debug.Log("Trying to reach dead hitzone");
 				getGoalList();
 				getNextGoal();
-            }
-        }
+			}
+		}
 	}
 
 	private void RandomDirection()
