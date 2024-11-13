@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class flowerSpawner : MonoBehaviour
@@ -23,6 +24,9 @@ public class flowerSpawner : MonoBehaviour
 	public string targetTag = "Spike"; // Set this to the tag of your target GameObject
 	static int enumerator = 0;
 	int ID = 0;
+
+	[SerializeReference]
+	public TMP_Text statsText;
 	void Start()
 	{
 		ID = enumerator++;
@@ -76,6 +80,7 @@ public class flowerSpawner : MonoBehaviour
 			GameObject spawnedObject = Instantiate(flower, spawnPosition, spawnDest.rotation);
 			spawnedObject.transform.SetParent(transform);
 			spawnedObject.GetComponent<Growth>().radius = globalradius;
+			spawnedObject.GetComponent<Growth>().statsText = statsText;
 			spawnedObject.GetComponent<Growth>().spawnById = ID;
 			
 

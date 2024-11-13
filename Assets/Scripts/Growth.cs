@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Growth : MonoBehaviour
@@ -12,6 +13,9 @@ public class Growth : MonoBehaviour
 
 	[SerializeReference]
 	GameObject hitzone;
+
+	[SerializeReference]
+	public TMP_Text statsText;
 
 	// Find the GameObject with the specified tag
 	// GameObject targetObject = GameObject.FindWithTag("Spike");
@@ -75,8 +79,10 @@ public class Growth : MonoBehaviour
             {
 	            hitzone.SetActive(true);
 				Hitzones.hitList.Add(hitzone.transform);
-				Hitzones.PtrintHitListCount();
-            }
+				//Hitzones.PtrintHitListCount();
+				statsText.text = Hitzones.PtrintHitListCount().ToString();
+
+			}
 
 			OvaryColide.enabled = true;
 			if (petalTrans.localScale.x < 1f)
@@ -120,7 +126,8 @@ public class Growth : MonoBehaviour
 			{
 				hitzone.SetActive(false);
 				Hitzones.hitList.Remove(hitzone.transform);
-				Hitzones.PtrintHitListCount();
+				//Hitzones.PtrintHitListCount();
+				statsText.text = Hitzones.PtrintHitListCount().ToString();
 			}
 			//Hitzones.hitList.Add(0,hitzone.transform);
 			// Get the Renderer component from the target GameObject
