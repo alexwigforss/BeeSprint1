@@ -18,7 +18,7 @@ public class Beehave : MonoBehaviour
 	bool selected = true;
 	public Transform HiveLocation;
 	Transform target;
-	private float prioDist;
+	//private float prioDist;
 	private float postDist;
 
 	bool aligned = false;
@@ -31,6 +31,7 @@ public class Beehave : MonoBehaviour
 
 	public GameObject flowerSpawners;
 	int selectedSpecie = 0;
+	int goalItterator = 0;
 	List<Transform> internalHitList = new List<Transform>();
 
 	private enum States
@@ -52,10 +53,10 @@ public class Beehave : MonoBehaviour
 
 	private void OnValidate()
 	{
-        if (Application.isPlaying)
-        {
-			getGoalQueue();
-        }
+		if (Application.isPlaying)
+		{
+			getGoalList();
+		}
 	}
 
 	void Update()
@@ -82,15 +83,24 @@ public class Beehave : MonoBehaviour
 				if (twosec >= 2f) { RandomDirection(); }
 				break;
 			case (int)States.collect:
-				MoveTowards(target);
-				break;
+				//Debug.Log(target);
+                if (target != null)
+                {
+					MoveTowards(target);
+                }
+                else
+                {
+					getNextGoal();
+					target = goal;
+                }
+                break;
 			default:
 				Debug.Log("Not moving!");
 				break;
 		}
 	}
 
-	private void getGoalQueue()
+	private void getGoalList()
 	{
 		Debug.Log("Getting Queue");
 		internalHitList = Hitzones.hitList;
@@ -98,8 +108,19 @@ public class Beehave : MonoBehaviour
 
 	private void getNextGoal()
 	{
-		goal = internalHitList[0];
-		Debug.Log("Getting Goal, hit list size = " + internalHitList.Count);
+		if (internalHitList.Count > 0)
+		{
+			if (goalItterator < internalHitList.Count -1)
+			{
+				goalItterator++;
+			}
+			else
+			{
+				goalItterator = 0;
+			}
+			goal = internalHitList[goalItterator];
+			Debug.Log("Getting Goal, hit list size = " + internalHitList.Count);
+		}
 	}
 
 	public void OnTriggerEnter(Collider other)
@@ -108,25 +129,25 @@ public class Beehave : MonoBehaviour
 		//if (other == goalCollider)
 		if (other.tag == "FlowerHitZone")
 		{
-            if (internalHitList.Count > 0)
-            {
+			if (internalHitList.Count > 0)
+			{
 				// stashedGoal = goal;
 				getNextGoal();
 				//return;
 			}
-            else
-            {
+			else
+			{
 				Debug.Log("hitListWas ZERO");
-	            stashedGoal = goal;
+				stashedGoal = goal;
 				goal = HiveLocation;
 				// Debug.Log("Colliding with goalCollider!");
 				//return;
-            }
+			}
 		}
 		else if (other.CompareTag("Nest"))
 		{
 			Debug.Log("Hit nest");
-			getGoalQueue();
+			getGoalList();
 			getNextGoal();
 			//goal = stashedGoal;
 		}
@@ -136,7 +157,7 @@ public class Beehave : MonoBehaviour
 
 	private void MoveTowards(Transform t)
 	{
-		prioDist = postDist;
+		//prioDist = postDist;
 		postDist = Vector3.Distance(transform.position, t.position);
 		engine.rotateTowards(t.position);
 		engine.MoveForward(true);
@@ -144,7 +165,14 @@ public class Beehave : MonoBehaviour
 		if (postDist < 0.9)
 		{
 			engine.rotateTowards(t.position * 8);
-		}
+			// Hack wich i hope prevent from chasing dead targets
+            if (!Hitzones.Contain(t))
+            {
+				Debug.Log("Trying to reach dead hitzone");
+				getGoalList();
+				getNextGoal();
+            }
+        }
 	}
 
 	private void RandomDirection()
