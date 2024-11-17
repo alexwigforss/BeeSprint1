@@ -12,7 +12,7 @@ public class Collision : MonoBehaviour
 	int nectar = 0;
 	int propolis = 0;
 	int water = 0;
-	int totalLoad = 0;
+	public int totalLoad = 0;
 	public int maxload = 40;
 	float loadspeed = 0.1f;
 	private TMP_Text tmpText;

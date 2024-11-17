@@ -12,6 +12,7 @@ public class Beehave : MonoBehaviour
 	Transform stashedGoal;
 	[SerializeField]
 	Collider goalCollider;
+
 	AutoMove engine;
 	Realigner re;
 	bool closer = false;
@@ -22,7 +23,7 @@ public class Beehave : MonoBehaviour
 	private float postDist;
 
 	bool aligned = false;
-
+	bool unloading = false;
 	private bool fwd = true;
 	public int state;
 	float timer = 0f;
@@ -34,12 +35,17 @@ public class Beehave : MonoBehaviour
 	int goalItterator = 0;
 	List<Transform> internalHitList = new List<Transform>();
 
+	Collision collision;
+
 	private enum States
 	{
 		home,
 		idle,
 		search,
-		collect
+		collect,
+		water,
+		propol,
+		unload
 	}
 
 	void Start()
@@ -47,6 +53,7 @@ public class Beehave : MonoBehaviour
 		target = goal.transform;
 		engine = GetComponent<AutoMove>();
 		re = GetComponent<Realigner>();
+		collision = GetComponent<Collision>();
 		engine.ResetAll();
 		postDist = Vector3.Distance(transform.position, goal.transform.position);
 		state = (int)States.search;
@@ -84,14 +91,14 @@ public class Beehave : MonoBehaviour
 				if (twosec >= 2f) { RandomDirection(); }
 				if (Hitzones.HitList.Count > 0)
 				{
-					getGoalList(selectedSpecie);
+                    getGoalList(selectedSpecie);
 					getNextGoal();
 					target = goal;
 					state = (int)States.collect;
 				}
 				break;
 			case (int)States.collect:
-				Debug.Log("BAM COLLECT");
+				// Debug.Log("BAM COLLECT");
 				if (target != null)
 				{
 					MoveTowards(target);
@@ -101,7 +108,34 @@ public class Beehave : MonoBehaviour
 					getNextGoal();
 					target = goal;
 				}
+				if (collision.totalLoad >= collision.maxload)
+				{
+					// unloading = true;
+					target = HiveLocation;
+					state = (int)States.unload;
+				}
 				break;
+			case (int)States.unload:
+				if (target != null)
+				{
+					MoveTowards(target);
+				}
+                if (collision.totalLoad <= 0)
+                {
+					if (Hitzones.HitList.Count > 0)
+					{
+						getGoalList(selectedSpecie);
+						getNextGoal();
+						getNextGoal(); // Temp Fix for the attempt to collect dead hitzone bug.
+						target = goal;
+						state = (int)States.collect;
+					}
+                    else
+                    {
+						Debug.LogError("Nowhere to go to in selected specie !!!");
+                    }
+                }
+                break;
 			default:
 				Debug.Log("Not moving!");
 				break;
