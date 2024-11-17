@@ -13,7 +13,7 @@ public class Collision : MonoBehaviour
 	int propolis = 0;
 	int water = 0;
 	int totalLoad = 0;
-	int maxload = 40;
+	public int maxload = 40;
 	float loadspeed = 0.1f;
 	private TMP_Text tmpText;
 

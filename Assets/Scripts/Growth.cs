@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Growth : MonoBehaviour
@@ -50,15 +51,8 @@ public class Growth : MonoBehaviour
 		renderer = targetObject.GetComponent<Renderer>();
 		material = renderer.material;
 		hitzone.SetActive(false);
-		//spawnId = getIdBySpawnLocation();
 	}
 
-	//private static int getIdBySpawnLocation()
-	//{
-	//	return getIdBySpawnLocation();
-	//}
-
-	// Update is called once per frame
 	void Update()
 	{
 		if (phase == 0)
@@ -79,8 +73,8 @@ public class Growth : MonoBehaviour
             {
 	            hitzone.SetActive(true);
 				Hitzones.HitList.Add(hitzone.transform);
+				Hitzones.HitPositions[spawnById].Add(hitzone.transform);
 				statsText.text = Hitzones.PtrintHitListCount().ToString();
-
 			}
 
 			OvaryColide.enabled = true;
@@ -125,6 +119,7 @@ public class Growth : MonoBehaviour
 			{
 				hitzone.SetActive(false);
 				Hitzones.HitList.Remove(hitzone.transform);
+				Hitzones.HitPositions[spawnById].Remove(hitzone.transform);
 				statsText.text = Hitzones.PtrintHitListCount().ToString();
 			}
 			//Hitzones.hitList.Add(0,hitzone.transform);

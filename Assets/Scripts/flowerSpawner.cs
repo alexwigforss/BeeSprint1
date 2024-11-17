@@ -31,8 +31,9 @@ public class flowerSpawner : MonoBehaviour
 	void Start()
 	{
 		ID = getIdByName();
-		
-		Debug.Log("Flower Spaner id: " + ID + "has entered the scene");
+		// Debug.Log("Flower Spaner id: " + ID + "has entered the scene");
+
+		Hitzones.HitPositions[ID] = new List<Transform> { };
 		spawnDest = motherDest;
 		windX = 0;
 		windZ = 0;
@@ -51,6 +52,7 @@ public class flowerSpawner : MonoBehaviour
 			return r;
 		}
 	}
+
 	void Update()
 	{
 		//Debug.Log(Time.frameCount);

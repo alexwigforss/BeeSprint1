@@ -30,7 +30,7 @@ public class Beehave : MonoBehaviour
 	int turndirection = 0;
 
 	public GameObject flowerSpawners;
-	int selectedSpecie = 0;
+	public int selectedSpecie = 0;
 	int goalItterator = 0;
 	List<Transform> internalHitList = new List<Transform>();
 
@@ -56,7 +56,7 @@ public class Beehave : MonoBehaviour
 	{
 		if (Application.isPlaying)
 		{
-			getGoalList();
+			getGoalList(selectedSpecie);
 		}
 	}
 
@@ -84,7 +84,7 @@ public class Beehave : MonoBehaviour
 				if (twosec >= 2f) { RandomDirection(); }
 				if (Hitzones.HitList.Count > 0)
 				{
-					getGoalList();
+					getGoalList(selectedSpecie);
 					getNextGoal();
 					target = goal;
 					state = (int)States.collect;
@@ -108,10 +108,15 @@ public class Beehave : MonoBehaviour
 		}
 	}
 
-	private void getGoalList()
+	private void getGoalList(int selector)
 	{
 		Debug.Log("Getting HitZone List");
-		internalHitList = Hitzones.HitList;
+		if (selector == 0) { 
+			internalHitList = Hitzones.HitList;
+		} else if (selector > 0)
+        {
+			internalHitList = Hitzones.HitPositions[selector];
+		}
 	}
 
 	private void getNextGoal()
@@ -151,7 +156,7 @@ public class Beehave : MonoBehaviour
 		else if (other.CompareTag("Nest"))
 		{
 			Debug.Log("Hit nest");
-			getGoalList();
+			getGoalList(selectedSpecie);
 			getNextGoal();
 		}
 		target = goal.transform;
@@ -172,7 +177,7 @@ public class Beehave : MonoBehaviour
 			if (!Hitzones.Contain(t))
 			{
 				Debug.Log("Trying to reach dead hitzone");
-				getGoalList();
+				getGoalList(selectedSpecie);
 				getNextGoal();
 			}
 		}
