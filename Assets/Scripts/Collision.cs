@@ -12,8 +12,8 @@ public class Collision : MonoBehaviour
 	int nectar = 0;
 	int propolis = 0;
 	int water = 0;
-	int totalLoad = 0;
-	int maxload = 40;
+	public int totalLoad = 0;
+	public int maxload = 40;
 	float loadspeed = 0.1f;
 	private TMP_Text tmpText;
 
@@ -24,9 +24,19 @@ public class Collision : MonoBehaviour
 	private Coroutine increaseCoroutine;
 	private Coroutine incPropCoroutine;
 
-	void Start()
+	void OnValidate()
 	{
-		tmpText = GetComponentInChildren<Canvas>().GetComponentInChildren<TMP_Text>();
+		if (Application.isPlaying)
+		{
+			try
+			{
+				tmpText = GetComponentInChildren<Canvas>().GetComponentInChildren<TMP_Text>();
+			}
+			catch (Exception)
+			{
+				Debug.LogError("No text on this bee");
+			}
+		}
 	}
 
 	// Update is called once per frame
@@ -93,7 +103,7 @@ public class Collision : MonoBehaviour
 			}
 			calcTotalLoad();
 			UpdatePlayerText();
-			Debug.Log("Drone collected pollen " + pollen);
+			//Debug.Log("Drone collected pollen " + pollen);
 		}
 		else if (other.CompareTag("Nest"))
 		{

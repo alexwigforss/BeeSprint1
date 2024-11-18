@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Growth : MonoBehaviour
@@ -12,6 +14,9 @@ public class Growth : MonoBehaviour
 
 	[SerializeReference]
 	GameObject hitzone;
+
+	[SerializeReference]
+	public TMP_Text statsText;
 
 	// Find the GameObject with the specified tag
 	// GameObject targetObject = GameObject.FindWithTag("Spike");
@@ -28,17 +33,18 @@ public class Growth : MonoBehaviour
 	private bool wilt = false;
 	Material material;
 	Color color = Color.black;
+	public int spawnById = -1;
 
 	void Start()
 	{
-        if (!imortal)
-        {
-        scaleChange = new Vector3(0.01f, 0.01f, 0.01f);
-		petalsStartScale = new Vector3(0.1f, 0.1f, 0.1f);
-		transform.localScale = scaleChange;
-		petalTrans.localScale = scaleChange;
-            
-        }
+		if (!imortal)
+		{
+			scaleChange = new Vector3(0.01f, 0.01f, 0.01f);
+			petalsStartScale = new Vector3(0.1f, 0.1f, 0.1f);
+			transform.localScale = scaleChange;
+			petalTrans.localScale = scaleChange;
+
+		}
 		fc = 0;
 
 		targetObject = FindChildWithTag(transform, targetTag);
@@ -47,7 +53,6 @@ public class Growth : MonoBehaviour
 		hitzone.SetActive(false);
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
 		if (phase == 0)
@@ -64,7 +69,14 @@ public class Growth : MonoBehaviour
 		}
 		else if (phase == 1)
 		{
-			hitzone.SetActive(true);
+			if (hitzone.activeSelf == false)
+            {
+	            hitzone.SetActive(true);
+				Hitzones.HitList.Add(hitzone.transform);
+				Hitzones.HitPositions[spawnById].Add(hitzone.transform);
+				statsText.text = Hitzones.PtrintHitListCount().ToString();
+			}
+
 			OvaryColide.enabled = true;
 			if (petalTrans.localScale.x < 1f)
 			{
@@ -103,7 +115,14 @@ public class Growth : MonoBehaviour
 	{
 		if (targetObject != null)
 		{
-			hitzone.SetActive(false);
+			if (hitzone.activeSelf == true)
+			{
+				hitzone.SetActive(false);
+				Hitzones.HitList.Remove(hitzone.transform);
+				Hitzones.HitPositions[spawnById].Remove(hitzone.transform);
+				statsText.text = Hitzones.PtrintHitListCount().ToString();
+			}
+			//Hitzones.hitList.Add(0,hitzone.transform);
 			// Get the Renderer component from the target GameObject
 
 			if (renderer != null)
