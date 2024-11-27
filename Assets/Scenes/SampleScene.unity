@@ -410,6 +410,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61f3abbab6d10044b1f31049d7d29cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalLoad: 0
+  maxload: 40
 --- !u!1 &170795402
 GameObject:
   m_ObjectHideFlags: 0
@@ -2991,6 +2993,7 @@ MonoBehaviour:
   HiveLocation: {fileID: 1593979350}
   state: 0
   flowerSpawners: {fileID: 0}
+  selectedSpecie: 0
 --- !u!114 &605284858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3021,6 +3024,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61f3abbab6d10044b1f31049d7d29cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalLoad: 0
+  maxload: 40
 --- !u!54 &605284860
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4023,7 +4028,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6152925533648587508, guid: f9dccfc015f284347a3191732209f27b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4314,6 +4319,7 @@ MonoBehaviour:
   HiveLocation: {fileID: 1593979350}
   state: 0
   flowerSpawners: {fileID: 0}
+  selectedSpecie: 0
 --- !u!114 &1049083528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4344,6 +4350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61f3abbab6d10044b1f31049d7d29cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalLoad: 0
+  maxload: 40
 --- !u!54 &1049083530
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5980,6 +5988,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61f3abbab6d10044b1f31049d7d29cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalLoad: 0
+  maxload: 5
 --- !u!54 &1427477016
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6071,6 +6081,7 @@ MonoBehaviour:
   HiveLocation: {fileID: 1593979350}
   state: 0
   flowerSpawners: {fileID: 1697589991}
+  selectedSpecie: 2
 --- !u!114 &1427477021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7339,7 +7350,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 58ee299921d6b864e99f15ee76b7feb5, type: 2}
+  - {fileID: 2100000, guid: c270be90ff6ff0a4ebdad3955c25b519, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
