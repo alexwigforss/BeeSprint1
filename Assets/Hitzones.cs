@@ -12,19 +12,19 @@ public class Hitzones : MonoBehaviour
 	// MFD
 	public static int PtrintHitListCount()
 	{
-		Debug.Log("Nr of hitzones = " + hitList.Count);
+		// Debug.Log("Nr of hitzones = " + hitList.Count);
 		return hitList.Count;
 	}
 
 	public static int noOfHitzonesInSpecie(int id)
 	{
-		Debug.Log("Nr of hitzones = " + hitList.Count);
+		// Debug.Log("Nr of hitzones = " + hitList.Count);
 		return HitPositions[id].Count;
 	}
 
 	public static int noOfSpecies()
 	{
-		Debug.Log("Nr of species = " + HitPositions.Count);
+		// Debug.Log("Nr of species = " + HitPositions.Count);
 		return HitPositions.Count;
 	}
 
