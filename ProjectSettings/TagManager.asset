@@ -10,6 +10,8 @@ TagManager:
   - FlowerHitZone
   - Nest
   - Water
+  - Clickable
+  - FwBase
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
+  - Clickable
   - 
   - 
   - 

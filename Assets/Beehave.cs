@@ -145,11 +145,20 @@ public class Beehave : MonoBehaviour
 	private void getGoalList(int selector)
 	{
 		// Debug.Log("Getting HitZone List");
-		if (selector == 0) { 
-			internalHitList = Hitzones.HitList;
-		} else if (selector > 0)
-        {
-			internalHitList = Hitzones.HitPositions[selector];
+		try
+		{
+			if (selector == 0)
+			{
+				internalHitList = Hitzones.HitList;
+			}
+			else if (selector > 0)
+			{
+				internalHitList = Hitzones.HitPositions[selector];
+			}
+		}
+		catch (System.Exception e)
+		{
+			Debug.LogException(e);
 		}
 	}
 
