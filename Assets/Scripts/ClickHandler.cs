@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class ClickHandler : MonoBehaviour
@@ -36,10 +37,17 @@ public class ClickHandler : MonoBehaviour
 
 	private void DetectClickedObject()
 	{
+		// Check if the pointer is over a UI element
+		if (EventSystem.current.IsPointerOverGameObject())
+		{
+			return; // Ignore the click if it's over a UI element
+		}
+
 		Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 		RaycastHit hit;
 		if (Physics.Raycast(ray, out hit))
 		{
+
 			GameObject clickedObject = hit.collider.gameObject;
 			// Clickable zones in scene
 			if (clickedObject.layer == (int)Layer.Clickable)
@@ -112,6 +120,4 @@ public class ClickHandler : MonoBehaviour
 		}
 		return null;
 	}
-
-
 }
