@@ -987,8 +987,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flowerSpawners: {fileID: 1697589991}
-  normalbasemat: {fileID: 2100000, guid: 7902ce20eccbfdb418fa162b835e8b50, type: 2}
-  highlightbasemat: {fileID: 2100000, guid: f453f7a96c6361f44a50a5a2f5de6719, type: 2}
 --- !u!114 &174278552
 MonoBehaviour:
   m_ObjectHideFlags: 0
