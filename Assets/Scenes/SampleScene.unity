@@ -986,6 +986,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e12d9d966f1bd46b08ff450661beb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flowerSpawners: {fileID: 1697589991}
+  normalbasemat: {fileID: 2100000, guid: 7902ce20eccbfdb418fa162b835e8b50, type: 2}
+  highlightbasemat: {fileID: 2100000, guid: f453f7a96c6361f44a50a5a2f5de6719, type: 2}
 --- !u!114 &174278552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2992,7 +2995,6 @@ MonoBehaviour:
   goalCollider: {fileID: 546031007}
   HiveLocation: {fileID: 1593979350}
   state: 0
-  flowerSpawners: {fileID: 1697589991}
   selectedSpecie: 3
 --- !u!114 &605284858
 MonoBehaviour:
@@ -4318,7 +4320,6 @@ MonoBehaviour:
   goalCollider: {fileID: 546031007}
   HiveLocation: {fileID: 1593979350}
   state: 0
-  flowerSpawners: {fileID: 1697589991}
   selectedSpecie: 1
 --- !u!114 &1049083528
 MonoBehaviour:
@@ -6068,7 +6069,6 @@ MonoBehaviour:
   goalCollider: {fileID: 546031007}
   HiveLocation: {fileID: 1593979350}
   state: 0
-  flowerSpawners: {fileID: 1697589991}
   selectedSpecie: 2
 --- !u!114 &1427477021
 MonoBehaviour:

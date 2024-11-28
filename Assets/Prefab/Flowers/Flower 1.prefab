@@ -717,7 +717,7 @@ GameObject:
   - component: {fileID: 413540450260772626}
   - component: {fileID: 8976791750129998161}
   m_Layer: 6
-  m_Name: Cylinder
+  m_Name: Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

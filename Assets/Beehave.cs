@@ -30,7 +30,7 @@ public class Beehave : MonoBehaviour
 	float twosec = 0f;
 	int turndirection = 0;
 
-	public GameObject flowerSpawners;
+	
 	public int selectedSpecie = 0;
 	int goalItterator = 0;
 	List<Transform> internalHitList = new List<Transform>();
