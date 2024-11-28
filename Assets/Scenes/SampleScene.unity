@@ -2300,6 +2300,7 @@ MonoBehaviour:
   spritePrefab: {fileID: 3881935524205956972, guid: bf6414cc069ac454ebc001f193fd694f, type: 3}
   layoutGroup: {fileID: 437343280}
   spawnersParent: {fileID: 1697589992}
+  sprites: []
 --- !u!1 &477845024
 GameObject:
   m_ObjectHideFlags: 0
@@ -2663,6 +2664,7 @@ GameObject:
   - component: {fileID: 508575336}
   - component: {fileID: 508575335}
   - component: {fileID: 508575334}
+  - component: {fileID: 508575338}
   m_Layer: 5
   m_Name: MainGuiCanvas
   m_TagString: Untagged
@@ -2755,6 +2757,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &508575338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508575333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19f337b5a04b514996eba575f435aa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flowerSpawners: {fileID: 1697589991}
 --- !u!1 &522203990
 GameObject:
   m_ObjectHideFlags: 0
@@ -7852,7 +7867,6 @@ GameObject:
   - component: {fileID: 1888581626}
   - component: {fileID: 1888581628}
   - component: {fileID: 1888581627}
-  - component: {fileID: 1888581630}
   m_Layer: 5
   m_Name: RightPanel
   m_TagString: Untagged
@@ -7918,18 +7932,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1888581625}
   m_CullTransparentMesh: 1
---- !u!114 &1888581630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1888581625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a19f337b5a04b514996eba575f435aa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1915845946
 GameObject:
   m_ObjectHideFlags: 0
@@ -9166,6 +9168,7 @@ SceneRoots:
   - {fileID: 1152811035}
   - {fileID: 174278550}
   - {fileID: 1085851896}
+  - {fileID: 32951057}
   - {fileID: 3533263452039954321}
   - {fileID: 949876673}
   - {fileID: 1612861786}
@@ -9173,6 +9176,5 @@ SceneRoots:
   - {fileID: 1697589992}
   - {fileID: 1385130005}
   - {fileID: 1778388862}
-  - {fileID: 32951057}
   - {fileID: 508575337}
   - {fileID: 1202939493}

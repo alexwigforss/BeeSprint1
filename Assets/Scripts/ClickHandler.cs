@@ -38,9 +38,10 @@ public class ClickHandler : MonoBehaviour
 	private void DetectClickedObject()
 	{
 		// Check if the pointer is over a UI element
+		// https://docs.unity3d.com/2018.1/Documentation/ScriptReference/EventSystems.EventSystem.IsPointerOverGameObject.html
 		if (EventSystem.current.IsPointerOverGameObject())
 		{
-			return; // Ignore the click if it's over a UI element
+			return;
 		}
 
 		Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -78,7 +79,6 @@ public class ClickHandler : MonoBehaviour
 				}
 			}
 		}
-		// TODO Clickable zones in gui
 	}
 
 	private void HighlightFlowerBase(int id)
