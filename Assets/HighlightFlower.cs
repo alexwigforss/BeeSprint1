@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HighlightFlower : MonoBehaviour
 {
+	public bool selected = false;
 	[SerializeField]
 	Material normalbasemat;
 	[SerializeField]
@@ -12,6 +13,12 @@ public class HighlightFlower : MonoBehaviour
 	// Method to highlight the selected flower
 	public void HighlightSelected()
 	{
+		if (selected)
+		{
+			UnlightSelected();
+			return;
+		}
+		selected = true;
 		foreach (Transform flower in transform)
 		{
 			Transform grass = flower.Find("Grass");
@@ -29,6 +36,7 @@ public class HighlightFlower : MonoBehaviour
 	// Method to unhighlight the selected flower
 	public void UnlightSelected()
 	{
+		selected = false;
 		foreach (Transform flower in transform)
 		{
 			Transform grass = flower.Find("Grass");
