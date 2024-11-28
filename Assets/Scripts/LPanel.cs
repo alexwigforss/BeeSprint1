@@ -37,6 +37,7 @@ public class LPanel : Menu
 							noOfBeesInGroup++;
 						}
 						tmp.text = noOfBeesInGroup.ToString();
+						
 					}
 
                 }
@@ -49,6 +50,7 @@ public class LPanel : Menu
 	{
 		// Create a new GameObject for the TextMeshPro
 		GameObject textObject = new GameObject("TextMeshProObject");
+		textObject.layer = LayerMask.NameToLayer("Ignore Raycast");
 		textObject.transform.SetParent(spriteObject.transform, false); // Set false to keep local scale and position
 		textObject.transform.localPosition = Vector3.zero; // Adjust the position as needed
 

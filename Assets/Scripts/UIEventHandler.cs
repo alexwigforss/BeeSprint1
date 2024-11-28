@@ -56,6 +56,28 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		else
 		{
 			Debug.Log("No Image component found on the clicked object.");
+
+			// Get the parent of the clicked object
+			Transform parentTransform = clickedObject.transform.parent;
+			if (parentTransform != null)
+			{
+				// Get the grandparent of the clicked object
+				Transform grandparentTransform = parentTransform.parent;
+				if (grandparentTransform != null)
+				{
+					// Get the index of the parent under the grandparent
+					int parentIndex = parentTransform.GetSiblingIndex();
+					Debug.Log("Parent's index under the grandparent: " + parentIndex);
+				}
+				else
+				{
+					Debug.Log("Grandparent not found.");
+				}
+			}
+			else
+			{
+				Debug.Log("Parent not found.");
+			}
 		}
 	}
 
@@ -78,4 +100,43 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		}
 		return null;
 	}
+	public void dummyOnPointerClick(PointerEventData eventData)
+	{
+		GameObject clickedObject = eventData.pointerCurrentRaycast.gameObject;
+		Debug.Log("UI Element Clicked: " + clickedObject.name);
+
+		Image clickedImage = clickedObject.GetComponent<Image>();
+		if (clickedImage != null)
+		{
+			// None related code
+		}
+		else
+		{
+			Debug.Log("No Image component found on the clicked object.");
+
+			// Get the parent of the clicked object
+			Transform parentTransform = clickedObject.transform.parent;
+			if (parentTransform != null)
+			{
+				// Get the grandparent of the clicked object
+				Transform grandparentTransform = parentTransform.parent;
+				if (grandparentTransform != null)
+				{
+					// Get the index of the parent under the grandparent
+					int parentIndex = parentTransform.GetSiblingIndex();
+					Debug.Log("Parent's index under the grandparent: " + parentIndex);
+				}
+				else
+				{
+					Debug.Log("Grandparent not found.");
+				}
+			}
+			else
+			{
+				Debug.Log("Parent not found.");
+			}
+		}
+	}
 }
+
+
