@@ -30,7 +30,7 @@ public class Beehave : MonoBehaviour
 	float twosec = 0f;
 	int turndirection = 0;
 
-	public GameObject flowerSpawners;
+	
 	public int selectedSpecie = 0;
 	int goalItterator = 0;
 	List<Transform> internalHitList = new List<Transform>();
@@ -144,12 +144,21 @@ public class Beehave : MonoBehaviour
 
 	private void getGoalList(int selector)
 	{
-		Debug.Log("Getting HitZone List");
-		if (selector == 0) { 
-			internalHitList = Hitzones.HitList;
-		} else if (selector > 0)
-        {
-			internalHitList = Hitzones.HitPositions[selector];
+		// Debug.Log("Getting HitZone List");
+		try
+		{
+			if (selector == 0)
+			{
+				internalHitList = Hitzones.HitList;
+			}
+			else if (selector > 0)
+			{
+				internalHitList = Hitzones.HitPositions[selector];
+			}
+		}
+		catch (System.Exception e)
+		{
+			Debug.LogException(e);
 		}
 	}
 
@@ -166,7 +175,7 @@ public class Beehave : MonoBehaviour
 				goalItterator = 0;
 			}
 			goal = internalHitList[goalItterator];
-			Debug.Log("Getting Goal, hit list size = " + internalHitList.Count);
+			// Debug.Log("Getting Goal, hit list size = " + internalHitList.Count);
 		}
 	}
 
@@ -182,14 +191,14 @@ public class Beehave : MonoBehaviour
 			}
 			else
 			{
-				Debug.Log("hitListWas ZERO");
+				// Debug.Log("hitListWas ZERO");
 				stashedGoal = goal;
 				goal = HiveLocation;
 			}
 		}
 		else if (other.CompareTag("Nest"))
 		{
-			Debug.Log("Hit nest");
+			// Debug.Log("Hit nest");
 			getGoalList(selectedSpecie);
 			getNextGoal();
 		}
@@ -210,7 +219,7 @@ public class Beehave : MonoBehaviour
 			// Hack wich i hope prevent from chasing dead targets
 			if (!Hitzones.Contain(t))
 			{
-				Debug.Log("Trying to reach dead hitzone");
+				// Debug.Log("Trying to reach dead hitzone");
 				getGoalList(selectedSpecie);
 				getNextGoal();
 			}

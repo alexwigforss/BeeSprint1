@@ -4,22 +4,78 @@ using UnityEngine.UI;
 
 public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 {
+	public GameObject flowerSpawners;
+
+	private void HighlightFlowerBase(Transform spawner)
+	{
+		if (spawner != null)
+		{
+			Debug.Log("Found grandchild with ID: " + spawner.name);
+
+			HighlightFlower highlightFlower = spawner.GetComponent<HighlightFlower>();
+			if (highlightFlower != null)
+			{
+				highlightFlower.HighlightSelected();
+			}
+			else
+			{
+				Debug.Log("HighlightFlower component not found on grandchild.");
+			}
+		}
+		else
+		{
+			Debug.Log("Spawner with ID not found.");
+		}
+	}
+
+
+
 	public void OnPointerClick(PointerEventData eventData)
 	{
 		GameObject clickedObject = eventData.pointerCurrentRaycast.gameObject;
-		Debug.Log("UI Element Clicked: "
-			+ eventData.pointerCurrentRaycast.gameObject.name);
-		Debug.Log("");
-		// Add your custom logic here
+		Debug.Log("UI Element Clicked: " + clickedObject.name);
+
 		Image clickedImage = clickedObject.GetComponent<Image>();
 		if (clickedImage != null)
 		{
 			Sprite clickedSprite = clickedImage.sprite;
-			Debug.Log("Clicked Sprite: " + clickedSprite.name);
+			Debug.Log("Clicked Sprite: " + clickedSprite.name + ", " + clickedSprite.texture.ToString());
+
+			// Find the child element with the matching texture
+			Transform matchingChild = FindChildWithMatchingTexture(flowerSpawners.transform, clickedSprite.texture);
+			if (matchingChild != null)
+			{
+				Debug.Log("Found matching child: " + matchingChild.name);
+				HighlightFlowerBase(matchingChild);
+			}
+			else
+			{
+				Debug.Log("No matching child found.");
+			}
 		}
 		else
 		{
 			Debug.Log("No Image component found on the clicked object.");
 		}
+	}
+
+	private Transform FindChildWithMatchingTexture(Transform parent, Texture2D texture)
+	{
+		foreach (Transform child in parent)
+		{
+			Transform flowerSpawner = child.Find("FlowerSpawner");
+			if (flowerSpawner != null)
+			{
+				if (flowerSpawner.TryGetComponent<flowerSpawner>(out var spawnerScript))
+				{
+					Texture2D childTexture = spawnerScript.texture as Texture2D;
+					if (childTexture != null && childTexture == texture)
+					{
+						return flowerSpawner;
+					}
+				}
+			}
+		}
+		return null;
 	}
 }

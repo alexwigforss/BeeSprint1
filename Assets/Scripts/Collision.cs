@@ -141,10 +141,6 @@ public class Collision : MonoBehaviour
 				tmpText.text += "\nMaxLoad";
 			}
 		}
-		else
-		{
-			Debug.LogError("TMP_Text component not found!");
-		}
 	}
 
 	IEnumerator CollectWaterOverTime()

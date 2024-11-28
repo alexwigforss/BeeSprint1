@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class RPanel : Menu
 {
+	public List<Sprite> sprites = new List<Sprite>();
+
 	private void Start()
 	{
 		base.Start();
 	}
 	protected override List<Sprite> GetSprites()
 	{
-		List<Sprite> sprites = new List<Sprite>();
-
 		foreach (Transform SpawnLocation in spawnersParent)
 		{
 			Transform flowerSpawner = SpawnLocation.Find("FlowerSpawner");
 			if (flowerSpawner != null)
 			{
-				flowerSpawner spawnerScript = flowerSpawner.GetComponent<flowerSpawner>();
-				if (spawnerScript != null)
+				if (flowerSpawner.TryGetComponent<flowerSpawner>(out var spawnerScript))
 				{
 					Texture2D texture = spawnerScript.texture as Texture2D;
 
@@ -26,6 +25,7 @@ public class RPanel : Menu
 					if (texture != null)
 					{
 						Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+					
 						sprites.Add(sprite);
 						spritesadded++;
 					}
