@@ -74,19 +74,7 @@ public class LPanel : Menu
 		return spriteObject;
 	}
 
-	private GameObject GetSelectedIcon(Sprite sprite, Transform item)
-	{
-		// Create a new GameObject for the sprite
-		GameObject spriteObject = new GameObject("SpriteObject");
-		spriteObject.transform.SetParent(layoutGroup, false); // Set false to keep local scale and position
-
-		// Add an Image component to the GameObject
-		Image image = spriteObject.AddComponent<Image>();
-		image.sprite = sprite;
-		return spriteObject;
-	}
-
-	public void ChangeIconOnClick() 
+	public void ChangeToIconSelected() 
 	{
 
 	}

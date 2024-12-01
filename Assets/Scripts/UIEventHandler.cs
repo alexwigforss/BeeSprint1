@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -5,6 +6,9 @@ using UnityEngine.UI;
 public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 {
 	public GameObject flowerSpawners;
+	public int selectedBeeGroup = -1 ;
+	[SerializeField] GameObject drones;
+	private List<int> selectedBeeGroups = new List<int>();
 
 	private void HighlightFlowerBase(Transform spawner)
 	{
@@ -66,7 +70,35 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 				{
 					// Get the index of the parent under the grandparent
 					int parentIndex = parentTransform.GetSiblingIndex();
-					Debug.Log("Parent's index under the grandparent: " + parentIndex);
+					/*
+					if (selectedBeeGroup == parentIndex)
+					{
+						selectedBeeGroup = -1;
+						// TODO Set icon to NOTselected
+						// Disable highlight on bees
+					}
+					
+					else
+					{
+						selectedBeeGroup = parentIndex;
+						// TODO Set icon to selected
+						// Enable highlight on bees
+					}
+					*/
+					Transform group = drones.transform.GetChild(parentIndex);
+					foreach (Transform drone in group)
+					{
+						BeeSelection bs = drone.GetComponent<BeeSelection>();
+						if (bs != null)
+						{
+							if (!bs.EnableSphere())
+							{
+								bs.DisableSphere();
+							}
+							
+						}
+					}
+					Debug.Log("Parent's index under the grandparent: " + selectedBeeGroup);
 				}
 				else
 				{

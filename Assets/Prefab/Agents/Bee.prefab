@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 8789816062651979064}
   - component: {fileID: 8563512079671450372}
   - component: {fileID: 6220487989903973945}
+  - component: {fileID: 4076472962129515960}
   m_Layer: 0
   m_Name: Bee
   m_TagString: Untagged
@@ -193,6 +194,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateSpeed: 2
   maxRotateSpeed: 30
+--- !u!114 &4076472962129515960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643267199250610435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d58b33499239e41bd620af3646d207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ssphere: {fileID: 2655778786774848402}
 --- !u!1 &738971204092842678
 GameObject:
   m_ObjectHideFlags: 0
