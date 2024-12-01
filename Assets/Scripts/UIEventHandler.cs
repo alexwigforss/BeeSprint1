@@ -35,8 +35,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		GameObject clickedObject = eventData.pointerCurrentRaycast.gameObject;
 		Debug.Log("UI Element Clicked: " + clickedObject.name);
 
-		Image clickedImage = clickedObject.GetComponent<Image>();
-		if (clickedImage != null)
+		if (clickedObject.TryGetComponent<Image>(out var clickedImage))
 		{
 			Sprite clickedSprite = clickedImage.sprite;
 			Debug.Log("Clicked Sprite: " + clickedSprite.name + ", " + clickedSprite.texture.ToString());
@@ -100,7 +99,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		}
 		return null;
 	}
-	public void dummyOnPointerClick(PointerEventData eventData)
+	public void DummyOnPointerClick(PointerEventData eventData)
 	{
 		GameObject clickedObject = eventData.pointerCurrentRaycast.gameObject;
 		Debug.Log("UI Element Clicked: " + clickedObject.name);
