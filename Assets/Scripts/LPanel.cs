@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class LPanel : Menu
 {
 	[SerializeField] Texture2D icon;
-
+	[SerializeField] Texture2D selecticon;
+	
 	protected override List<Sprite> GetSprites()
 	{
 		List<Sprite> sprites = new List<Sprite>();
@@ -22,16 +23,16 @@ public class LPanel : Menu
 				{
 					if (item.name.Contains("Bee"))
 					{
-						GameObject spriteObject = getBeeIcon(sprite, item);
-						tmp = getIconText(spriteObject);
+						GameObject spriteObject = GetBeeIcon(sprite, item);
+						tmp = GetIconText(spriteObject);
 						spritesadded++;
 
 					}
 					else if(item.name.Contains("Group"))
 					{
 						int noOfBeesInGroup = 0;
-						GameObject spriteObject = getBeeIcon(sprite, item);
-						tmp = getIconText(spriteObject);
+						GameObject spriteObject = GetBeeIcon(sprite, item);
+						tmp = GetIconText(spriteObject);
 						foreach (Transform subitem in item)
 						{
 							noOfBeesInGroup++;
@@ -46,7 +47,7 @@ public class LPanel : Menu
 		return sprites;
 	}
 
-	private static TextMeshProUGUI getIconText(GameObject spriteObject)
+	private static TextMeshProUGUI GetIconText(GameObject spriteObject)
 	{
 		// Create a new GameObject for the TextMeshPro
 		GameObject textObject = new GameObject("TextMeshProObject");
@@ -61,7 +62,7 @@ public class LPanel : Menu
 		return tmp;
 	}
 
-	private GameObject getBeeIcon(Sprite sprite, Transform item)
+	private GameObject GetBeeIcon(Sprite sprite, Transform item)
 	{
 		// Create a new GameObject for the sprite
 		GameObject spriteObject = new GameObject("SpriteObject");
@@ -71,5 +72,22 @@ public class LPanel : Menu
 		Image image = spriteObject.AddComponent<Image>();
 		image.sprite = sprite;
 		return spriteObject;
+	}
+
+	private GameObject GetSelectedIcon(Sprite sprite, Transform item)
+	{
+		// Create a new GameObject for the sprite
+		GameObject spriteObject = new GameObject("SpriteObject");
+		spriteObject.transform.SetParent(layoutGroup, false); // Set false to keep local scale and position
+
+		// Add an Image component to the GameObject
+		Image image = spriteObject.AddComponent<Image>();
+		image.sprite = sprite;
+		return spriteObject;
+	}
+
+	public void ChangeIconOnClick() 
+	{
+
 	}
 }
