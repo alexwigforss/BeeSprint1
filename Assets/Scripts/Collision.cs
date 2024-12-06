@@ -137,7 +137,7 @@ public class Collision : MonoBehaviour
 			tmpText.text = "" + pollen + "," + nectar + "," + propolis + "," + water;
 			if (totalLoad >= maxload)
 			{
-				Debug.Log("Bamm Full");
+				//Debug.Log("Bamm Full");
 				tmpText.text += "\nMaxLoad";
 			}
 		}
@@ -145,7 +145,7 @@ public class Collision : MonoBehaviour
 
 	IEnumerator CollectWaterOverTime()
 	{
-		Debug.Log("Increasing" + water);
+		//Debug.Log("Increasing" + water);
 		while (totalLoad < maxload)
 		{
 			if (hasLeftWater)
@@ -156,7 +156,7 @@ public class Collision : MonoBehaviour
 			water++;
 			calcTotalLoad();
 			UpdatePlayerText();
-			Debug.Log("Post Increasing" + water);
+			//Debug.Log("Post Increasing" + water);
 			yield return new WaitForSeconds(loadspeed);
 		}
 		increaseCoroutine = null;
@@ -164,7 +164,7 @@ public class Collision : MonoBehaviour
 
 	IEnumerator CollectPropolisOverTime()
 	{
-		Debug.Log("Increasing" + water);
+		//Debug.Log("Increasing" + water);
 		while (totalLoad < maxload)
 		{
 			if (hasLeftTree)
@@ -175,7 +175,7 @@ public class Collision : MonoBehaviour
 			propolis++;
 			calcTotalLoad();
 			UpdatePlayerText();
-			Debug.Log("Post Increasing" + water);
+			//Debug.Log("Post Increasing" + water);
 			yield return new WaitForSeconds(loadspeed);
 		}
 		increaseCoroutine = null;
