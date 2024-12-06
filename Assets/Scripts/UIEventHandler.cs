@@ -9,6 +9,8 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 	public int selectedBeeGroup = -1 ;
 	[SerializeField] GameObject drones;
 	private List<int> selectedBeeGroups = new List<int>();
+	// LPanel lp = LayoutGroup.AddComponent<LPanel>();
+	private LPanel leftPanelRef;
 
 	private void HighlightFlowerBase(Transform spawner)
 	{
@@ -32,6 +34,30 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		}
 	}
 
+		void Start()
+		{
+			// Get the grandchild Transform
+			Transform grandchildTransform = transform.GetChild(1).GetChild(0);
+			if (grandchildTransform != null)
+			{
+			// Get the script component from the grandchild
+			leftPanelRef = grandchildTransform.GetComponent<LPanel>();
+				if (leftPanelRef != null)
+				{
+					Debug.Log("LPanel component found on grandchild.");
+				// You can now use grandchildScript to call methods or access variables
+				leftPanelRef.HelloLPanel();
+				}
+				else
+				{
+					Debug.Log("LPanel component not found on grandchild.");
+				}
+			}
+			else
+			{
+				Debug.Log("Grandchild not found.");
+			}
+		}
 
 
 	public void OnPointerClick(PointerEventData eventData)
@@ -70,33 +96,21 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 				{
 					// Get the index of the parent under the grandparent
 					int parentIndex = parentTransform.GetSiblingIndex();
-					
+
 					if (selectedBeeGroup == parentIndex)
 					{
+						leftPanelRef.UnSetSpriteSelected(selectedBeeGroup);
+						DisableSpheres(selectedBeeGroup);
 						selectedBeeGroup = -1;
 						// TODO Set icon to NOTselected
 						// Disable highlight on bees
 					}
-					
+
 					else
 					{
 						selectedBeeGroup = parentIndex;
-						// TODO Set icon to selected
-						// Enable highlight on bees
-					}
-					
-					Transform group = drones.transform.GetChild(parentIndex);
-					foreach (Transform drone in group)
-					{
-						BeeSelection bs = drone.GetComponent<BeeSelection>();
-						if (bs != null)
-						{
-							if (!bs.EnableSphere())
-							{
-								bs.DisableSphere();
-							}
-							
-						}
+						EnableSpheres(parentIndex);
+						leftPanelRef.SetSpriteSelected(selectedBeeGroup);
 					}
 					Debug.Log("Parent's index under the grandparent: " + selectedBeeGroup);
 				}
@@ -108,6 +122,32 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 			else
 			{
 				Debug.Log("Parent not found.");
+			}
+		}
+	}
+	int store = -1;
+	private void EnableSpheres(int parentIndex)
+	{
+		Transform group = drones.transform.GetChild(parentIndex);
+		foreach (Transform drone in group)
+		{
+			BeeSelection bs = drone.GetComponent<BeeSelection>();
+			if (bs != null)
+			{
+				bs.EnableSphere();
+			}
+		}
+	}
+	
+	private void DisableSpheres(int parentIndex)
+	{
+		Transform group = drones.transform.GetChild(parentIndex);
+		foreach (Transform drone in group)
+		{
+			BeeSelection bs = drone.GetComponent<BeeSelection>();
+			if (bs != null)
+			{
+				bs.DisableSphere();
 			}
 		}
 	}

@@ -2,15 +2,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
+// NOTE This is an interface to be extended by the side panels
+//		Therefore it is not atached to any gameobject in the editor
 public abstract class Menu : MonoBehaviour
 {
 	public GameObject spritePrefab;
 	public Transform layoutGroup;
 	public Transform spawnersParent; // Assign this in the Inspector
 	internal int spritesadded = 0;
+	List<Sprite> sprites;
 	protected virtual void Start()
 	{
-		List<Sprite> sprites = GetSprites();
+		sprites = GetSprites();
 		foreach (Sprite sprite in sprites)
 		{
 			GameObject newSprite = Instantiate(spritePrefab, layoutGroup);

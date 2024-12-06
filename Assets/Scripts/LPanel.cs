@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class LPanel : Menu
 {
 	[SerializeField] Texture2D icon;
 	[SerializeField] Texture2D selecticon;
-	
+
+
+	private List<GameObject> spriteObjects = new List<GameObject>();
+
 	protected override List<Sprite> GetSprites()
 	{
 		List<Sprite> sprites = new List<Sprite>();
@@ -21,41 +25,33 @@ public class LPanel : Menu
 			{
 				if (item != null)
 				{
-					//if (item.name.Contains("Bee"))
-					//{
-					//	GameObject spriteObject = GetBeeIcon(sprite, item);
-					//	tmp = GetIconText(spriteObject);
-					//	spritesadded++;
-
-					//}
-					if(item.name.Contains("Group"))
+					if (item.name.Contains("Group"))
 					{
 						int noOfBeesInGroup = 0;
 						GameObject spriteObject = GetBeeIcon(sprite, item);
+						spriteObjects.Add(spriteObject); // Store the reference
 						tmp = GetIconText(spriteObject);
 						foreach (Transform subitem in item)
 						{
 							noOfBeesInGroup++;
 						}
 						tmp.text = noOfBeesInGroup.ToString();
+						// Match the size of the sprite object
+						RectTransform spriteRectTransform = spriteObject.GetComponent<RectTransform>();
+						RectTransform tmpRectTransform = tmp.GetComponent<RectTransform>();
 
-							// Match the size of the sprite object
-							RectTransform spriteRectTransform = spriteObject.GetComponent<RectTransform>();
-							RectTransform tmpRectTransform = tmp.GetComponent<RectTransform>();
-
-							if (spriteRectTransform != null && tmpRectTransform != null)
-							{
-								tmpRectTransform.sizeDelta = spriteRectTransform.sizeDelta;
-								tmpRectTransform.position = spriteRectTransform.position;
-							}
-
+						if (spriteRectTransform != null && tmpRectTransform != null)
+						{
+							tmpRectTransform.sizeDelta = spriteRectTransform.sizeDelta;
+							tmpRectTransform.position = spriteRectTransform.position;
+						}
 					}
-
 				}
 			}
 		}
 		return sprites;
 	}
+
 
 	private static TextMeshProUGUI GetIconText(GameObject spriteObject)
 	{
@@ -83,9 +79,67 @@ public class LPanel : Menu
 		image.sprite = sprite;
 		return spriteObject;
 	}
-
-	public void ChangeToIconSelected() 
+	int storedIndex = -1;
+	public void SetSpriteSelected(int index)
 	{
+		if (index >= 0 && index < spriteObjects.Count)
+		{
+			GameObject spriteObject = spriteObjects[index];
+			Image image = spriteObject.GetComponent<Image>();
+			if (image != null)
+			{
+				image.sprite = Sprite.Create(selecticon, new Rect(0, 0, selecticon.width, selecticon.height), new Vector2(0.5f, 0.5f));
+				UnSetSpriteSelected(storedIndex);
+				storedIndex = index;
+			}
+			else
+			{
+				Debug.LogError("Image component not found on the GameObject.");
+			}
+		}
+		else
+		{
+			Debug.LogError("Index out of range.");
+		}
+	}
 
+	public void UnSetSpriteSelected(int index)
+	{
+		if (index >= 0 && index < spriteObjects.Count)
+		{
+			GameObject spriteObject = spriteObjects[index];
+			Image image = spriteObject.GetComponent<Image>();
+			if (image != null)
+			{
+				image.sprite = Sprite.Create(icon, new Rect(0, 0, icon.width, icon.height), new Vector2(0.5f, 0.5f));
+			}
+			else
+			{
+				Debug.LogError("Image component not found on the GameObject.");
+			}
+		}
+		else
+		{
+			Debug.LogError("Index out of range.");
+		}
+	}
+
+	/*
+	public void ChangeSprite(GameObject spriteObject, Sprite newSprite, int index)
+	{
+		Image image = spriteObject.GetComponent<Image>();
+		if (image != null)
+		{
+			image.sprite = newSprite;
+		}
+		else
+		{
+			Debug.LogError("Image component not found on the GameObject.");
+		}
+	}
+	*/
+	internal void HelloLPanel()
+	{
+		Debug.Log("LPanel says HELLO!");
 	}
 }

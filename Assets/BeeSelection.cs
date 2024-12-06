@@ -15,14 +15,14 @@ public class BeeSelection : MonoBehaviour
 	/// Returns False if already active
 	/// </summary>
 	/// <returns></returns>
-	public bool EnableSphere()
+	public void EnableSphere()
 	{
-		if (ssphere.activeSelf == true)
-		{
-			return false;
-		}
+		//if (ssphere.activeSelf == true)
+		//{
+		//	return false;
+		//}
 		ssphere.SetActive(true);
-		return true;
+		//return true;
 	}
 	public void DisableSphere()
 	{
