@@ -21,14 +21,14 @@ public class LPanel : Menu
 			{
 				if (item != null)
 				{
-					if (item.name.Contains("Bee"))
-					{
-						GameObject spriteObject = GetBeeIcon(sprite, item);
-						tmp = GetIconText(spriteObject);
-						spritesadded++;
+					//if (item.name.Contains("Bee"))
+					//{
+					//	GameObject spriteObject = GetBeeIcon(sprite, item);
+					//	tmp = GetIconText(spriteObject);
+					//	spritesadded++;
 
-					}
-					else if(item.name.Contains("Group"))
+					//}
+					if(item.name.Contains("Group"))
 					{
 						int noOfBeesInGroup = 0;
 						GameObject spriteObject = GetBeeIcon(sprite, item);
@@ -38,10 +38,20 @@ public class LPanel : Menu
 							noOfBeesInGroup++;
 						}
 						tmp.text = noOfBeesInGroup.ToString();
-						
+
+							// Match the size of the sprite object
+							RectTransform spriteRectTransform = spriteObject.GetComponent<RectTransform>();
+							RectTransform tmpRectTransform = tmp.GetComponent<RectTransform>();
+
+							if (spriteRectTransform != null && tmpRectTransform != null)
+							{
+								tmpRectTransform.sizeDelta = spriteRectTransform.sizeDelta;
+								tmpRectTransform.position = spriteRectTransform.position;
+							}
+
 					}
 
-                }
+				}
 			}
 		}
 		return sprites;

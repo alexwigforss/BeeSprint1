@@ -70,7 +70,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 				{
 					// Get the index of the parent under the grandparent
 					int parentIndex = parentTransform.GetSiblingIndex();
-					/*
+					
 					if (selectedBeeGroup == parentIndex)
 					{
 						selectedBeeGroup = -1;
@@ -84,7 +84,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 						// TODO Set icon to selected
 						// Enable highlight on bees
 					}
-					*/
+					
 					Transform group = drones.transform.GetChild(parentIndex);
 					foreach (Transform drone in group)
 					{
