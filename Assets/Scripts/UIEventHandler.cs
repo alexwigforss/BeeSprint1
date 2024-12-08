@@ -96,21 +96,34 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 				{
 					// Get the index of the parent under the grandparent
 					int parentIndex = parentTransform.GetSiblingIndex();
-
-					if (selectedBeeGroup == parentIndex)
+					int prioSelected = selectedBeeGroup;
+					if (selectedBeeGroup < 0)
 					{
+						Debug.Log("none before");
+						selectedBeeGroup = parentIndex;
+						EnableSpheres(parentIndex);
+						leftPanelRef.SetSpriteSelected(parentIndex);
+					}
+					else if (selectedBeeGroup == parentIndex)
+					{
+						Debug.Log("same as before");
 						leftPanelRef.UnSetSpriteSelected(selectedBeeGroup);
 						DisableSpheres(selectedBeeGroup);
 						selectedBeeGroup = -1;
 						// TODO Set icon to NOTselected
 						// Disable highlight on bees
 					}
-
-					else
+					else if (selectedBeeGroup != parentIndex)
 					{
 						selectedBeeGroup = parentIndex;
+						leftPanelRef.UnSetSpriteSelected(prioSelected);
+						DisableSpheres(prioSelected);
 						EnableSpheres(parentIndex);
 						leftPanelRef.SetSpriteSelected(selectedBeeGroup);
+					}
+					else
+					{
+						Debug.Log("This shloud not happen");
 					}
 					Debug.Log("Parent's index under the grandparent: " + selectedBeeGroup);
 				}

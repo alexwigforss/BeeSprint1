@@ -17,12 +17,7 @@ public class BeeSelection : MonoBehaviour
 	/// <returns></returns>
 	public void EnableSphere()
 	{
-		//if (ssphere.activeSelf == true)
-		//{
-		//	return false;
-		//}
 		ssphere.SetActive(true);
-		//return true;
 	}
 	public void DisableSphere()
 	{
