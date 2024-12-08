@@ -30,7 +30,7 @@ public class Beehave : MonoBehaviour
 	float twosec = 0f;
 	int turndirection = 0;
 
-	
+
 	public int selectedSpecie = 0;
 	int goalItterator = 0;
 	List<Transform> internalHitList = new List<Transform>();
@@ -91,7 +91,7 @@ public class Beehave : MonoBehaviour
 				if (twosec >= 2f) { RandomDirection(); }
 				if (Hitzones.HitList.Count > 0)
 				{
-                    getGoalList(selectedSpecie);
+					getGoalList(selectedSpecie);
 					getNextGoal();
 					target = goal;
 					state = (int)States.collect;
@@ -99,13 +99,15 @@ public class Beehave : MonoBehaviour
 				break;
 			case (int)States.collect:
 				// Debug.Log("BAM COLLECT");
-				if (target != null)
+				if (target != null && target.gameObject.activeInHierarchy)
 				{
 					MoveTowards(target);
 				}
 				else
 				{
+					getGoalList(selectedSpecie);
 					getNextGoal();
+					//getNextGoal(); // Temp Fix for the attempt to collect dead hitzone bug.
 					target = goal;
 				}
 				if (collision.totalLoad >= collision.maxload)
@@ -116,26 +118,19 @@ public class Beehave : MonoBehaviour
 				}
 				break;
 			case (int)States.unload:
-				if (target != null)
+				if (collision.totalLoad > 0)
 				{
+					target = HiveLocation;
 					MoveTowards(target);
 				}
-                if (collision.totalLoad <= 0)
-                {
-					if (Hitzones.HitList.Count > 0)
-					{
-						getGoalList(selectedSpecie);
-						getNextGoal();
-						getNextGoal(); // Temp Fix for the attempt to collect dead hitzone bug.
-						target = goal;
-						state = (int)States.collect;
-					}
-                    else
-                    {
-						Debug.LogError("Nowhere to go to in selected specie !!!");
-                    }
-                }
-                break;
+				else
+				{
+					getGoalList(selectedSpecie);
+					getNextGoal();
+					target = goal;
+					state = (int)States.collect;
+				}
+				break;
 			default:
 				Debug.Log("Not moving!");
 				break;
@@ -154,6 +149,10 @@ public class Beehave : MonoBehaviour
 			else if (selector > 0)
 			{
 				internalHitList = Hitzones.HitPositions[selector];
+				if (internalHitList.Count > 4)
+				{
+					internalHitList.RemoveRange(0, internalHitList.Count / 2);
+				}
 			}
 		}
 		catch (System.Exception e)

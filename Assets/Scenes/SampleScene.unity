@@ -465,7 +465,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44
+  m_fontSize: 16
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3125,7 +3125,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -4219,7 +4219,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44
+  m_fontSize: 16
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5255,6 +5255,22 @@ PrefabInstance:
     - target: {fileID: 3546011584258399620, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923600576509896005, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509418852479425712, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324588201307299103, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 81
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324588201307299103, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -152
       objectReference: {fileID: 0}
     - target: {fileID: 8563512079671450372, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
       propertyPath: goal
