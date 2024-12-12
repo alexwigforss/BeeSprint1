@@ -111,7 +111,7 @@ public class ClickHandler : MonoBehaviour
 		{
 			foreach (Transform grandchild in child)
 			{
-				flowerSpawner fspwn = grandchild.GetComponent<flowerSpawner>();
+				FlowerSpawner fspwn = grandchild.GetComponent<FlowerSpawner>();
 				if (fspwn != null && fspwn.ID == id)
 				{
 					return grandchild;

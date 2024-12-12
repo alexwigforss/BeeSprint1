@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SpikeCollision : MonoBehaviour
 {
-	private flowerSpawner parentScript;
+	private FlowerSpawner parentScript;
 
 	void Start()
 	{
 		// Get the parent script component
-		parentScript = GetComponentInParent<flowerSpawner>();
+		parentScript = GetComponentInParent<FlowerSpawner>();
 
 		if (parentScript == null)
 		{
