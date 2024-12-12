@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,65 +7,48 @@ using UnityEngine.UI;
 public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 {
 	public GameObject flowerSpawners;
-	public int selectedBeeGroup = -1 ;
+	public int selectedBeeGroup = -1;
 	[SerializeField] GameObject drones;
-	private List<int> selectedBeeGroups = new List<int>();
-	// LPanel lp = LayoutGroup.AddComponent<LPanel>();
 	private LPanel leftPanelRef;
 
 	private void HighlightFlowerBase(Transform spawner)
 	{
 		if (spawner != null)
 		{
-			Debug.Log("Found grandchild with ID: " + spawner.name);
-
+			// Debug.Log("Found grandchild with ID: " + spawner.name);
 			HighlightFlower highlightFlower = spawner.GetComponent<HighlightFlower>();
-			if (highlightFlower != null)
-			{
-				highlightFlower.HighlightSelected();
-			}
-			else
-			{
-				Debug.Log("HighlightFlower component not found on grandchild.");
-			}
+			if (highlightFlower != null) { highlightFlower.HighlightSelected(); }
+			else {
+				// TODO Its been unselected so remove its id from chossen Bgrup if there is one.
+				Debug.Log("HighlightFlower component not found on grandchild."); }
 		}
-		else
-		{
-			Debug.Log("Spawner with ID not found.");
-		}
+		else { Debug.Log("Spawner with ID not found."); }
 	}
 
-		void Start()
+	void Start()
+	{
+		// Get the grandchild Transform
+		Transform grandchildTransform = transform.GetChild(1).GetChild(0);
+		if (grandchildTransform != null)
 		{
-			// Get the grandchild Transform
-			Transform grandchildTransform = transform.GetChild(1).GetChild(0);
-			if (grandchildTransform != null)
-			{
 			// Get the script component from the grandchild
 			leftPanelRef = grandchildTransform.GetComponent<LPanel>();
-				if (leftPanelRef != null)
-				{
-					Debug.Log("LPanel component found on grandchild.");
-				// You can now use grandchildScript to call methods or access variables
-				leftPanelRef.HelloLPanel();
-				}
-				else
-				{
-					Debug.Log("LPanel component not found on grandchild.");
-				}
-			}
-			else
+			if (leftPanelRef != null)
 			{
-				Debug.Log("Grandchild not found.");
+				Debug.Log("LPanel component found on grandchild.");
+				leftPanelRef.HelloLPanel();
 			}
+			else { Debug.Log("LPanel component not found on grandchild."); }
 		}
-
+		else { Debug.Log("Grandchild not found."); }
+	}
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
 		GameObject clickedObject = eventData.pointerCurrentRaycast.gameObject;
 		Debug.Log("UI Element Clicked: " + clickedObject.name);
 
+		// Click on image (Flower)
 		if (clickedObject.TryGetComponent<Image>(out var clickedImage))
 		{
 			Sprite clickedSprite = clickedImage.sprite;
@@ -76,16 +60,15 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 			{
 				Debug.Log("Found matching child: " + matchingChild.name);
 				HighlightFlowerBase(matchingChild);
+				// TODO Get the ID of the spawner
+				// TODO Pass it to the begroup if one is selected
 			}
-			else
-			{
-				Debug.Log("No matching child found.");
-			}
+			else { Debug.Log("No matching child found."); }
 		}
-		else
+		// Else click was on TMP or panel
+		else if (clickedObject.GetComponent<TextMeshProUGUI>())
 		{
-			Debug.Log("No Image component found on the clicked object.");
-
+			Debug.Log("TMP component found on the clicked object.");
 			// Get the parent of the clicked object
 			Transform parentTransform = clickedObject.transform.parent;
 			if (parentTransform != null)
@@ -99,19 +82,17 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 					int prioSelected = selectedBeeGroup;
 					if (selectedBeeGroup < 0)
 					{
-						Debug.Log("none before");
+						// Debug.Log("none before");
 						selectedBeeGroup = parentIndex;
 						EnableSpheres(parentIndex);
 						leftPanelRef.SetSpriteSelected(parentIndex);
 					}
 					else if (selectedBeeGroup == parentIndex)
 					{
-						Debug.Log("same as before");
+						// Debug.Log("same as before");
 						leftPanelRef.UnSetSpriteSelected(selectedBeeGroup);
 						DisableSpheres(selectedBeeGroup);
 						selectedBeeGroup = -1;
-						// TODO Set icon to NOTselected
-						// Disable highlight on bees
 					}
 					else if (selectedBeeGroup != parentIndex)
 					{
@@ -121,47 +102,31 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 						EnableSpheres(parentIndex);
 						leftPanelRef.SetSpriteSelected(selectedBeeGroup);
 					}
-					else
-					{
-						Debug.Log("This shloud not happen");
-					}
+					else { Debug.Log("This shloud not happen"); }
 					Debug.Log("Parent's index under the grandparent: " + selectedBeeGroup);
 				}
-				else
-				{
-					Debug.Log("Grandparent not found.");
-				}
+				else { Debug.Log("Grandparent not found."); }
 			}
-			else
-			{
-				Debug.Log("Parent not found.");
-			}
+			else { Debug.Log("Parent not found."); }
 		}
 	}
-	int store = -1;
 	private void EnableSpheres(int parentIndex)
 	{
 		Transform group = drones.transform.GetChild(parentIndex);
 		foreach (Transform drone in group)
 		{
 			BeeSelection bs = drone.GetComponent<BeeSelection>();
-			if (bs != null)
-			{
-				bs.EnableSphere();
-			}
+			if (bs != null) { bs.EnableSphere(); }
 		}
 	}
-	
+
 	private void DisableSpheres(int parentIndex)
 	{
 		Transform group = drones.transform.GetChild(parentIndex);
 		foreach (Transform drone in group)
 		{
 			BeeSelection bs = drone.GetComponent<BeeSelection>();
-			if (bs != null)
-			{
-				bs.DisableSphere();
-			}
+			if (bs != null) { bs.DisableSphere(); }
 		}
 	}
 
@@ -184,6 +149,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		}
 		return null;
 	}
+	/*
 	public void DummyOnPointerClick(PointerEventData eventData)
 	{
 		GameObject clickedObject = eventData.pointerCurrentRaycast.gameObject;
@@ -220,7 +186,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 				Debug.Log("Parent not found.");
 			}
 		}
-	}
+	}*/
 }
 
 
