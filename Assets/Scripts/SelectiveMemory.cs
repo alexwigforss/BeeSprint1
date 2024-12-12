@@ -23,11 +23,8 @@ public class SelectiveMemory : MonoBehaviour
 		return memory.Contains(value);
 	}
 
-	public void PrintSpecie()
+	public void PrintSpecies()
 	{
-		foreach (int value in memory)
-		{
-			Debug.Log(value);
-		}
+		string result = string.Join(", ", memory); Debug.Log(result);
 	}
 }

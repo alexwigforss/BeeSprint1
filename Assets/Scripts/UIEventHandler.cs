@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,7 +11,8 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 {
 	public GameObject flowerSpawners;
 	public int selectedBeeGroup = -1;
-	[SerializeField] GameObject drones;
+	public GameObject drones;
+	//[SerializeField] GameObject drones;
 	private LPanel leftPanelRef;
 
 	private void HighlightFlowerBase(Transform spawner)
@@ -19,14 +21,55 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		{
 			// Debug.Log("Found grandchild with ID: " + spawner.name);
 			HighlightFlower highlightFlower = spawner.GetComponent<HighlightFlower>();
-			if (highlightFlower != null) { highlightFlower.HighlightSelected(); }
+			if (highlightFlower != null)
+			{
+				if (highlightFlower.HighlightSelected())
+				{
+					// TODO add id to chossen Bgrup if there is one.
+					if (selectedBeeGroup >= 0)
+					{
+						FlowerSpawner fs = spawner.GetComponent<FlowerSpawner>();
+						GetBeeMemory(selectedBeeGroup).AddSpecie(fs.ID);
+						GetBeeMemory(selectedBeeGroup).PrintSpecies();
+					}
+				}
+				else
+				{
+					if (selectedBeeGroup >= 0)
+					{
+						FlowerSpawner fs = spawner.GetComponent<FlowerSpawner>();
+						GetBeeMemory(selectedBeeGroup).RemoveSpecie(fs.ID);
+						GetBeeMemory(selectedBeeGroup).PrintSpecies();
+					}
+					Debug.Log("Specie was unselected");
+				}
+			}
 			else
 			{
 				// TODO is unselected so remove its id from chossen Bgrup if there is one.
+
+
 				Debug.Log("HighlightFlower component not found on grandchild.");
 			}
 		}
 		else { Debug.Log("Spawner with ID not found."); }
+	}
+
+	SelectiveMemory GetBeeMemory(int index)
+	{
+		Transform trans = drones.transform.GetChild(index);
+		GameObject go = trans.gameObject;
+
+		SelectiveMemory memory = go.GetComponent<SelectiveMemory>();
+		if (memory != null)
+		{
+			return memory;
+		}
+		else
+		{
+			Debug.Log("SelectiveMemory not found");
+			return null;
+		}
 	}
 
 	void Start()
@@ -89,6 +132,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 						// Debug.Log("none before");
 						selectedBeeGroup = parentIndex;
 						EnableSpheres(parentIndex);
+						ShowSelectSpecies(parentIndex);
 						leftPanelRef.SetSpriteSelected(parentIndex);
 					}
 					// None selected
@@ -109,7 +153,9 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 						DisableSpheres(prioSelected);
 						UnselectAllSpecies();
 						// Select current
+						ShowSelectSpecies(parentIndex);
 						EnableSpheres(parentIndex);
+
 						leftPanelRef.SetSpriteSelected(selectedBeeGroup);
 						// TODO Reselect species from memory
 					}
@@ -119,6 +165,31 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 				else { Debug.Log("Grandparent not found."); }
 			}
 			else { Debug.Log("Parent not found."); }
+		}
+	}
+
+	private void ShowSelectSpecies(int parentIndex)
+	{
+		
+		foreach (Transform spawner in flowerSpawners.transform)
+		{
+			foreach (Transform flower in spawner)
+			{
+				// Get the script component on the child
+				HighlightFlower hlf = flower.GetComponent<HighlightFlower>();
+				FlowerSpawner fs = flower.GetComponent<FlowerSpawner>();
+				if (hlf != null)
+				{
+					//Debug.Log(fs.ID);
+					// Set the variable on the script
+					GetBeeMemory(selectedBeeGroup).PrintSpecies();
+					if (GetBeeMemory(selectedBeeGroup).ContainsSpecie(fs.ID))
+					{
+						hlf.HighlightSelected();
+					}
+				}
+				else { Debug.LogWarning("MyScript component not found on " + flower.name); }
+			}
 		}
 	}
 
@@ -170,7 +241,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 			Transform flowerSpawner = child.Find("FlowerSpawner");
 			if (flowerSpawner != null)
 			{
-				if (flowerSpawner.TryGetComponent<flowerSpawner>(out var spawnerScript))
+				if (flowerSpawner.TryGetComponent<FlowerSpawner>(out var spawnerScript))
 				{
 					Texture2D childTexture = spawnerScript.texture as Texture2D;
 					if (childTexture != null && childTexture == texture)

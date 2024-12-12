@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 
-public class flowerSpawner : MonoBehaviour
+public class FlowerSpawner : MonoBehaviour
 {
 	// public List<Texture2D> textureList; // Assign your textures in the Inspector
 	public Texture2D texture; // Assign your textures in the Inspector

@@ -17,7 +17,7 @@ public class RPanel : Menu
 			Transform flowerSpawner = SpawnLocation.Find("FlowerSpawner");
 			if (flowerSpawner != null)
 			{
-				if (flowerSpawner.TryGetComponent<flowerSpawner>(out var spawnerScript))
+				if (flowerSpawner.TryGetComponent<FlowerSpawner>(out var spawnerScript))
 				{
 					Texture2D texture = spawnerScript.texture as Texture2D;
 

@@ -11,12 +11,12 @@ public class HighlightFlower : MonoBehaviour
 	Material highlightbasemat;
 
 	// Method to highlight the selected flower
-	public void HighlightSelected()
+	public bool HighlightSelected()
 	{
 		if (selected)
 		{
 			UnlightSelected();
-			return;
+			return false;
 		}
 		selected = true;
 		foreach (Transform flower in transform)
@@ -31,6 +31,7 @@ public class HighlightFlower : MonoBehaviour
 				}
 			}
 		}
+		return true;
 	}
 
 	// Method to unhighlight the selected flower
