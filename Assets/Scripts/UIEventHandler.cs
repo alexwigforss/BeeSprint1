@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+//using UnityEngine.UIElements;
 
 public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 {
@@ -18,9 +20,11 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 			// Debug.Log("Found grandchild with ID: " + spawner.name);
 			HighlightFlower highlightFlower = spawner.GetComponent<HighlightFlower>();
 			if (highlightFlower != null) { highlightFlower.HighlightSelected(); }
-			else {
-				// TODO Its been unselected so remove its id from chossen Bgrup if there is one.
-				Debug.Log("HighlightFlower component not found on grandchild."); }
+			else
+			{
+				// TODO is unselected so remove its id from chossen Bgrup if there is one.
+				Debug.Log("HighlightFlower component not found on grandchild.");
+			}
 		}
 		else { Debug.Log("Spawner with ID not found."); }
 	}
@@ -87,20 +91,27 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 						EnableSpheres(parentIndex);
 						leftPanelRef.SetSpriteSelected(parentIndex);
 					}
+					// None selected
 					else if (selectedBeeGroup == parentIndex)
 					{
 						// Debug.Log("same as before");
 						leftPanelRef.UnSetSpriteSelected(selectedBeeGroup);
 						DisableSpheres(selectedBeeGroup);
+						UnselectAllSpecies();
 						selectedBeeGroup = -1;
 					}
+					// Another selected
 					else if (selectedBeeGroup != parentIndex)
 					{
 						selectedBeeGroup = parentIndex;
+						// Unselect previous
 						leftPanelRef.UnSetSpriteSelected(prioSelected);
 						DisableSpheres(prioSelected);
+						UnselectAllSpecies();
+						// Select current
 						EnableSpheres(parentIndex);
 						leftPanelRef.SetSpriteSelected(selectedBeeGroup);
+						// TODO Reselect species from memory
 					}
 					else { Debug.Log("This shloud not happen"); }
 					Debug.Log("Parent's index under the grandparent: " + selectedBeeGroup);
@@ -110,6 +121,28 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 			else { Debug.Log("Parent not found."); }
 		}
 	}
+
+	private void UnselectAllSpecies()
+	{
+		foreach (Transform spawner in flowerSpawners.transform)
+		{
+			foreach (Transform flower in spawner)
+			{
+				// Get the script component on the child
+				HighlightFlower hlf = flower.GetComponent<HighlightFlower>();
+				if (hlf != null)
+				{
+					// Set the variable on the script
+					if (hlf.selected == true)
+					{
+						hlf.HighlightSelected();
+					}
+				}
+				else { Debug.LogWarning("MyScript component not found on " + flower.name); }
+			}
+		}
+	}
+
 	private void EnableSpheres(int parentIndex)
 	{
 		Transform group = drones.transform.GetChild(parentIndex);
