@@ -4,16 +4,30 @@ using UnityEngine;
 
 public class SelectiveMemory : MonoBehaviour
 {
-    List<int> memory = new List<int>();
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	// Chosed HashSet to avoid duplicatre values
+    //public List<int> memory = new List<int>();
+	private HashSet<int> memory = new HashSet<int>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public void AddSpecie(int value)
+	{
+		memory.Add(value);
+	}
+
+	public void RemoveSpecie(int value)
+	{
+		memory.Remove(value);
+	}
+
+	public bool ContainsSpecie(int value)
+	{
+		return memory.Contains(value);
+	}
+
+	public void PrintSpecie()
+	{
+		foreach (int value in memory)
+		{
+			Debug.Log(value);
+		}
+	}
 }
