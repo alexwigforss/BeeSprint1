@@ -9,9 +9,9 @@ public class Beehave : MonoBehaviour
 {
 	[SerializeField]
 	Transform goal;
-	Transform stashedGoal;
-	[SerializeField]
-	Collider goalCollider;
+	//Transform stashedGoal;
+	//[SerializeField]
+	//Collider goalCollider;
 
 	AutoMove engine;
 	Realigner re;
@@ -55,13 +55,19 @@ public class Beehave : MonoBehaviour
 
 	void Start()
 	{
-		target = goal.transform;
+		// target = goal.transform;
 		engine = GetComponent<AutoMove>();
 		re = GetComponent<Realigner>();
 		collision = GetComponent<Collision>();
 		engine.ResetAll();
 		postDist = Vector3.Distance(transform.position, goal.transform.position);
 		state = (int)States.search;
+	}
+
+	public void InstanceInit()
+	{
+		getGoalLists();
+		state = 3;
 	}
 
 	private void OnValidate()
@@ -142,6 +148,42 @@ public class Beehave : MonoBehaviour
 		}
 	}
 
+	public void GetTargetFromSibling()
+	{
+		Transform parent = transform.parent;
+		if (parent == null)
+		{
+			Debug.LogWarning("No parent found.");
+			return;
+		}
+
+		float minDistance = float.MaxValue;
+		Transform nearestSibling = null;
+
+		foreach (Transform sibling in parent)
+		{
+			if (sibling != transform)
+			{
+				float distance = Vector3.Distance(transform.position, sibling.position);
+				if (distance < minDistance)
+				{
+					minDistance = distance;
+					nearestSibling = sibling;
+				}
+			}
+		}
+
+		if (nearestSibling != null)
+		{
+			target = nearestSibling;
+			Debug.Log("Nearest sibling found: " + target.name);
+		}
+		else
+		{
+			Debug.LogWarning("No siblings found.");
+		}
+	}
+
 	SelectiveMemory GetBeeMemory()
 	{
 		Transform trans = transform.parent;
@@ -160,8 +202,8 @@ public class Beehave : MonoBehaviour
 
 	private void getGoalLists()
 	{
-		Debug.Log("Getting new PosList from... ");
-		GetBeeMemory().PrintSpecies();
+		// Debug.Log("Getting new PosList from... ");
+		//GetBeeMemory().PrintSpecies();
 		try
 		{
 			internalHitList.Clear();
@@ -173,7 +215,7 @@ public class Beehave : MonoBehaviour
 					tempList.RemoveRange(0, tempList.Count / 2);
 				}
 				internalHitList.AddRange(tempList);
-				
+
 			}
 		}
 		catch (System.Exception e)
@@ -214,7 +256,7 @@ public class Beehave : MonoBehaviour
 				goalItterator = 0;
 			}
 			goal = internalHitList[goalItterator];
-			Debug.Log("Getting Goal ["+goalItterator+"], from hit list size = " + internalHitList.Count);
+			//Debug.Log("Getting Goal [" + goalItterator + "], from hit list size = " + internalHitList.Count);
 		}
 	}
 
@@ -231,7 +273,7 @@ public class Beehave : MonoBehaviour
 			else
 			{
 				// Debug.Log("hitListWas ZERO");
-				stashedGoal = goal;
+				//stashedGoal = goal;
 				goal = HiveLocation;
 			}
 		}
