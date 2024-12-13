@@ -209,16 +209,6 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		leftPanelRef.ReGetSprites();
 	}
 
-	//private void SpawnBee()
-	//{
-	//	Vector3 spawnPosition = nestLocation.position;
-
-	//	GameObject spawnedObject = Instantiate(bee, spawnPosition, new Quaternion());
-	//	spawnedObject.transform.SetParent(transform);
-	//	spawnedObject.GetComponent<Beehave>().HiveLocation = nestLocation;
-	//	spawnedObject.GetComponent<AutoMove>().HiveLocation = nestLocation;
-	//}
-
 	private void ShowSelectSpecies(int parentIndex)
 	{
 
