@@ -22,6 +22,8 @@ public class Movement : MonoBehaviour
 	Boolean descend = false;
 	Boolean strleft = false;
 	Boolean strright = false;
+	Boolean strfleft = false;
+	Boolean strfright = false;
 
 	void Start()
 	{
@@ -32,7 +34,6 @@ public class Movement : MonoBehaviour
 		if (rb != null)
 		{
 			// Apply rotation
-			//rb.transform.Rotate(rotateForce);
 			rb.transform.Rotate(rotateForce * Time.deltaTime);
 
 			// Apply movement
@@ -40,21 +41,30 @@ public class Movement : MonoBehaviour
 			rb.velocity += worldMoveForce * Time.deltaTime;
 
 			// Apply movement with Acceleration / Deceleration
-			if (accelerate && fwdspeed < maxSpeed) { fwdspeed += acceleration; moveForce.z = fwdspeed; }
-			else if (!accelerate && fwdspeed > 0.0f) { fwdspeed -= acceleration; moveForce.z = fwdspeed; }
-			if (reverse && fwdspeed > -maxSpeed) { fwdspeed -= acceleration; moveForce.z = fwdspeed; }
-			else if (!reverse && fwdspeed < 0.0f) { fwdspeed += acceleration; moveForce.z = fwdspeed; }
-			if (fwdspeed > -0.1 && fwdspeed < 0.1) { fwdspeed = moveForce.z = 0.0f; }
+			if (accelerate) { fwdspeed = Mathf.Min(fwdspeed + acceleration, maxSpeed); }
+			else if (reverse) { fwdspeed = Mathf.Max(fwdspeed - acceleration, -maxSpeed); }
+			else { fwdspeed = Mathf.MoveTowards(fwdspeed, 0, acceleration); }
+			moveForce.z = fwdspeed;
+
+			// Apply Steering with strleft / strright
+			if (strleft) { strspeed = Mathf.Min(strspeed + rotateSpeed, maxSpeed); }
+			else if (strright) { strspeed = Mathf.Max(strspeed - rotateSpeed, -maxSpeed); }
+			else { strspeed = Mathf.MoveTowards(strspeed, 0, rotateSpeed); }
+			rotateForce.y = strspeed;
 
 			// Apply movement with Ascending / Descending
-			if (ascend && risespeed < maxSpeed / 2) { risespeed += acceleration; moveForce.y = risespeed; }
-			else if (!ascend && risespeed > 0.0f) { risespeed -= acceleration; moveForce.y = risespeed; }
-			if (descend && risespeed > -maxSpeed / 2) { risespeed -= acceleration; moveForce.y = risespeed; }
-			else if (!descend && risespeed < 0.0f) { risespeed += acceleration; moveForce.y = risespeed; }
-			if (risespeed > -0.1 && risespeed < 0.1) { risespeed = moveForce.y = 0.0f; }
-		}
+			if (ascend) { risespeed = Mathf.Min(risespeed + acceleration, maxSpeed / 2); }
+			else if (descend) { risespeed = Mathf.Max(risespeed - acceleration, -maxSpeed / 2); }
+			else { risespeed = Mathf.MoveTowards(risespeed, 0, acceleration); }
+			moveForce.y = risespeed;
 
+			// Apply Strifing with strfleft / strfright
+			if (strfleft) { moveForce.x = -moveSpeed * 20; }
+			else if (strfright) { moveForce.x = moveSpeed * 20; }
+			else { moveForce.x = 0; }
+		}
 	}
+
 	public void HandleMouseX()
 	{
 		Vector2 mouseDelta = Mouse.current.delta.ReadValue();
@@ -77,22 +87,23 @@ public class Movement : MonoBehaviour
 	}
 	public void HandleSteerRight(InputAction.CallbackContext context)
 	{
-		if (context.performed) { rotateForce.y += rotateSpeed; }
-		else if (context.canceled) { rotateForce.y = 0; }
+		if (context.performed) { strleft = true; }
+		else if (context.canceled) { strleft = false; }
 	}
 	public void HandleSteerLeft(InputAction.CallbackContext context)
 	{
-		if (context.performed) { rotateForce.y -= rotateSpeed; }
-		else if (context.canceled) { rotateForce.y = 0; }
+		if (context.performed) { strright = true; }
+		else if (context.canceled) { strright = false; }
 	}
 	public void HandleStrifeRight(InputAction.CallbackContext context)
 	{
-		if (context.performed) { moveForce.x = moveSpeed * 20; }
-		else if (context.canceled) { moveForce.x = 0; }	}
+		if (context.performed) { strfright = true; }
+		else if (context.canceled) { strfright = false; }
+	}
 	public void HandleStrifeLeft(InputAction.CallbackContext context)
 	{
-		if (context.performed) { moveForce.x = -moveSpeed * 20; }
-		else if (context.canceled) { moveForce.x = 0; }
+		if (context.performed) { strfleft = true; }
+		else if (context.canceled) { strfleft = false; }
 	}
 	public void HandleMoveForward(InputAction.CallbackContext context)
 	{
@@ -106,22 +117,22 @@ public class Movement : MonoBehaviour
 	}
 	public void HandleTiltBack(InputAction.CallbackContext context)
 	{
-		if (context.performed) { rotateForce.x -= rotateSpeed; }
+		if (context.performed) { rotateForce.x -= rotateSpeed * 10; }
 		else if (context.canceled) { rotateForce.x = 0; }
 	}
 	public void HandleTiltLeft(InputAction.CallbackContext context)
 	{
-		if (context.performed) { rotateForce.z += rotateSpeed; }
+		if (context.performed) { rotateForce.z += rotateSpeed * 10; }
 		else if (context.canceled) { rotateForce.z = 0; }
 	}
 	public void HandleTiltForward(InputAction.CallbackContext context)
 	{
-		if (context.performed) { rotateForce.x += rotateSpeed; }
+		if (context.performed) { rotateForce.x += rotateSpeed * 10; }
 		else if (context.canceled) { rotateForce.x = 0; }
 	}
 	public void HandleTiltRight(InputAction.CallbackContext context)
 	{
-		if (context.performed) { rotateForce.z -= rotateSpeed; }
+		if (context.performed) { rotateForce.z -= rotateSpeed * 10; }
 		else if (context.canceled) { rotateForce.z = 0; }
 	}
 	public void HandleRealign(InputAction.CallbackContext context)
