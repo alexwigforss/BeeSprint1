@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SelectiveMemory : MonoBehaviour
 {
 	// Chosed HashSet to avoid duplicatre values
     //public List<int> memory = new List<int>();
-	private HashSet<int> memory = new HashSet<int>();
+	private HashSet<int> memory;
+
+	private void Awake()
+	{
+		memory = new HashSet<int>();
+	}
 
 	public void AddSpecie(int value)
 	{
@@ -22,7 +28,10 @@ public class SelectiveMemory : MonoBehaviour
 	{
 		return memory.Contains(value);
 	}
-
+	public int[] GetSpecies() 
+	{
+		return memory.ToArray();
+	}
 	public void PrintSpecies()
 	{
 		string result = string.Join(", ", memory); Debug.Log(result);

@@ -33,9 +33,14 @@ public class Beehave : MonoBehaviour
 
 	public int selectedSpecie = 0;
 	int goalItterator = 0;
-	List<Transform> internalHitList = new List<Transform>();
+	List<Transform> internalHitList;
 
 	Collision collision;
+
+	private void Awake()
+	{
+		internalHitList = new List<Transform>();
+	}
 
 	private enum States
 	{
@@ -89,30 +94,29 @@ public class Beehave : MonoBehaviour
 				if (turndirection == 0) { engine.MoveRight(true); }
 				else { engine.MoveLeft(true); }
 				if (twosec >= 2f) { RandomDirection(); }
-				if (Hitzones.HitList.Count > 0)
+				if (Hitzones.HitPositions.Count > 0)
 				{
-					getGoalList(selectedSpecie);
+					//getGoalList(selectedSpecie);
+					getGoalLists();
 					getNextGoal();
 					target = goal;
 					state = (int)States.collect;
 				}
 				break;
 			case (int)States.collect:
-				// Debug.Log("BAM COLLECT");
 				if (target != null && target.gameObject.activeInHierarchy)
 				{
 					MoveTowards(target);
 				}
 				else
 				{
-					getGoalList(selectedSpecie);
+					//getGoalList(selectedSpecie);
+					getGoalLists();
 					getNextGoal();
-					//getNextGoal(); // Temp Fix for the attempt to collect dead hitzone bug.
 					target = goal;
 				}
 				if (collision.totalLoad >= collision.maxload)
 				{
-					// unloading = true;
 					target = HiveLocation;
 					state = (int)States.unload;
 				}
@@ -125,7 +129,8 @@ public class Beehave : MonoBehaviour
 				}
 				else
 				{
-					getGoalList(selectedSpecie);
+					//getGoalList(selectedSpecie);
+					getGoalLists();
 					getNextGoal();
 					target = goal;
 					state = (int)States.collect;
@@ -137,16 +142,51 @@ public class Beehave : MonoBehaviour
 		}
 	}
 
-	private void getGoalList(int selector)
+	SelectiveMemory GetBeeMemory()
 	{
-		// Debug.Log("Getting HitZone List");
+		Transform trans = transform.parent;
+		GameObject go = trans.gameObject;
+
+		if (go.TryGetComponent<SelectiveMemory>(out var memory))
+		{
+			return memory;
+		}
+		else
+		{
+			Debug.Log("SelectiveMemory not found");
+			return null;
+		}
+	}
+
+	private void getGoalLists()
+	{
+		Debug.Log("Getting new PosList from... ");
+		GetBeeMemory().PrintSpecies();
 		try
 		{
-			if (selector == 0)
+			internalHitList.Clear();
+			foreach (var i in GetBeeMemory().GetSpecies())
 			{
-				internalHitList = Hitzones.HitList;
+				List<Transform> tempList = Hitzones.HitPositions[i];
+				if (tempList.Count > 4)
+				{
+					tempList.RemoveRange(0, tempList.Count / 2);
+				}
+				internalHitList.AddRange(tempList);
+				
 			}
-			else if (selector > 0)
+		}
+		catch (System.Exception e)
+		{
+			Debug.LogException(e);
+		}
+	}
+
+	private void getGoalList(int selector)
+	{
+		try
+		{
+			if (selector > 0)
 			{
 				internalHitList = Hitzones.HitPositions[selector];
 				if (internalHitList.Count > 4)
@@ -174,7 +214,7 @@ public class Beehave : MonoBehaviour
 				goalItterator = 0;
 			}
 			goal = internalHitList[goalItterator];
-			// Debug.Log("Getting Goal, hit list size = " + internalHitList.Count);
+			Debug.Log("Getting Goal ["+goalItterator+"], from hit list size = " + internalHitList.Count);
 		}
 	}
 

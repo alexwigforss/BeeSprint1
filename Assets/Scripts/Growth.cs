@@ -72,7 +72,6 @@ public class Growth : MonoBehaviour
 			if (hitzone.activeSelf == false)
             {
 	            hitzone.SetActive(true);
-				Hitzones.HitList.Add(hitzone.transform);
 				Hitzones.HitPositions[spawnById].Add(hitzone.transform);
 				statsText.text = Hitzones.PtrintHitListCount().ToString();
 			}
@@ -118,13 +117,11 @@ public class Growth : MonoBehaviour
 			if (hitzone.activeSelf == true)
 			{
 				hitzone.SetActive(false);
-				Hitzones.HitList.Remove(hitzone.transform);
 				Hitzones.HitPositions[spawnById].Remove(hitzone.transform);
 				statsText.text = Hitzones.PtrintHitListCount().ToString();
 			}
-			//Hitzones.hitList.Add(0,hitzone.transform);
-			// Get the Renderer component from the target GameObject
 
+			// Get the Renderer component from the target GameObject
 			if (renderer != null)
 			{
 				// Modify the material properties
