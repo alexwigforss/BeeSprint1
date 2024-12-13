@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -60,15 +61,21 @@ public class Beehave : MonoBehaviour
 		re = GetComponent<Realigner>();
 		collision = GetComponent<Collision>();
 		engine.ResetAll();
+		if (goal == null)
+		{
+			getGoalLists();
+			goal = internalHitList.FirstOrDefault();
+		}
 		postDist = Vector3.Distance(transform.position, goal.transform.position);
 		state = (int)States.search;
 	}
 
-	public void InstanceInit()
-	{
-		getGoalLists();
-		state = 3;
-	}
+	//public void InstanceInit()
+	//{
+		
+	//	getGoalLists();
+	//	state = 3;
+	//}
 
 	private void OnValidate()
 	{

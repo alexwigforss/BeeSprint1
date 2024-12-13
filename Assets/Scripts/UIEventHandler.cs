@@ -203,9 +203,10 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		{
 			//spawnedObject.transform.SetParent(transform);
 			spawnedObject.GetComponent<Beehave>().HiveLocation = nestLocation;
-			spawnedObject.GetComponent<Beehave>().InstanceInit();
+			// spawnedObject.GetComponent<Beehave>().InstanceInit();
 			spawnedObject.GetComponent<AutoMove>().HiveLocation = nestLocation;
 		}
+		leftPanelRef.ReGetSprites();
 	}
 
 	//private void SpawnBee()

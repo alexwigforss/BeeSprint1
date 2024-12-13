@@ -12,6 +12,7 @@ TagManager:
   - Water
   - Clickable
   - FwBase
+  - Icon
   layers:
   - Default
   - TransparentFX
