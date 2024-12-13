@@ -22,6 +22,8 @@ public class Movement : MonoBehaviour
 	Boolean descend = false;
 	Boolean strleft = false;
 	Boolean strright = false;
+	Boolean strfleft = false;
+	Boolean strfright = false;
 
 	void Start()
 	{
@@ -45,6 +47,15 @@ public class Movement : MonoBehaviour
 			if (reverse && fwdspeed > -maxSpeed) { fwdspeed -= acceleration; moveForce.z = fwdspeed; }
 			else if (!reverse && fwdspeed < 0.0f) { fwdspeed += acceleration; moveForce.z = fwdspeed; }
 			if (fwdspeed > -0.1 && fwdspeed < 0.1) { fwdspeed = moveForce.z = 0.0f; }
+
+			// Apply Steering with strleft / strright
+			if (strleft && strspeed < maxSpeed) { strspeed += rotateSpeed; rotateForce.y = strspeed; }
+			else if (!strleft && strspeed > 0.0f) { strspeed -= rotateSpeed; rotateForce.y = strspeed; }
+			if (strright && strspeed > -maxSpeed) { strspeed -= rotateSpeed; rotateForce.y = strspeed; }
+			else if (!strright && strspeed < 0.0f) { strspeed += rotateSpeed; rotateForce.y = strspeed; }
+			if (strspeed > -0.1 && strspeed < 0.1) { strspeed = rotateForce.y = 0.0f; }
+
+			// Apply Strifing with strfleft / strfright
 
 			// Apply movement with Ascending / Descending
 			if (ascend && risespeed < maxSpeed / 2) { risespeed += acceleration; moveForce.y = risespeed; }
@@ -77,13 +88,13 @@ public class Movement : MonoBehaviour
 	}
 	public void HandleSteerRight(InputAction.CallbackContext context)
 	{
-		if (context.performed) { rotateForce.y += rotateSpeed; }
-		else if (context.canceled) { rotateForce.y = 0; }
+		if (context.performed) { strleft = true; }
+		else if (context.canceled) { strleft = false; }
 	}
 	public void HandleSteerLeft(InputAction.CallbackContext context)
 	{
-		if (context.performed) { rotateForce.y -= rotateSpeed; }
-		else if (context.canceled) { rotateForce.y = 0; }
+		if (context.performed) { strright = true; }
+		else if (context.canceled) { strright = false; }
 	}
 	public void HandleStrifeRight(InputAction.CallbackContext context)
 	{
