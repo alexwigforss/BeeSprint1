@@ -9,14 +9,12 @@ public class LPanel : Menu
 {
 	[SerializeField] Texture2D icon;
 	[SerializeField] Texture2D selecticon;
-
-
-	private List<GameObject> spriteObjects = new List<GameObject>();
+	private List<GameObject> spriteObjects = new();
 
 	protected override List<Sprite> GetSprites()
 	{
-		List<Sprite> sprites = new List<Sprite>();
-		TextMeshProUGUI tmp = new TextMeshProUGUI();
+		List<Sprite> sprites = new();
+		TextMeshProUGUI tmp = new();
 		Texture2D texture = icon;
 		if (texture != null)
 		{
@@ -52,6 +50,26 @@ public class LPanel : Menu
 		return sprites;
 	}
 
+	public void ReGetSprites()
+	{
+		// Clear existing icons
+		foreach (Transform child in layoutGroup)
+		{
+			Destroy(child.gameObject);
+		}
+
+		// Clear the spriteObjects list
+		spriteObjects.Clear();
+
+		// Get new sprites and instantiate new icons
+		Sprites = GetSprites();
+		foreach (Sprite sprite in Sprites)
+		{
+			GameObject newSprite = Instantiate(spritePrefab, layoutGroup);
+			newSprite.GetComponent<Image>().sprite = sprite;
+			spriteObjects.Add(newSprite); // Store the reference
+		}
+	}
 
 	private static TextMeshProUGUI GetIconText(GameObject spriteObject)
 	{
