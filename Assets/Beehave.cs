@@ -164,6 +164,7 @@ public class Beehave : MonoBehaviour
 		GetBeeMemory().PrintSpecies();
 		try
 		{
+			internalHitList.Clear();
 			foreach (var i in GetBeeMemory().GetSpecies())
 			{
 				List<Transform> tempList = Hitzones.HitPositions[i];
@@ -171,7 +172,7 @@ public class Beehave : MonoBehaviour
 				{
 					tempList.RemoveRange(0, tempList.Count / 2);
 				}
-				internalHitList = tempList;
+				internalHitList.AddRange(tempList);
 				
 			}
 		}
@@ -185,11 +186,6 @@ public class Beehave : MonoBehaviour
 	{
 		try
 		{
-			//if (selector == 0)
-			//{
-			//	internalHitList = Hitzones.HitList;
-			//}
-			//else
 			if (selector > 0)
 			{
 				internalHitList = Hitzones.HitPositions[selector];
@@ -218,7 +214,7 @@ public class Beehave : MonoBehaviour
 				goalItterator = 0;
 			}
 			goal = internalHitList[goalItterator];
-			// Debug.Log("Getting Goal, hit list size = " + internalHitList.Count);
+			Debug.Log("Getting Goal ["+goalItterator+"], from hit list size = " + internalHitList.Count);
 		}
 	}
 
