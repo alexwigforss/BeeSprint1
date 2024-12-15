@@ -194,9 +194,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		{
 			// Create a new group and attach to it
 			GameObject newGroup = Instantiate(bGroupPrefab, drones.transform);
-			newGroup.name = "BGroup (" + (drones.transform.childCount + 1) + ")";
-
-			//GameObject newGroup = new GameObject("BGroup (" + (drones.transform.childCount + 1) + ")");
+			newGroup.name = "BGroup (" + (drones.transform.childCount - 1) + ")";
 			newGroup.transform.SetParent(drones.transform);
 			spawnedObject.transform.SetParent(newGroup.transform);
 			spawnedObject.GetComponent<Beehave>().state = 1;

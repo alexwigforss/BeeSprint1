@@ -66,14 +66,7 @@ public class Beehave : MonoBehaviour
 			getGoalLists();
 			goal = internalHitList.FirstOrDefault();
 		}
-		try
-		{
-			postDist = Vector3.Distance(transform.position, goal.transform.position);
-		}
-		catch (System.Exception)
-		{
-			throw;
-		}
+		// postDist = Vector3.Distance(transform.position, goal.transform.position);
 		state = (int)States.search;
 	}
 
@@ -291,6 +284,10 @@ public class Beehave : MonoBehaviour
 	{
 		// TBD Implement return to home when fully loaded.
 		//if (other == goalCollider)
+		if (goal == null)
+		{
+			return;
+		}
 		if (other.tag == "FlowerHitZone")
 		{
 			if (internalHitList.Count > 0)
@@ -310,8 +307,7 @@ public class Beehave : MonoBehaviour
 			getGoalList(selectedSpecie);
 			getNextGoal();
 		}
-		target = goal.transform;
-
+			target = goal.transform;
 	}
 
 	private void MoveTowards(Transform t)
