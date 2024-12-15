@@ -2472,6 +2472,7 @@ MonoBehaviour:
   selectedBeeGroup: -1
   drones: {fileID: 1778388861}
   bee: {fileID: 643267199250610435, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
+  bGroupPrefab: {fileID: 978238289167897406, guid: 0509f9203ff1f614c891f7c99802132e, type: 3}
   nestLocation: {fileID: 1593979350}
 --- !u!135 &546031007 stripped
 SphereCollider:

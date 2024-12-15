@@ -120,6 +120,32 @@ public class LPanel : Menu
 		}
 		else
 		{
+				Debug.LogError("Index out of range.");
+		}
+	}
+	
+	public void SetNewSpriteSelected(int index)
+	{
+		if (index >= 0 && index < spriteObjects.Count)
+		{
+			GameObject spriteObject = spriteObjects[index];
+			Image image = spriteObject.GetComponent<Image>();
+			if (image != null)
+			{
+				//image.sprite = Sprite.Create(selecticon, new Rect(0, 0, selecticon.width, selecticon.height), new Vector2(0.5f, 0.5f));
+				//if (storedIndex != index)
+				//{
+				//	UnSetSpriteSelected(storedIndex);
+				//}
+				storedIndex = index;
+			}
+			else
+			{
+				Debug.LogError("Image component not found on the GameObject.");
+			}
+		}
+		else
+		{
 			Debug.LogError("Index out of range.");
 		}
 	}

@@ -9,7 +9,7 @@ public abstract class Menu : MonoBehaviour
 	public GameObject spritePrefab;
 	public Transform layoutGroup;
 	public Transform spawnersParent; // Assign this in the Inspector
-	internal int spritesadded = 0;
+	//internal int spritesadded = 0;
 	List<Sprite> sprites;
 
 	public List<Sprite> Sprites { get => sprites; set => sprites = value; }

@@ -66,13 +66,19 @@ public class Beehave : MonoBehaviour
 			getGoalLists();
 			goal = internalHitList.FirstOrDefault();
 		}
-		postDist = Vector3.Distance(transform.position, goal.transform.position);
+		try
+		{
+			postDist = Vector3.Distance(transform.position, goal.transform.position);
+		}
+		catch (System.Exception)
+		{
+			throw;
+		}
 		state = (int)States.search;
 	}
 
 	//public void InstanceInit()
 	//{
-		
 	//	getGoalLists();
 	//	state = 3;
 	//}
@@ -100,6 +106,13 @@ public class Beehave : MonoBehaviour
 				if (timer >= 0.8f) { engine.MoveForward(true); }
 				else { engine.MoveForward(false); }
 				engine.MoveRight(true, 2);
+				getGoalLists();
+				if (internalHitList.Count > 0)
+				{
+					getNextGoal();
+					target = goal;
+					state = (int)States.collect;
+				}
 				break;
 			case (int)States.search:
 				if (!aligned) { aligned = re.AlignXZ(true); }
@@ -107,10 +120,10 @@ public class Beehave : MonoBehaviour
 				if (turndirection == 0) { engine.MoveRight(true); }
 				else { engine.MoveLeft(true); }
 				if (twosec >= 2f) { RandomDirection(); }
+				getGoalLists();
 				if (Hitzones.HitPositions.Count > 0)
 				{
 					//getGoalList(selectedSpecie);
-					getGoalLists();
 					getNextGoal();
 					target = goal;
 					state = (int)States.collect;
@@ -146,7 +159,14 @@ public class Beehave : MonoBehaviour
 					getGoalLists();
 					getNextGoal();
 					target = goal;
-					state = (int)States.collect;
+					if (internalHitList.Count <= 0)
+					{
+						state = (int)States.idle;
+					}
+					else
+					{
+						state = (int)States.collect;
+					}
 				}
 				break;
 			default:
@@ -202,7 +222,7 @@ public class Beehave : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("SelectiveMemory not found");
+			//Debug.Log("SelectiveMemory not found");
 			return null;
 		}
 	}
@@ -227,7 +247,7 @@ public class Beehave : MonoBehaviour
 		}
 		catch (System.Exception e)
 		{
-			Debug.LogException(e);
+			// Debug.LogException(e);
 		}
 	}
 

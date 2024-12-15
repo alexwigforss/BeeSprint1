@@ -15,6 +15,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 	public int selectedBeeGroup = -1;
 	public GameObject drones;
 	public GameObject bee;
+	public GameObject bGroupPrefab;
 	[SerializeField] Transform nestLocation;
 	private LPanel leftPanelRef;
 
@@ -50,8 +51,6 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 			else
 			{
 				// TODO is unselected so remove its id from chossen Bgrup if there is one.
-
-
 				Debug.Log("HighlightFlower component not found on grandchild.");
 			}
 		}
@@ -182,22 +181,26 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 	{
 		Vector3 spawnPosition = nestLocation.position;
 		GameObject spawnedObject = Instantiate(bee, spawnPosition, Quaternion.identity);
-
+		int selectedSprite = selectedBeeGroup;
 		if (selectedBeeGroup >= 0 && selectedBeeGroup < drones.transform.childCount)
 		{
 			// Attach to the specified child
 			Transform groupTransform = drones.transform.GetChild(selectedBeeGroup);
 			spawnedObject.transform.SetParent(groupTransform);
 			spawnedObject.GetComponent<Beehave>().state = 3;
-			//spawnedObject.GetComponent<Beehave>().GetTargetFromSibling();
+			// spawnedObject.GetComponent<Beehave>().GetTargetFromSibling();
 		}
 		else
 		{
 			// Create a new group and attach to it
-			GameObject newGroup = new GameObject("BGroup (" + (drones.transform.childCount + 1) + ")");
+			GameObject newGroup = Instantiate(bGroupPrefab, drones.transform);
+			newGroup.name = "BGroup (" + (drones.transform.childCount + 1) + ")";
+
+			//GameObject newGroup = new GameObject("BGroup (" + (drones.transform.childCount + 1) + ")");
 			newGroup.transform.SetParent(drones.transform);
 			spawnedObject.transform.SetParent(newGroup.transform);
 			spawnedObject.GetComponent<Beehave>().state = 1;
+			selectedSprite = drones.transform.childCount-1;
 		}
 		if (spawnedObject != null)
 		{
@@ -207,6 +210,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 			spawnedObject.GetComponent<AutoMove>().HiveLocation = nestLocation;
 		}
 		leftPanelRef.ReGetSprites();
+		// leftPanelRef.SetNewSpriteSelected(selectedSprite);
 	}
 
 	private void ShowSelectSpecies(int parentIndex)
