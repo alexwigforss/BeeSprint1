@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.WSA;
 //using UnityEngine.UIElements;
 
 public class UIEventHandler : MonoBehaviour, IPointerClickHandler
@@ -12,7 +14,9 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 	public GameObject flowerSpawners;
 	public int selectedBeeGroup = -1;
 	public GameObject drones;
-	//[SerializeField] GameObject drones;
+	public GameObject bee;
+	public GameObject bGroupPrefab;
+	[SerializeField] Transform nestLocation;
 	private LPanel leftPanelRef;
 
 	private void HighlightFlowerBase(Transform spawner)
@@ -30,7 +34,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 					{
 						FlowerSpawner fs = spawner.GetComponent<FlowerSpawner>();
 						GetBeeMemory(selectedBeeGroup).AddSpecie(fs.ID);
-						GetBeeMemory(selectedBeeGroup).PrintSpecies();
+						//GetBeeMemory(selectedBeeGroup).PrintSpecies();
 					}
 				}
 				else
@@ -39,7 +43,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 					{
 						FlowerSpawner fs = spawner.GetComponent<FlowerSpawner>();
 						GetBeeMemory(selectedBeeGroup).RemoveSpecie(fs.ID);
-						GetBeeMemory(selectedBeeGroup).PrintSpecies();
+						//GetBeeMemory(selectedBeeGroup).PrintSpecies();
 					}
 					Debug.Log("Specie was unselected");
 				}
@@ -47,8 +51,6 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 			else
 			{
 				// TODO is unselected so remove its id from chossen Bgrup if there is one.
-
-
 				Debug.Log("HighlightFlower component not found on grandchild.");
 			}
 		}
@@ -98,19 +100,26 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		// Click on image (Flower)
 		if (clickedObject.TryGetComponent<Image>(out var clickedImage))
 		{
-			Sprite clickedSprite = clickedImage.sprite;
-			Debug.Log("Clicked Sprite: " + clickedSprite.name + ", " + clickedSprite.texture.ToString());
-
-			// Find the child element with the matching texture
-			Transform matchingChild = FindChildWithMatchingTexture(flowerSpawners.transform, clickedSprite.texture);
-			if (matchingChild != null)
+			if (clickedImage.tag == "Icon")
 			{
-				Debug.Log("Found matching child: " + matchingChild.name);
-				HighlightFlowerBase(matchingChild);
-				// TODO Get the ID of the spawner
-				// TODO Pass it to the begroup if one is selected
+				Debug.Log("Icon CLICKED");
+				SpawnBee();
 			}
-			else { Debug.Log("No matching child found."); }
+			else
+			{
+
+				Sprite clickedSprite = clickedImage.sprite;
+				Debug.Log("Clicked Sprite: " + clickedSprite.name + ", " + clickedSprite.texture.ToString());
+
+				// Find the child element with the matching texture
+				Transform matchingChild = FindChildWithMatchingTexture(flowerSpawners.transform, clickedSprite.texture);
+				if (matchingChild != null)
+				{
+					Debug.Log("Found matching child: " + matchingChild.name);
+					HighlightFlowerBase(matchingChild);
+				}
+				else { Debug.Log("No matching child found."); }
+			}
 		}
 		// Else click was on TMP or panel
 		else if (clickedObject.GetComponent<TextMeshProUGUI>())
@@ -168,9 +177,43 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		}
 	}
 
+	void SpawnBee()
+	{
+		Vector3 spawnPosition = nestLocation.position;
+		GameObject spawnedObject = Instantiate(bee, spawnPosition, Quaternion.identity);
+		int selectedSprite = selectedBeeGroup;
+		if (selectedBeeGroup >= 0 && selectedBeeGroup < drones.transform.childCount)
+		{
+			// Attach to the specified child
+			Transform groupTransform = drones.transform.GetChild(selectedBeeGroup);
+			spawnedObject.transform.SetParent(groupTransform);
+			spawnedObject.GetComponent<Beehave>().state = 3;
+			// spawnedObject.GetComponent<Beehave>().GetTargetFromSibling();
+		}
+		else
+		{
+			// Create a new group and attach to it
+			GameObject newGroup = Instantiate(bGroupPrefab, drones.transform);
+			newGroup.name = "BGroup (" + (drones.transform.childCount - 1) + ")";
+			newGroup.transform.SetParent(drones.transform);
+			spawnedObject.transform.SetParent(newGroup.transform);
+			spawnedObject.GetComponent<Beehave>().state = 1;
+			selectedSprite = drones.transform.childCount-1;
+		}
+		if (spawnedObject != null)
+		{
+			//spawnedObject.transform.SetParent(transform);
+			spawnedObject.GetComponent<Beehave>().HiveLocation = nestLocation;
+			// spawnedObject.GetComponent<Beehave>().InstanceInit();
+			spawnedObject.GetComponent<AutoMove>().HiveLocation = nestLocation;
+		}
+		leftPanelRef.ReGetSprites();
+		// leftPanelRef.SetNewSpriteSelected(selectedSprite);
+	}
+
 	private void ShowSelectSpecies(int parentIndex)
 	{
-		
+
 		foreach (Transform spawner in flowerSpawners.transform)
 		{
 			foreach (Transform flower in spawner)
@@ -182,7 +225,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 				{
 					//Debug.Log(fs.ID);
 					// Set the variable on the script
-					GetBeeMemory(selectedBeeGroup).PrintSpecies();
+					//GetBeeMemory(selectedBeeGroup).PrintSpecies();
 					if (GetBeeMemory(selectedBeeGroup).ContainsSpecie(fs.ID))
 					{
 						hlf.HighlightSelected();

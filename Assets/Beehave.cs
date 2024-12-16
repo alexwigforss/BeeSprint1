@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -9,9 +10,9 @@ public class Beehave : MonoBehaviour
 {
 	[SerializeField]
 	Transform goal;
-	Transform stashedGoal;
-	[SerializeField]
-	Collider goalCollider;
+	//Transform stashedGoal;
+	//[SerializeField]
+	//Collider goalCollider;
 
 	AutoMove engine;
 	Realigner re;
@@ -55,21 +56,11 @@ public class Beehave : MonoBehaviour
 
 	void Start()
 	{
-		target = goal.transform;
 		engine = GetComponent<AutoMove>();
 		re = GetComponent<Realigner>();
 		collision = GetComponent<Collision>();
 		engine.ResetAll();
-		postDist = Vector3.Distance(transform.position, goal.transform.position);
-		state = (int)States.search;
-	}
-
-	private void OnValidate()
-	{
-		if (Application.isPlaying)
-		{
-			getGoalList(selectedSpecie);
-		}
+		state = (int)States.idle;
 	}
 
 	void Update()
@@ -87,6 +78,7 @@ public class Beehave : MonoBehaviour
 				if (timer >= 0.8f) { engine.MoveForward(true); }
 				else { engine.MoveForward(false); }
 				engine.MoveRight(true, 2);
+				IfTargetsStartCollect();
 				break;
 			case (int)States.search:
 				if (!aligned) { aligned = re.AlignXZ(true); }
@@ -94,14 +86,7 @@ public class Beehave : MonoBehaviour
 				if (turndirection == 0) { engine.MoveRight(true); }
 				else { engine.MoveLeft(true); }
 				if (twosec >= 2f) { RandomDirection(); }
-				if (Hitzones.HitPositions.Count > 0)
-				{
-					//getGoalList(selectedSpecie);
-					getGoalLists();
-					getNextGoal();
-					target = goal;
-					state = (int)States.collect;
-				}
+				IfTargetsStartCollect();
 				break;
 			case (int)States.collect:
 				if (target != null && target.gameObject.activeInHierarchy)
@@ -110,7 +95,6 @@ public class Beehave : MonoBehaviour
 				}
 				else
 				{
-					//getGoalList(selectedSpecie);
 					getGoalLists();
 					getNextGoal();
 					target = goal;
@@ -129,16 +113,69 @@ public class Beehave : MonoBehaviour
 				}
 				else
 				{
-					//getGoalList(selectedSpecie);
 					getGoalLists();
 					getNextGoal();
 					target = goal;
-					state = (int)States.collect;
+					if (internalHitList.Count <= 0)
+					{
+						state = (int)States.idle;
+					}
+					else
+					{
+						state = (int)States.collect;
+					}
 				}
 				break;
 			default:
 				Debug.Log("Not moving!");
 				break;
+		}
+
+		void IfTargetsStartCollect()
+		{
+			getGoalLists();
+			if (internalHitList.Count > 0)
+			{
+				getNextGoal();
+				target = goal;
+				state = (int)States.collect;
+			}
+		}
+	}
+
+	public void GetTargetFromSibling()
+	{
+		Transform parent = transform.parent;
+		if (parent == null)
+		{
+			Debug.LogWarning("No parent found.");
+			return;
+		}
+
+		float minDistance = float.MaxValue;
+		Transform nearestSibling = null;
+
+		foreach (Transform sibling in parent)
+		{
+			if (sibling != transform)
+			{
+				float distance = Vector3.Distance(transform.position, sibling.position);
+				if (distance < minDistance)
+				{
+					minDistance = distance;
+					nearestSibling = sibling;
+				}
+			}
+		}
+
+		if (nearestSibling != null)
+		{
+			target = nearestSibling;
+			Debug.Log("Nearest sibling found: " + target.name);
+		}
+		else
+		{
+			Debug.LogWarning("No siblings found.");
 		}
 	}
 
@@ -153,15 +190,14 @@ public class Beehave : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("SelectiveMemory not found");
+			//Debug.Log("SelectiveMemory not found");
 			return null;
 		}
 	}
 
 	private void getGoalLists()
 	{
-		Debug.Log("Getting new PosList from... ");
-		GetBeeMemory().PrintSpecies();
+		//GetBeeMemory().PrintSpecies();
 		try
 		{
 			internalHitList.Clear();
@@ -173,31 +209,13 @@ public class Beehave : MonoBehaviour
 					tempList.RemoveRange(0, tempList.Count / 2);
 				}
 				internalHitList.AddRange(tempList);
-				
-			}
-		}
-		catch (System.Exception e)
-		{
-			Debug.LogException(e);
-		}
-	}
 
-	private void getGoalList(int selector)
-	{
-		try
-		{
-			if (selector > 0)
-			{
-				internalHitList = Hitzones.HitPositions[selector];
-				if (internalHitList.Count > 4)
-				{
-					internalHitList.RemoveRange(0, internalHitList.Count / 2);
-				}
 			}
+			// Debug.Log("Got " + internalHitList.Count + " hitzonez");
 		}
 		catch (System.Exception e)
 		{
-			Debug.LogException(e);
+			Debug.LogException(e.InnerException);
 		}
 	}
 
@@ -214,14 +232,16 @@ public class Beehave : MonoBehaviour
 				goalItterator = 0;
 			}
 			goal = internalHitList[goalItterator];
-			Debug.Log("Getting Goal ["+goalItterator+"], from hit list size = " + internalHitList.Count);
+			//Debug.Log("Getting Goal [" + goalItterator + "], from hit list size = " + internalHitList.Count);
 		}
 	}
 
 	public void OnTriggerEnter(Collider other)
 	{
-		// TBD Implement return to home when fully loaded.
-		//if (other == goalCollider)
+		if (goal == null)
+		{
+			return;
+		}
 		if (other.tag == "FlowerHitZone")
 		{
 			if (internalHitList.Count > 0)
@@ -230,24 +250,19 @@ public class Beehave : MonoBehaviour
 			}
 			else
 			{
-				// Debug.Log("hitListWas ZERO");
-				stashedGoal = goal;
 				goal = HiveLocation;
 			}
 		}
 		else if (other.CompareTag("Nest"))
 		{
-			// Debug.Log("Hit nest");
-			getGoalList(selectedSpecie);
+			getGoalLists();
 			getNextGoal();
 		}
-		target = goal.transform;
-
+			target = goal.transform;
 	}
 
 	private void MoveTowards(Transform t)
 	{
-		//prioDist = postDist;
 		postDist = Vector3.Distance(transform.position, t.position);
 		engine.rotateTowards(t.position);
 		engine.MoveForward(true);
@@ -255,11 +270,12 @@ public class Beehave : MonoBehaviour
 		if (postDist < 0.9)
 		{
 			engine.rotateTowards(t.position * 8);
-			// Hack wich i hope prevent from chasing dead targets
+			// Check if the zone is still in list
+			// To avoid chasing dead targets
 			if (!Hitzones.Contain(t))
 			{
 				// Debug.Log("Trying to reach dead hitzone");
-				getGoalList(selectedSpecie);
+				getGoalLists();
 				getNextGoal();
 			}
 		}

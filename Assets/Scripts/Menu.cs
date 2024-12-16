@@ -9,12 +9,15 @@ public abstract class Menu : MonoBehaviour
 	public GameObject spritePrefab;
 	public Transform layoutGroup;
 	public Transform spawnersParent; // Assign this in the Inspector
-	internal int spritesadded = 0;
+	//internal int spritesadded = 0;
 	List<Sprite> sprites;
+
+	public List<Sprite> Sprites { get => sprites; set => sprites = value; }
+
 	protected virtual void Start()
 	{
-		sprites = GetSprites();
-		foreach (Sprite sprite in sprites)
+		Sprites = GetSprites();
+		foreach (Sprite sprite in Sprites)
 		{
 			GameObject newSprite = Instantiate(spritePrefab, layoutGroup);
 			newSprite.GetComponent<Image>().sprite = sprite;
@@ -23,7 +26,7 @@ public abstract class Menu : MonoBehaviour
 
 	protected virtual List<Sprite> GetSprites()
 	{
-		List<Sprite> sprites = new List<Sprite>();
+		List<Sprite> sprites = new();
 		return sprites;
 	}
 }

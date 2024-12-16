@@ -34,6 +34,7 @@ public class SelectiveMemory : MonoBehaviour
 	}
 	public void PrintSpecies()
 	{
-		string result = string.Join(", ", memory); Debug.Log(result);
+		string result = string.Join(", ", memory);
+		Debug.Log(result);
 	}
 }
