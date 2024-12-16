@@ -132,11 +132,7 @@ public class LPanel : Menu
 			Image image = spriteObject.GetComponent<Image>();
 			if (image != null)
 			{
-				//image.sprite = Sprite.Create(selecticon, new Rect(0, 0, selecticon.width, selecticon.height), new Vector2(0.5f, 0.5f));
-				//if (storedIndex != index)
-				//{
-				//	UnSetSpriteSelected(storedIndex);
-				//}
+				image.sprite = Sprite.Create(selecticon, new Rect(0, 0, selecticon.width, selecticon.height), new Vector2(0.5f, 0.5f));
 				storedIndex = index;
 			}
 			else

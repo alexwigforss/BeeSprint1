@@ -208,7 +208,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 			spawnedObject.GetComponent<AutoMove>().HiveLocation = nestLocation;
 		}
 		leftPanelRef.ReGetSprites();
-		// leftPanelRef.SetNewSpriteSelected(selectedSprite);
+		leftPanelRef.SetNewSpriteSelected(selectedSprite);
 	}
 
 	private void ShowSelectSpecies(int parentIndex)
