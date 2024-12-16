@@ -92,44 +92,123 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		else { Debug.Log("Grandchild not found."); }
 	}
 
+	void HighlightSprite(Image image)
+	{
+		Outline outline = image.GetComponent<Outline>();
+		if (outline != null)
+		{
+			// If the image is already highlighted, unhighlight it
+			UnHighlightSprite(image);
+		}
+		else
+		{
+			// If the image is not highlighted, add the outline
+			outline = image.gameObject.AddComponent<Outline>();
+			outline.effectColor = Color.black;
+			outline.effectDistance = new Vector2(5, 5);
+		}
+	}
+
+	void UnHighlightSprite(Image image)
+	{
+		Outline outline = image.GetComponent<Outline>();
+		if (outline != null)
+		{
+			Destroy(outline);
+			Debug.Log("Outline removed from " + image.name);
+		}
+		else
+		{
+			Debug.LogWarning("No Outline component found on " + image.name);
+		}
+	}
+
+	public void UnHighlightAllImages()
+	{
+		// Find the RightPanel GameObject
+		GameObject rightPanel = GameObject.Find("RightPanel");
+		if (rightPanel == null)
+		{
+			Debug.LogWarning("RightPanel not found.");
+			return;
+		}
+
+		// Find the LayoutGroup GameObject
+		Transform layoutGroup = rightPanel.transform.Find("LayoutGroup");
+		if (layoutGroup == null)
+		{
+			Debug.LogWarning("LayoutGroup not found.");
+			return;
+		}
+
+		// Iterate through all children of the LayoutGroup
+		foreach (Transform child in layoutGroup)
+		{
+			Image image = child.GetComponent<Image>();
+			if (image != null)
+			{
+				// Check if the image has an Outline component
+				Outline outline = image.GetComponent<Outline>();
+				if (outline != null)
+				{
+					// Unhighlight the image by removing the Outline component
+					Destroy(outline);
+					Debug.Log("Outline removed from " + image.name);
+				}
+			}
+		}
+	}
+
+
 	public void OnPointerClick(PointerEventData eventData)
 	{
 		GameObject clickedObject = eventData.pointerCurrentRaycast.gameObject;
 		Debug.Log("UI Element Clicked: " + clickedObject.name);
 
-		// Click on image (Flower)
+		// Click on image
 		if (clickedObject.TryGetComponent<Image>(out var clickedImage))
 		{
-				if (clickedImage.tag == "Icon")
+			if (clickedImage.tag == "Icon")
+			{
+				Debug.Log("Icon CLICKED");
+				SpawnBee(); // If spawnbee created new group
+				GetSelectedBeeByTMPChild(clickedObject);
+
+				// Highlight the clicked icon
+				//HighlightSprite(clickedImage);
+				UnHighlightAllImages();
+			}
+			else if (selectedBeeGroup >= 0)
+			{
+				Sprite clickedSprite = clickedImage.sprite;
+				Debug.Log("Clicked Sprite: " + clickedSprite.name + ", " + clickedSprite.texture.ToString());
+
+				// Find the child element with the matching texture
+				Transform matchingChild = FindChildWithMatchingTexture(flowerSpawners.transform, clickedSprite.texture);
+				if (matchingChild != null)
 				{
-					Debug.Log("Icon CLICKED");
-					SpawnBee(); // If spawnbee created new group
-					GetSelectedBeeByTMPChild(clickedObject);
-				}
+					Debug.Log("Found matching child: " + matchingChild.name);
+					HighlightFlowerBase(matchingChild);
 
-			
-				else if (selectedBeeGroup >= 0)
+					// Highlight the clicked flower sprite
+					HighlightSprite(clickedImage);
+				}
+				else
 				{
-
-					Sprite clickedSprite = clickedImage.sprite;
-					Debug.Log("Clicked Sprite: " + clickedSprite.name + ", " + clickedSprite.texture.ToString());
-
-					// Find the child element with the matching texture
-					Transform matchingChild = FindChildWithMatchingTexture(flowerSpawners.transform, clickedSprite.texture);
-					if (matchingChild != null)
-					{
-						Debug.Log("Found matching child: " + matchingChild.name);
-						HighlightFlowerBase(matchingChild);
-					}
-					else { Debug.Log("No matching child found."); }
+					Debug.Log("No matching child found.");
 				}
-			
+			}
 		}
+
 		// Else click was on TMP or panel ()
 		else if (clickedObject.GetComponent<TextMeshProUGUI>())
 		{
 			GetSelectedBeeByTMPChild(clickedObject);
+			UnHighlightAllImages();
 		}
+
+
+
 
 		void GetSelectedBeeByTMPChild(GameObject clickedObject)
 		{
@@ -306,44 +385,6 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		}
 		return null;
 	}
-	/*
-	public void DummyOnPointerClick(PointerEventData eventData)
-	{
-		GameObject clickedObject = eventData.pointerCurrentRaycast.gameObject;
-		Debug.Log("UI Element Clicked: " + clickedObject.name);
-
-		Image clickedImage = clickedObject.GetComponent<Image>();
-		if (clickedImage != null)
-		{
-			// None related code
-		}
-		else
-		{
-			Debug.Log("No Image component found on the clicked object.");
-
-			// Get the parent of the clicked object
-			Transform parentTransform = clickedObject.transform.parent;
-			if (parentTransform != null)
-			{
-				// Get the grandparent of the clicked object
-				Transform grandparentTransform = parentTransform.parent;
-				if (grandparentTransform != null)
-				{
-					// Get the index of the parent under the grandparent
-					int parentIndex = parentTransform.GetSiblingIndex();
-					Debug.Log("Parent's index under the grandparent: " + parentIndex);
-				}
-				else
-				{
-					Debug.Log("Grandparent not found.");
-				}
-			}
-			else
-			{
-				Debug.Log("Parent not found.");
-			}
-		}
-	}*/
 }
 
 
