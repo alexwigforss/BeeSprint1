@@ -8,7 +8,14 @@ public class BeeSelection : MonoBehaviour
 
 	void Start()
 	{
-		ssphere.SetActive(false);
+		if (ssphere != null)
+		{
+			ssphere.SetActive(false);
+		}
+		else
+		{
+			Debug.LogWarning("ssphere is not assigned in the Inspector.");
+		}
 	}
 
 	/// <summary>
@@ -17,11 +24,28 @@ public class BeeSelection : MonoBehaviour
 	/// <returns></returns>
 	public void EnableSphere()
 	{
-		ssphere.SetActive(true);
-	}
-	public void DisableSphere()
-	{
-		ssphere.SetActive(false);
+		if (ssphere != null)
+		{
+			ssphere.SetActive(true);
+			Debug.Log("ssphere has been enabled.");
+		}
+		else
+		{
+			Debug.LogWarning("ssphere is not assigned in the Inspector.");
+		}
 	}
 
+	public void DisableSphere()
+	{
+		if (ssphere != null)
+		{
+			ssphere.SetActive(false);
+			Debug.Log("ssphere has been disabled.");
+		}
+		else
+		{
+			Debug.LogWarning("ssphere is not assigned in the Inspector.");
+		}
+	}
 }
+
