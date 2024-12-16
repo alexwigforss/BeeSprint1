@@ -100,27 +100,30 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		// Click on image (Flower)
 		if (clickedObject.TryGetComponent<Image>(out var clickedImage))
 		{
-			if (clickedImage.tag == "Icon")
-			{
-				Debug.Log("Icon CLICKED");
-				SpawnBee(); // If spawnbee created new group
-				GetSelectedBeeByTMPChild(clickedObject);
-			}
-			else
-			{
-
-				Sprite clickedSprite = clickedImage.sprite;
-				Debug.Log("Clicked Sprite: " + clickedSprite.name + ", " + clickedSprite.texture.ToString());
-
-				// Find the child element with the matching texture
-				Transform matchingChild = FindChildWithMatchingTexture(flowerSpawners.transform, clickedSprite.texture);
-				if (matchingChild != null)
+				if (clickedImage.tag == "Icon")
 				{
-					Debug.Log("Found matching child: " + matchingChild.name);
-					HighlightFlowerBase(matchingChild);
+					Debug.Log("Icon CLICKED");
+					SpawnBee(); // If spawnbee created new group
+					GetSelectedBeeByTMPChild(clickedObject);
 				}
-				else { Debug.Log("No matching child found."); }
-			}
+
+			
+				else if (selectedBeeGroup >= 0)
+				{
+
+					Sprite clickedSprite = clickedImage.sprite;
+					Debug.Log("Clicked Sprite: " + clickedSprite.name + ", " + clickedSprite.texture.ToString());
+
+					// Find the child element with the matching texture
+					Transform matchingChild = FindChildWithMatchingTexture(flowerSpawners.transform, clickedSprite.texture);
+					if (matchingChild != null)
+					{
+						Debug.Log("Found matching child: " + matchingChild.name);
+						HighlightFlowerBase(matchingChild);
+					}
+					else { Debug.Log("No matching child found."); }
+				}
+			
 		}
 		// Else click was on TMP or panel ()
 		else if (clickedObject.GetComponent<TextMeshProUGUI>())
@@ -204,7 +207,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 			newGroup.transform.SetParent(drones.transform);
 			spawnedObject.transform.SetParent(newGroup.transform);
 			spawnedObject.GetComponent<Beehave>().state = 1;
-			selectedSprite = drones.transform.childCount-1;
+			selectedSprite = drones.transform.childCount - 1;
 		}
 		if (spawnedObject != null)
 		{
