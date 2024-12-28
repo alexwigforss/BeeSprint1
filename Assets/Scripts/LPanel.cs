@@ -181,8 +181,8 @@ public class LPanel : Menu
 		}
 	}
 	*/
-	internal void HelloLPanel()
-	{
-		Debug.Log("LPanel says HELLO!");
-	}
+	//internal void HelloLPanel()
+	//{
+	//	Debug.Log("LPanel says HELLO!");
+	//}
 }

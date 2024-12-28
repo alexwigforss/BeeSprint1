@@ -85,7 +85,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 			if (leftPanelRef != null)
 			{
 				Debug.Log("LPanel component found on grandchild.");
-				leftPanelRef.HelloLPanel();
+				// leftPanelRef.HelloLPanel();
 			}
 			else { Debug.Log("LPanel component not found on grandchild."); }
 		}
@@ -172,11 +172,12 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 			{
 				Debug.Log("Icon CLICKED");
 				SpawnBee(); // If spawnbee created new group
-				GetSelectedBeeByTMPChild(clickedObject);
+				// GetSelectedBeeByTMPChild(clickedObject);
 
 				// Highlight the clicked icon
 				//HighlightSprite(clickedImage);
-				UnHighlightAllImages();
+				// UnHighlightAllImages();
+				
 			}
 			else if (selectedBeeGroup >= 0)
 			{
@@ -210,7 +211,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 
 
 
-		void GetSelectedBeeByTMPChild(GameObject clickedObject)
+		void GetSelectedBeeByTMPChild(GameObject clickedObject, int parentIndex = -5)
 		{
 			// Get the parent of the clicked object
 			Transform parentTransform = clickedObject.transform.parent;
@@ -221,12 +222,15 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 				if (grandparentTransform != null)
 				{
 					// Get the index of the parent under the grandparent
-					int parentIndex = parentTransform.GetSiblingIndex();
+					if (parentIndex == -5)
+					{
+						parentIndex = parentTransform.GetSiblingIndex();
+					}
 					int prioSelected = selectedBeeGroup;
 					//From none to one selected
 					if (selectedBeeGroup < 0)
 					{
-						// Debug.Log("none before");
+						// Debug.Log("Bee group was none");
 						selectedBeeGroup = parentIndex;
 						EnableSpheres(parentIndex);
 						ShowSelectSpecies(parentIndex);
@@ -290,13 +294,12 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		}
 		if (spawnedObject != null)
 		{
-			//spawnedObject.transform.SetParent(transform);
 			spawnedObject.GetComponent<Beehave>().HiveLocation = nestLocation;
-			// spawnedObject.GetComponent<Beehave>().InstanceInit();
 			spawnedObject.GetComponent<AutoMove>().HiveLocation = nestLocation;
 		}
 		leftPanelRef.ReGetSprites();
-		// leftPanelRef.SetNewSpriteSelected(selectedSprite);
+		Debug.Log("selectedSprite is: " + selectedSprite + "selectedBeeGroup is: " + selectedBeeGroup);
+		leftPanelRef.SetNewSpriteSelected(selectedSprite);
 		// spawnedObject.GetComponent<BeeSelection>().EnableSphere();
 	}
 
