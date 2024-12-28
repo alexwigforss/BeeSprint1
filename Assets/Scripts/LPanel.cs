@@ -166,23 +166,4 @@ public class LPanel : Menu
 			Debug.LogError("Index out of range.");
 		}
 	}
-
-	/*
-	public void ChangeSprite(GameObject spriteObject, Sprite newSprite, int index)
-	{
-		Image image = spriteObject.GetComponent<Image>();
-		if (image != null)
-		{
-			image.sprite = newSprite;
-		}
-		else
-		{
-			Debug.LogError("Image component not found on the GameObject.");
-		}
-	}
-	*/
-	internal void HelloLPanel()
-	{
-		Debug.Log("LPanel says HELLO!");
-	}
 }

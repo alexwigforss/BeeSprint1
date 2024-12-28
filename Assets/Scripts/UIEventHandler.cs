@@ -85,7 +85,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 			if (leftPanelRef != null)
 			{
 				Debug.Log("LPanel component found on grandchild.");
-				leftPanelRef.HelloLPanel();
+				// leftPanelRef.HelloLPanel();
 			}
 			else { Debug.Log("LPanel component not found on grandchild."); }
 		}
@@ -172,25 +172,18 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 			{
 				Debug.Log("Icon CLICKED");
 				SpawnBee(); // If spawnbee created new group
-				GetSelectedBeeByTMPChild(clickedObject);
-
-				// Highlight the clicked icon
-				//HighlightSprite(clickedImage);
-				UnHighlightAllImages();
+				EnableSpheres(selectedBeeGroup);
+				leftPanelRef.SetSpriteSelected(selectedBeeGroup);
 			}
 			else if (selectedBeeGroup >= 0)
 			{
 				Sprite clickedSprite = clickedImage.sprite;
 				Debug.Log("Clicked Sprite: " + clickedSprite.name + ", " + clickedSprite.texture.ToString());
-
-				// Find the child element with the matching texture
 				Transform matchingChild = FindChildWithMatchingTexture(flowerSpawners.transform, clickedSprite.texture);
 				if (matchingChild != null)
 				{
 					Debug.Log("Found matching child: " + matchingChild.name);
 					HighlightFlowerBase(matchingChild);
-
-					// Highlight the clicked flower sprite
 					HighlightSprite(clickedImage);
 				}
 				else
@@ -203,11 +196,12 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		// Else click was on TMP or panel ()
 		else if (clickedObject.GetComponent<TextMeshProUGUI>())
 		{
+			Debug.Log("BAM Bee tmp clicked");
 			GetSelectedBeeByTMPChild(clickedObject);
 			UnHighlightAllImages();
 		}
 
-
+			
 
 
 		void GetSelectedBeeByTMPChild(GameObject clickedObject)
@@ -226,7 +220,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 					//From none to one selected
 					if (selectedBeeGroup < 0)
 					{
-						// Debug.Log("none before");
+						// Debug.Log("Bee group was none");
 						selectedBeeGroup = parentIndex;
 						EnableSpheres(parentIndex);
 						ShowSelectSpecies(parentIndex);
@@ -272,7 +266,6 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		bool ng = false;
 		if (selectedBeeGroup >= 0 && selectedBeeGroup < drones.transform.childCount)
 		{
-			// Attach to the specified child
 			Transform groupTransform = drones.transform.GetChild(selectedBeeGroup);
 			spawnedObject.transform.SetParent(groupTransform);
 			spawnedObject.GetComponent<Beehave>().state = 3;
@@ -286,17 +279,16 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 			newGroup.transform.SetParent(drones.transform);
 			spawnedObject.transform.SetParent(newGroup.transform);
 			spawnedObject.GetComponent<Beehave>().state = 1;
-			selectedSprite = drones.transform.childCount - 1;
+			selectedBeeGroup = selectedSprite = drones.transform.childCount - 1;
 		}
 		if (spawnedObject != null)
 		{
-			//spawnedObject.transform.SetParent(transform);
 			spawnedObject.GetComponent<Beehave>().HiveLocation = nestLocation;
-			// spawnedObject.GetComponent<Beehave>().InstanceInit();
 			spawnedObject.GetComponent<AutoMove>().HiveLocation = nestLocation;
 		}
 		leftPanelRef.ReGetSprites();
-		// leftPanelRef.SetNewSpriteSelected(selectedSprite);
+		Debug.Log("selectedSprite is: " + selectedSprite + "selectedBeeGroup is: " + selectedBeeGroup);
+		leftPanelRef.SetNewSpriteSelected(selectedSprite);
 		// spawnedObject.GetComponent<BeeSelection>().EnableSphere();
 	}
 
@@ -307,14 +299,10 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		{
 			foreach (Transform flower in spawner)
 			{
-				// Get the script component on the child
 				HighlightFlower hlf = flower.GetComponent<HighlightFlower>();
 				FlowerSpawner fs = flower.GetComponent<FlowerSpawner>();
 				if (hlf != null)
 				{
-					//Debug.Log(fs.ID);
-					// Set the variable on the script
-					//GetBeeMemory(selectedBeeGroup).PrintSpecies();
 					if (GetBeeMemory(selectedBeeGroup).ContainsSpecie(fs.ID))
 					{
 						hlf.HighlightSelected();
@@ -354,6 +342,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 			BeeSelection bs = drone.GetComponent<BeeSelection>();
 			if (bs != null) { bs.EnableSphere(); }
 		}
+		Debug.Log("Spheres enabled at index: " + parentIndex);
 	}
 
 	private void DisableSpheres(int parentIndex)

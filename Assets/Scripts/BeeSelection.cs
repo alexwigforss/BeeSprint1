@@ -14,7 +14,7 @@ public class BeeSelection : MonoBehaviour
 		}
 		else
 		{
-			Debug.LogWarning("ssphere is not assigned in the Inspector.");
+			Debug.LogWarning("ssphere is not assigned.");
 		}
 	}
 
@@ -27,7 +27,7 @@ public class BeeSelection : MonoBehaviour
 		if (ssphere != null)
 		{
 			ssphere.SetActive(true);
-			Debug.Log("ssphere has been enabled.");
+			// Debug.Log("ssphere has been enabled.");
 		}
 		else
 		{
@@ -40,7 +40,7 @@ public class BeeSelection : MonoBehaviour
 		if (ssphere != null)
 		{
 			ssphere.SetActive(false);
-			Debug.Log("ssphere has been disabled.");
+			// Debug.Log("ssphere has been disabled.");
 		}
 		else
 		{
