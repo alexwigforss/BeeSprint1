@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngine.WSA;
 //using UnityEngine.UIElements;
 
 public class UIEventHandler : MonoBehaviour, IPointerClickHandler
