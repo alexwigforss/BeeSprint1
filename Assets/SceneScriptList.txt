@@ -1,0 +1,79 @@
+BeePlayer [Movement] [Collision]
+  3BPCamera
+    Canvas [CanvasScaler] [GraphicRaycaster]
+      Text (TMP) [TextMeshProUGUI]
+  beenat
+    LWing
+      RotationPoint [Flapper]
+        Upside
+        Downside
+    RWing
+      RotationPoint [Flapper]
+        Upside
+        Downside
+    Abdomen
+    Cone.001
+    Cone.004
+    Head
+    Head.001
+    Head.002
+    Head.003
+    Icosphere
+    Icosphere.001
+  Cylinder
+Directional Light
+World
+  TopDownCamera [TopDownCamMove]
+  Water
+  Tree (1)
+    Nest
+GameManager [PlayerInput] [InputSystemController] [ClickHandler] [HideCursor] [CameraChooser]
+ResourceManager [Resources] [Hitzones]
+GuiManager
+FlowerSpawners
+  SpawnLocation (1)
+    FlowerSpawner [FlowerSpawner] [HighlightFlower]
+  SpawnLocation (2)
+    FlowerSpawner [FlowerSpawner] [HighlightFlower]
+  SpawnLocation (3)
+    FlowerSpawner [FlowerSpawner] [HighlightFlower]
+  SpawnLocation (4)
+    FlowerSpawner [FlowerSpawner] [HighlightFlower]
+  SpawnLocation (5)
+    FlowerSpawner [FlowerSpawner] [HighlightFlower]
+EventSystem [EventSystem] [InputSystemUIInputModule]
+Drones
+  BGroup [SelectiveMemory]
+    Bee [Collision] [AutoMove] [Beehave] [Realigner] [BeeSelection]
+      Camera
+        Canvas [CanvasScaler] [GraphicRaycaster]
+          Text (TMP) [TextMeshProUGUI]
+      beenat
+        LWing
+          RotationPoint [Flapper]
+            Upside
+            Downside
+        RWing
+          RotationPoint [Flapper]
+            Upside
+            Downside
+        Abdomen
+        Cone.001
+        Cone.004
+        Head
+        Head.001
+        Head.002
+        Head.003
+        Icosphere
+        Icosphere.001
+      SelectionSphere
+MainGuiCanvas [CanvasScaler] [GraphicRaycaster] [UIEventHandler]
+  TopPanel [Image]
+    LayoutGroup [HorizontalLayoutGroup]
+      Text (TMP) [TextMeshProUGUI]
+      Image [Image]
+      WorldStats [TextMeshProUGUI]
+  LeftPanel [Image]
+    LayoutGroup [VerticalLayoutGroup] [LPanel]
+  RightPanel [Image]
+    LayoutGroup [VerticalLayoutGroup] [RPanel]
