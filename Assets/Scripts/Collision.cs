@@ -5,8 +5,8 @@ using TMPro;
 using System.Xml;
 using System;
 
-public class Collision : MonoBehaviour
-{
+public class Collision : MonoBehaviour {
+	public bool isPlayer = false;
 	System.Random random = new System.Random();
 	int pollen = 0;
 	int nectar = 0;
@@ -24,67 +24,67 @@ public class Collision : MonoBehaviour
 	private Coroutine increaseCoroutine;
 	private Coroutine incPropCoroutine;
 
-	void OnValidate()
-	{
-		if (Application.isPlaying)
-		{
-			try
-			{
-				tmpText = GetComponentInChildren<Canvas>().GetComponentInChildren<TMP_Text>();
-			}
-			catch (Exception)
-			{
-				Debug.LogError("No text on this bee");
-			}
+	//void OnValidate() {
+	//	if (isPlayer) {
+	//		if (Application.isPlaying) {
+	//			try {
+	//				tmpText = GetComponentInChildren<Canvas>().GetComponentInChildren<TMP_Text>();
+	//				Debug.LogError("Found bee text");
+	//			} catch (Exception) {
+	//				Debug.LogError("No text on this bee");
+	//			}
+	//		}
+	//	}
+	//}
+
+	void Start() {
+		if (isPlayer) {
+			StartCoroutine(InitializeText());
 		}
 	}
+
+	IEnumerator InitializeText() {
+		yield return null; // Wait for the next frame
+		try {
+			tmpText = GetComponentInChildren<Canvas>().GetComponentInChildren<TMP_Text>();
+			Debug.LogError("Found bee text");
+		} catch (Exception) {
+			Debug.LogError("No text on this bee");
+		}
+	}
+
 
 	// Update is called once per frame
-	void Update()
-	{
+	void Update() {
 
 	}
-	public void OnCollisionEnter(UnityEngine.Collision collision)
-	{
-		if (collision.gameObject.name.Equals("World"))
-		{
+	public void OnCollisionEnter(UnityEngine.Collision collision) {
+		if (collision.gameObject.name.Equals("World")) {
 			transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Flapper>().enabled = false;
 			transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Flapper>().enabled = false;
-		}
-		else if (collision.gameObject.name.Equals("Water"))
-		{
+		} else if (collision.gameObject.name.Equals("Water")) {
 			hasLeftWater = false;
 			increaseCoroutine ??= StartCoroutine(CollectWaterOverTime());
-		}
-		else if (collision.gameObject.name.StartsWith("Tree"))
-		{
+		} else if (collision.gameObject.name.StartsWith("Tree")) {
 			hasLeftTree = false;
 			incPropCoroutine ??= StartCoroutine(CollectPropolisOverTime());
 		}
 
 	}
 
-	public void OnCollisionExit(UnityEngine.Collision collision)
-	{
-		if (collision.gameObject.name.Equals("World"))
-		{
+	public void OnCollisionExit(UnityEngine.Collision collision) {
+		if (collision.gameObject.name.Equals("World")) {
 			transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Flapper>().enabled = true;
 			transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<Flapper>().enabled = true;
-		}
-		else if (collision.gameObject.name.Equals("Water"))
-		{
+		} else if (collision.gameObject.name.Equals("Water")) {
 			hasLeftWater = true;
-			if (increaseCoroutine != null)
-			{
+			if (increaseCoroutine != null) {
 				StopCoroutine(increaseCoroutine);
 				increaseCoroutine = null;
 			}
-		}
-		else if (collision.gameObject.name.StartsWith("Tree"))
-		{
+		} else if (collision.gameObject.name.StartsWith("Tree")) {
 			hasLeftTree = true;
-			if (incPropCoroutine != null)
-			{
+			if (incPropCoroutine != null) {
 				StopCoroutine(incPropCoroutine);
 				incPropCoroutine = null;
 			}
@@ -92,64 +92,50 @@ public class Collision : MonoBehaviour
 
 	}
 
-	public void OnTriggerEnter(Collider other)
-	{
-		if (other.CompareTag("FlowerHitZone"))
-		{
-			if (totalLoad < maxload)
-			{
-				if (random.Next(0, 2) == 0) { pollen++; }
-				else { nectar++; }
+	public void OnTriggerEnter(Collider other) {
+		if (other.CompareTag("FlowerHitZone")) {
+			if (totalLoad < maxload) {
+				if (random.Next(0, 2) == 0) { pollen++; } else { nectar++; }
 			}
 			calcTotalLoad();
 			UpdatePlayerText();
 			//Debug.Log("Drone collected pollen " + pollen);
-		}
-		else if (other.CompareTag("Nest"))
-		{
+		} else if (other.CompareTag("Nest")) {
 			hasLeftNest = false;
 			decreaseCoroutine ??= StartCoroutine(UnloadResources());
 		}
 	}
 
-	private void calcTotalLoad()
-	{
+	private void calcTotalLoad() {
 		totalLoad = pollen + nectar + propolis + water;
-    }
+	}
 
-	public void OnTriggerExit(Collider other)
-	{
-		if (other.CompareTag("Nest"))
-		{
+	public void OnTriggerExit(Collider other) {
+		if (other.CompareTag("Nest")) {
 			hasLeftNest = true;
-			if (decreaseCoroutine != null)
-			{
+			if (decreaseCoroutine != null) {
 				StopCoroutine(decreaseCoroutine);
 				decreaseCoroutine = null;
 			}
 		}
 	}
 
-	private void UpdatePlayerText()
-	{
-		if (tmpText != null)
-		{
-			tmpText.text = "" + pollen + "," + nectar + "," + propolis + "," + water;
-			if (totalLoad >= maxload)
-			{
-				//Debug.Log("Bamm Full");
-				tmpText.text += "\nMaxLoad";
+	private void UpdatePlayerText() {
+		if (isPlayer) {
+			if (tmpText != null) {
+				tmpText.text = "" + pollen + "," + nectar + "," + propolis + "," + water;
+				if (totalLoad >= maxload) {
+					//Debug.Log("Bamm Full");
+					tmpText.text += "\nMaxLoad";
+				}
 			}
 		}
 	}
 
-	IEnumerator CollectWaterOverTime()
-	{
+	IEnumerator CollectWaterOverTime() {
 		//Debug.Log("Increasing" + water);
-		while (totalLoad < maxload)
-		{
-			if (hasLeftWater)
-			{
+		while (totalLoad < maxload) {
+			if (hasLeftWater) {
 				hasLeftWater = false;
 				break;
 			}
@@ -162,13 +148,10 @@ public class Collision : MonoBehaviour
 		increaseCoroutine = null;
 	}
 
-	IEnumerator CollectPropolisOverTime()
-	{
+	IEnumerator CollectPropolisOverTime() {
 		//Debug.Log("Increasing" + water);
-		while (totalLoad < maxload)
-		{
-			if (hasLeftTree)
-			{
+		while (totalLoad < maxload) {
+			if (hasLeftTree) {
 				hasLeftTree = false;
 				break;
 			}
@@ -181,32 +164,25 @@ public class Collision : MonoBehaviour
 		increaseCoroutine = null;
 	}
 
-	IEnumerator UnloadResources()
-	{
-		while (pollen > 0 || nectar > 0 || propolis > 0 || water > 0)
-		{
-			if (hasLeftNest)
-			{
+	IEnumerator UnloadResources() {
+		while (pollen > 0 || nectar > 0 || propolis > 0 || water > 0) {
+			if (hasLeftNest) {
 				hasLeftNest = false;
 				break;
 			}
-			if (pollen > 0)
-			{
+			if (pollen > 0) {
 				pollen--;
 				Resources.pol++;
 			}
-			if (nectar > 0)
-			{
+			if (nectar > 0) {
 				nectar--;
 				Resources.nec++;
 			}
-			if (propolis > 0)
-			{
+			if (propolis > 0) {
 				propolis--;
 				Resources.pro++;
 			}
-			if (water > 0)
-			{
+			if (water > 0) {
 				water--;
 				Resources.wat++;
 			}
