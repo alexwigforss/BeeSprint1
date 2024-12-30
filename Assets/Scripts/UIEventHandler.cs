@@ -258,13 +258,11 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		Vector3 spawnPosition = nestLocation.position;
 		GameObject spawnedObject = Instantiate(bee, spawnPosition, Quaternion.identity);
 		int selectedSprite = selectedBeeGroup;
-		bool ng = false;
 		if (selectedBeeGroup >= 0 && selectedBeeGroup < drones.transform.childCount)
 		{
 			Transform groupTransform = drones.transform.GetChild(selectedBeeGroup);
 			spawnedObject.transform.SetParent(groupTransform);
 			spawnedObject.GetComponent<Beehave>().state = 3;
-			// spawnedObject.GetComponent<Beehave>().GetTargetFromSibling();
 		}
 		else
 		{
@@ -284,7 +282,6 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler
 		leftPanelRef.ReGetSprites();
 		Debug.Log("selectedSprite is: " + selectedSprite + "selectedBeeGroup is: " + selectedBeeGroup);
 		leftPanelRef.SetNewSpriteSelected(selectedSprite);
-		// spawnedObject.GetComponent<BeeSelection>().EnableSphere();
 	}
 
 	private void ShowSelectSpecies(int parentIndex)

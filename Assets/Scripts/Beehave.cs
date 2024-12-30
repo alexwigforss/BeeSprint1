@@ -16,16 +16,12 @@ public class Beehave : MonoBehaviour
 
 	AutoMove engine;
 	Realigner re;
-	bool closer = false;
-	bool selected = true;
 	public Transform HiveLocation;
 	Transform target;
 	//private float prioDist;
 	private float postDist;
 
 	bool aligned = false;
-	bool unloading = false;
-	private bool fwd = true;
 	public int state;
 	float timer = 0f;
 	float twosec = 0f;

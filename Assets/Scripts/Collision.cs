@@ -24,19 +24,6 @@ public class Collision : MonoBehaviour {
 	private Coroutine increaseCoroutine;
 	private Coroutine incPropCoroutine;
 
-	//void OnValidate() {
-	//	if (isPlayer) {
-	//		if (Application.isPlaying) {
-	//			try {
-	//				tmpText = GetComponentInChildren<Canvas>().GetComponentInChildren<TMP_Text>();
-	//				Debug.LogError("Found bee text");
-	//			} catch (Exception) {
-	//				Debug.LogError("No text on this bee");
-	//			}
-	//		}
-	//	}
-	//}
-
 	void Start() {
 		if (isPlayer) {
 			StartCoroutine(InitializeText());
@@ -47,7 +34,7 @@ public class Collision : MonoBehaviour {
 		yield return null; // Wait for the next frame
 		try {
 			tmpText = GetComponentInChildren<Canvas>().GetComponentInChildren<TMP_Text>();
-			Debug.LogError("Found bee text");
+			Debug.Log("Found bee text");
 		} catch (Exception) {
 			Debug.LogError("No text on this bee");
 		}
