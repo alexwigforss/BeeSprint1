@@ -29,7 +29,6 @@ World
     Nest
 GameManager [PlayerInput] [InputSystemController] [ClickHandler] [HideCursor] [CameraChooser]
 ResourceManager [Resources] [Hitzones]
-GuiManager
 FlowerSpawners
   SpawnLocation (1)
     FlowerSpawner [FlowerSpawner] [HighlightFlower]
@@ -45,9 +44,6 @@ EventSystem [EventSystem] [InputSystemUIInputModule]
 Drones
   BGroup [SelectiveMemory]
     Bee [Collision] [AutoMove] [Beehave] [Realigner] [BeeSelection]
-      Camera
-        Canvas [CanvasScaler] [GraphicRaycaster]
-          Text (TMP) [TextMeshProUGUI]
       beenat
         LWing
           RotationPoint [Flapper]
@@ -70,7 +66,7 @@ Drones
 MainGuiCanvas [CanvasScaler] [GraphicRaycaster] [UIEventHandler]
   TopPanel [Image]
     LayoutGroup [HorizontalLayoutGroup]
-      Text (TMP) [TextMeshProUGUI]
+      ResourceText (TMP) [TextMeshProUGUI]
       Image [Image]
       WorldStats [TextMeshProUGUI]
   LeftPanel [Image]

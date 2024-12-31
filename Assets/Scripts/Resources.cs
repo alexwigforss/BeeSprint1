@@ -11,14 +11,13 @@ public class Resources : MonoBehaviour {
 
 	[SerializeReference]
 	public TMP_Text resourceText;
-	// Start is called before the first frame update
+
 	void Start() {
 		resources = 0;
 		pol = 0; pro = 0; nec = 0; wat = 0;
 		prepol = 0; prepro = 0; prenec = 0; prewat = 0;
 	}
 
-	// Update is called once per frame
 	void Update() {
 		if (pol != prepol) {
 			prepol = pol;
@@ -44,7 +43,6 @@ public class Resources : MonoBehaviour {
 
 	private void UpdateResourceText() {
 		if (resourceText != null) {
-			// resourceText.text = "" + resources;
 			resourceText.text = "Po:" + pol + " Ne:" + nec + " Pr:" + pro + " Wa:" + wat;
 		} else {
 			Debug.LogError("TMP_Text component not found!");

@@ -24,8 +24,6 @@ public class FlowerSpawner : MonoBehaviour {
 	public TMP_Text statsText;
 	void Start() {
 		ID = getIdByName();
-		// Debug.Log("Flower Spawner id: " + ID + "has entered the scene");
-
 		Hitzones.HitPositions[ID] = new List<Transform> { };
 		spawnDest = motherDest;
 		globalradius = UnityEngine.Random.Range(0.5f, 2f);

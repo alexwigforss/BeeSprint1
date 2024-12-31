@@ -1,33 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SpikeCollision : MonoBehaviour
-{
+public class SpikeCollision : MonoBehaviour {
 	private FlowerSpawner parentScript;
 
-	void Start()
-	{
-		// Get the parent script component
+	void Start() {
 		parentScript = GetComponentInParent<FlowerSpawner>();
-
-		if (parentScript == null)
-		{
-			//Debug.LogError("flowerSpawner component not found in parent hierarchy.");
+		if (parentScript == null) {
+			Debug.LogError("flowerSpawner component not found in parent hierarchy.");
 		}
 	}
 
-	void OnTriggerEnter(Collider other)
-	{
-		// Debug.Log("Triggered Something");
-		if (parentScript != null)
-		{
+	void OnTriggerEnter(Collider other) {
+		if (parentScript != null) {
 			// Notify the parent about the trigger event
 			parentScript.OnChildTrigger();
-		}
-		else
-		{
-			//Debug.LogError("Cannot call OnChildTrigger because parentScript is null.");
+		} else {
+			Debug.LogError("Cannot call OnChildTrigger because parentScript is null.");
 		}
 	}
 }

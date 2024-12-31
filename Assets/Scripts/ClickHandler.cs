@@ -26,13 +26,11 @@ public class ClickHandler : MonoBehaviour
 	private void LeftMouseClicked()
 	{
 		DetectClickedObject();
-		// print("LeftMouseClicked");
 	}
 
 	private void RightMouseClicked()
 	{
 		DetectClickedObject();
-		// print("RightMouseClicked");
 	}
 
 	private void DetectClickedObject()
@@ -43,6 +41,7 @@ public class ClickHandler : MonoBehaviour
 		{
 			return;
 		}
+		// MFD
 
 		Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 		RaycastHit hit;

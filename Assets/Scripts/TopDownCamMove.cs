@@ -6,103 +6,64 @@ using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using UnityEngine.Windows;
 
-public class TopDownCamMove : MonoBehaviour
-{
+public class TopDownCamMove : MonoBehaviour {
 	Rigidbody rb;
 	Camera cam;
 	[SerializeField] float moveSpeed;
 	[SerializeField] float rotoSpeed;
 	Vector3 moveForce = Vector3.zero;
 	float rotoForce = 0.0f;
-
-	void Start()
-	{
+	void Start() {
 		cam = GetComponent<Camera>();
 		cam.transform.position = new Vector3(0, 45, 0);
 	}
-	private void Update()
-	{
-		if (cam != null)
-		{
-			// Apply movement
+	private void Update() {
+		if (cam != null) {
 			Vector3 worldMoveForce = cam.transform.TransformDirection(moveForce) * Time.deltaTime;
 			Vector3 worldRotateForce = new Vector3(0, 0, rotoForce) * Time.deltaTime;
-			// Debug.Log(worldMoveForce);
 			cam.transform.position += worldMoveForce;
 			cam.transform.Rotate(worldRotateForce);
 		}
 	}
-	public void HandleCamLeft(InputAction.CallbackContext context)
-	{
-		if (context.performed)
-		{
-			//Debug.Log("Left");
+	public void HandleCamLeft(InputAction.CallbackContext context) {
+		if (context.performed) {
 			moveForce.x = -moveSpeed;
-		}
-		else if (context.canceled) { moveForce.x = 0; }
+		} else if (context.canceled) { moveForce.x = 0; }
 
 	}
-	public void HandleCamRight(InputAction.CallbackContext context)
-	{
-		if (context.performed)
-		{
-			//Debug.Log("Right");
+	public void HandleCamRight(InputAction.CallbackContext context) {
+		if (context.performed) {
 			moveForce.x = moveSpeed;
-		}
-		else if (context.canceled) { moveForce.x = 0; }
+		} else if (context.canceled) { moveForce.x = 0; }
 	}
-	public void HandleCamUp(InputAction.CallbackContext context)
-	{
-		if (context.performed)
-		{
-			//Debug.Log("Up");
+	public void HandleCamUp(InputAction.CallbackContext context) {
+		if (context.performed) {
 			moveForce.y = moveSpeed;
-		}
-		else if (context.canceled) { moveForce.y = 0; }
+		} else if (context.canceled) { moveForce.y = 0; }
 	}
-	public void HandleCamDown(InputAction.CallbackContext context)
-	{
-		if (context.performed)
-		{
-			//Debug.Log("Down");
+	public void HandleCamDown(InputAction.CallbackContext context) {
+		if (context.performed) {
 			moveForce.y = -moveSpeed;
-		}
-		else if (context.canceled) { moveForce.y = 0; }
+		} else if (context.canceled) { moveForce.y = 0; }
 	}
-	public void HandleZoomIn(InputAction.CallbackContext context)
-	{
-		if (context.performed)
-		{
-			//Debug.Log("In");
+	public void HandleZoomIn(InputAction.CallbackContext context) {
+		if (context.performed) {
 			moveForce.z = moveSpeed;
-		}
-		else if (context.canceled) { moveForce.z = 0; }
+		} else if (context.canceled) { moveForce.z = 0; }
 	}
-	public void HandleZoomOut(InputAction.CallbackContext context)
-	{
-		if (context.performed)
-		{
-			//Debug.Log("Out");
+	public void HandleZoomOut(InputAction.CallbackContext context) {
+		if (context.performed) {
 			moveForce.z = -moveSpeed;
-		}
-		else if (context.canceled) { moveForce.z = 0; }
+		} else if (context.canceled) { moveForce.z = 0; }
 	}
-	public void HandleCamRotateCounterClock(InputAction.CallbackContext context)
-	{
-		if (context.performed)
-		{
-			//Debug.Log("CC");
+	public void HandleCamRotateCounterClock(InputAction.CallbackContext context) {
+		if (context.performed) {
 			rotoForce = -rotoSpeed;
-		}
-		else if (context.canceled) { rotoForce = 0; }
+		} else if (context.canceled) { rotoForce = 0; }
 	}
-	public void HandleCamRotateClockwise(InputAction.CallbackContext context)
-	{
-		if (context.performed)
-		{
-			//Debug.Log("CW");
+	public void HandleCamRotateClockwise(InputAction.CallbackContext context) {
+		if (context.performed) {
 			rotoForce = rotoSpeed;
-		}
-		else if (context.canceled) { rotoForce = 0; }
+		} else if (context.canceled) { rotoForce = 0; }
 	}
 }

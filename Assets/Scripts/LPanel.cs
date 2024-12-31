@@ -5,32 +5,25 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 
-public class LPanel : Menu
-{
+public class LPanel : Menu {
 	[SerializeField] Texture2D icon;
 	[SerializeField] Texture2D selecticon;
 	private List<GameObject> spriteObjects = new();
 
-	protected override List<Sprite> GetSprites()
-	{
+	protected override List<Sprite> GetSprites() {
 		List<Sprite> sprites = new();
 		TextMeshProUGUI tmp = new();
 		Texture2D texture = icon;
-		if (texture != null)
-		{
+		if (texture != null) {
 			Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-			foreach (Transform item in spawnersParent)
-			{
-				if (item != null)
-				{
-					if (item.name.Contains("Group"))
-					{
+			foreach (Transform item in spawnersParent) {
+				if (item != null) {
+					if (item.name.Contains("Group")) {
 						int noOfBeesInGroup = 0;
 						GameObject spriteObject = GetBeeIcon(sprite, item);
 						spriteObjects.Add(spriteObject); // Store the reference
 						tmp = GetIconText(spriteObject);
-						foreach (Transform subitem in item)
-						{
+						foreach (Transform subitem in item) {
 							noOfBeesInGroup++;
 						}
 						tmp.text = noOfBeesInGroup.ToString();
@@ -38,8 +31,7 @@ public class LPanel : Menu
 						RectTransform spriteRectTransform = spriteObject.GetComponent<RectTransform>();
 						RectTransform tmpRectTransform = tmp.GetComponent<RectTransform>();
 
-						if (spriteRectTransform != null && tmpRectTransform != null)
-						{
+						if (spriteRectTransform != null && tmpRectTransform != null) {
 							tmpRectTransform.sizeDelta = spriteRectTransform.sizeDelta;
 							tmpRectTransform.position = spriteRectTransform.position;
 						}
@@ -50,11 +42,9 @@ public class LPanel : Menu
 		return sprites;
 	}
 
-	public void ReGetSprites()
-	{
+	public void ReGetSprites() {
 		// Clear existing icons
-		foreach (Transform child in layoutGroup)
-		{
+		foreach (Transform child in layoutGroup) {
 			Destroy(child.gameObject);
 		}
 
@@ -63,16 +53,14 @@ public class LPanel : Menu
 
 		// Get new sprites and instantiate new icons
 		Sprites = GetSprites();
-		foreach (Sprite sprite in Sprites)
-		{
+		foreach (Sprite sprite in Sprites) {
 			GameObject newSprite = Instantiate(spritePrefab, layoutGroup);
 			newSprite.GetComponent<Image>().sprite = sprite;
 			spriteObjects.Add(newSprite); // Store the reference
 		}
 	}
 
-	private static TextMeshProUGUI GetIconText(GameObject spriteObject)
-	{
+	private static TextMeshProUGUI GetIconText(GameObject spriteObject) {
 		// Create a new GameObject for the TextMeshPro
 		GameObject textObject = new GameObject("TextMeshProObject");
 		textObject.layer = LayerMask.NameToLayer("Ignore Raycast");
@@ -86,8 +74,7 @@ public class LPanel : Menu
 		return tmp;
 	}
 
-	private GameObject GetBeeIcon(Sprite sprite, Transform item)
-	{
+	private GameObject GetBeeIcon(Sprite sprite, Transform item) {
 		// Create a new GameObject for the sprite
 		GameObject spriteObject = new GameObject("SpriteObject");
 		spriteObject.transform.SetParent(layoutGroup, false); // Set false to keep local scale and position
@@ -98,71 +85,49 @@ public class LPanel : Menu
 		return spriteObject;
 	}
 	int storedIndex = -1;
-	public void SetSpriteSelected(int index)
-	{
-		if (index >= 0 && index < spriteObjects.Count)
-		{
+	public void SetSpriteSelected(int index) {
+		if (index >= 0 && index < spriteObjects.Count) {
 			GameObject spriteObject = spriteObjects[index];
 			Image image = spriteObject.GetComponent<Image>();
-			if (image != null)
-			{
+			if (image != null) {
 				image.sprite = Sprite.Create(selecticon, new Rect(0, 0, selecticon.width, selecticon.height), new Vector2(0.5f, 0.5f));
-				if (storedIndex != index)
-				{
+				if (storedIndex != index) {
 					UnSetSpriteSelected(storedIndex);
 				}
 				storedIndex = index;
-			}
-			else
-			{
+			} else {
 				Debug.LogError("Image component not found on the GameObject.");
 			}
-		}
-		else
-		{
-				Debug.LogError("Index out of range.");
-		}
-	}
-	
-	public void SetNewSpriteSelected(int index)
-	{
-		if (index >= 0 && index < spriteObjects.Count)
-		{
-			GameObject spriteObject = spriteObjects[index];
-			Image image = spriteObject.GetComponent<Image>();
-			if (image != null)
-			{
-				image.sprite = Sprite.Create(selecticon, new Rect(0, 0, selecticon.width, selecticon.height), new Vector2(0.5f, 0.5f));
-				storedIndex = index;
-			}
-			else
-			{
-				Debug.LogError("Image component not found on the GameObject.");
-			}
-		}
-		else
-		{
+		} else {
 			Debug.LogError("Index out of range.");
 		}
 	}
 
-	public void UnSetSpriteSelected(int index)
-	{
-		if (index >= 0 && index < spriteObjects.Count)
-		{
+	public void SetNewSpriteSelected(int index) {
+		if (index >= 0 && index < spriteObjects.Count) {
 			GameObject spriteObject = spriteObjects[index];
 			Image image = spriteObject.GetComponent<Image>();
-			if (image != null)
-			{
-				image.sprite = Sprite.Create(icon, new Rect(0, 0, icon.width, icon.height), new Vector2(0.5f, 0.5f));
-			}
-			else
-			{
+			if (image != null) {
+				image.sprite = Sprite.Create(selecticon, new Rect(0, 0, selecticon.width, selecticon.height), new Vector2(0.5f, 0.5f));
+				storedIndex = index;
+			} else {
 				Debug.LogError("Image component not found on the GameObject.");
 			}
+		} else {
+			Debug.LogError("Index out of range.");
 		}
-		else
-		{
+	}
+
+	public void UnSetSpriteSelected(int index) {
+		if (index >= 0 && index < spriteObjects.Count) {
+			GameObject spriteObject = spriteObjects[index];
+			Image image = spriteObject.GetComponent<Image>();
+			if (image != null) {
+				image.sprite = Sprite.Create(icon, new Rect(0, 0, icon.width, icon.height), new Vector2(0.5f, 0.5f));
+			} else {
+				Debug.LogError("Image component not found on the GameObject.");
+			}
+		} else {
 			Debug.LogError("Index out of range.");
 		}
 	}
