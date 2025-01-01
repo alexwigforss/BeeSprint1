@@ -7,23 +7,17 @@ using UnityEngine.Animations;
 using static UnityEngine.GraphicsBuffer;
 
 public class Beehave : MonoBehaviour {
-	// [SerializeField]
 	Transform goal;
 	AutoMove engine;
 	Realigner re;
 	public Transform HiveLocation;
 	Transform target;
-	//private float prioDist;
 	private float postDist;
-
 	bool aligned = false;
 	public int state;
 	float timer = 0f;
 	float twosec = 0f;
 	int turndirection = 0;
-
-
-	int selectedSpecie = 0;
 	int goalItterator = 0;
 	List<Transform> internalHitList;
 

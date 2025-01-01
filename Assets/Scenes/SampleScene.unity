@@ -468,7 +468,6 @@ GameObject:
   m_Component:
   - component: {fileID: 174278550}
   - component: {fileID: 174278549}
-  - component: {fileID: 174278548}
   - component: {fileID: 174278551}
   - component: {fileID: 174278552}
   - component: {fileID: 174278553}
@@ -479,18 +478,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &174278548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 174278547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e153e988da1f3824a9e588595c8355d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &174278549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1716,6 +1703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3849f6fe4629e849a61410da05ecab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lodDistance: 50
 --- !u!23 &396529058
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3145,6 +3133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3849f6fe4629e849a61410da05ecab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lodDistance: 50
 --- !u!4 &1209021348 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 13e7e07f6f3e4a24c88f9ce813f77067, type: 3}

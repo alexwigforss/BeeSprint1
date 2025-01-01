@@ -22,27 +22,36 @@ public class FlowerSpawner : MonoBehaviour {
 
 	[SerializeReference]
 	public TMP_Text statsText;
+
+	/// <summary>
+	/// Initializes the FlowerSpawner, sets the ID, and starts the spawning coroutine.
+	/// </summary>
 	void Start() {
-		ID = getIdByName();
+		ID = GetIdByName();
 		Hitzones.HitPositions[ID] = new List<Transform> { };
 		spawnDest = motherDest;
 		globalradius = UnityEngine.Random.Range(0.5f, 2f);
 		StartCoroutine(Spawning());
 	}
 
-	private int getIdByName() {
-		{
-			string parentName = transform.parent.name; int r = 0;
-			// Use regular expression to find the number within parentheses
-			Match match = Regex.Match(parentName, @"\((\d+)\)");
-			if (match.Success) { r = int.Parse(match.Groups[1].Value); }
-			Debug.Log("Parent name is: " + parentName + " My number is: " + r);
-			return r;
-		}
+	/// <summary>
+	/// Gets the ID of the FlowerSpawner based on its parent's name.
+	/// </summary>
+	/// <returns>The ID extracted from the parent's name.</returns>
+	private int GetIdByName() {
+		string parentName = transform.parent.name;
+		int r = 0;
+		// Use regular expression to find the number within parentheses
+		Match match = Regex.Match(parentName, @"\((\d+)\)");
+		if (match.Success) { r = int.Parse(match.Groups[1].Value); }
+		Debug.Log("Parent name is: " + parentName + " My number is: " + r);
+		return r;
 	}
 
+	/// <summary>
+	/// Updates the FlowerSpawner, periodically starting the spawning coroutine.
+	/// </summary>
 	void Update() {
-		//Debug.Log(Time.frameCount);
 		if (Time.frameCount % betweenSpawnTimeMillis == 0 && childNoOfSeeds > 0) {
 			spawningbool = true;
 			StartCoroutine(Spawning());
@@ -50,6 +59,12 @@ public class FlowerSpawner : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Finds a child GameObject with the specified tag.
+	/// </summary>
+	/// <param name="parent">The parent Transform to search within.</param>
+	/// <param name="tag">The tag to search for.</param>
+	/// <returns>The child GameObject with the specified tag, or null if not found.</returns>
 	GameObject FindChildWithTag(Transform parent, string tag) {
 		foreach (Transform child in parent) {
 			if (child.CompareTag(tag)) {
@@ -63,27 +78,25 @@ public class FlowerSpawner : MonoBehaviour {
 		return null;
 	}
 
+	/// <summary>
+	/// Coroutine for spawning flowers at random positions within a specified radius.
+	/// </summary>
+	/// <returns>An IEnumerator for the coroutine.</returns>
 	IEnumerator Spawning() {
 		while (spawningbool) {
 			yield return new WaitForSeconds(spawnTime);
-			// Calculate a new random position for each spawn
-			float windX, windZ;
-			GetRandomInCircle(out windX, out windZ);
-			Vector3 spawnPosition = new Vector3(spawnDest.position.x + windX, spawnDest.position.y, spawnDest.position.z + windZ);
-
+			GetRandomInCircle(out float windX, out float windZ);
+			Vector3 spawnPosition = new(spawnDest.position.x + windX, spawnDest.position.y, spawnDest.position.z + windZ);
 			GameObject spawnedObject = Instantiate(flower, spawnPosition, spawnDest.rotation);
 			spawnedObject.transform.SetParent(transform);
 			spawnedObject.GetComponent<Growth>().radius = globalradius;
 			spawnedObject.GetComponent<Growth>().statsText = statsText;
 			spawnedObject.GetComponent<Growth>().spawnById = ID;
-
-			// Find the target GameObject by tag
 			GameObject targetObject = FindChildWithTag(spawnedObject.transform, targetTag);
 
 			if (targetObject != null) {
 				// Find the mesh renderer in the target GameObject
 				MeshRenderer meshRenderer = targetObject.GetComponent<MeshRenderer>();
-
 				if (meshRenderer != null) {
 					ApplyMaterial(meshRenderer);
 				} else {
@@ -92,15 +105,19 @@ public class FlowerSpawner : MonoBehaviour {
 			} else {
 				Debug.LogError("Target GameObject with the specified tag not found.");
 			}
-
 			spawningbool = false;
 		}
 	}
 
+	/// <summary>
+	/// Applies a material with the specified texture to the given MeshRenderer.
+	/// </summary>
+	/// <param name="meshRenderer">The MeshRenderer to apply the material to.</param>
 	private void ApplyMaterial(MeshRenderer meshRenderer) {
 		// Create a new material with the texture
-		Material newMaterial = new Material(Shader.Find("Standard"));
-		newMaterial.mainTexture = texture;
+		Material newMaterial = new(Shader.Find("Standard")) {
+			mainTexture = texture
+		};
 
 		// Set rendering mode to Cutout
 		newMaterial.SetFloat("_Mode", 1); // 1 corresponds to Cutout mode
@@ -119,12 +136,21 @@ public class FlowerSpawner : MonoBehaviour {
 		meshRenderer.material = newMaterial;
 	}
 
+	/// <summary>
+	/// Generates random coordinates within a circle.
+	/// </summary>
+	/// <param name="x">The x-coordinate of the random point.</param>
+	/// <param name="y">The y-coordinate of the random point.</param>
 	void GetRandomInCircle(out float x, out float y) {
 		float angle = UnityEngine.Random.Range(0.0f, (float)(Math.PI * 2));
 		float r = UnityEngine.Random.Range(minSpawndDist, maxSpawndDist * 2);
 		x = r * Mathf.Cos(angle);
 		y = r * Mathf.Sin(angle);
 	}
+
+	/// <summary>
+	/// Increases the number of seeds when a child object triggers an event.
+	/// </summary>
 	public void OnChildTrigger() {
 		childNoOfSeeds++;
 	}
