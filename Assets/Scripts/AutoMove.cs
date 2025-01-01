@@ -10,7 +10,7 @@ public class AutoMove : MonoBehaviour {
 	[SerializeField] float maxSpeed = 2.0f;
 	[SerializeField] float maxRotateSpeed;
 
-	float fwdspeed, strspeed, risespeed = 0.0f;
+	float fwdspeed, risespeed = 0.0f;
 	float maxMoveSpeed;
 
 	Vector3 moveForce = Vector3.zero;

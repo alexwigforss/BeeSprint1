@@ -1844,7 +1844,7 @@ MonoBehaviour:
   spritePrefab: {fileID: 3881935524205956972, guid: bf6414cc069ac454ebc001f193fd694f, type: 3}
   layoutGroup: {fileID: 437343280}
   spawnersParent: {fileID: 1697589992}
-  sprites: []
+  rPanelSprites: []
 --- !u!1 &484216477
 GameObject:
   m_ObjectHideFlags: 0
@@ -4117,49 +4117,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4923600576509896005, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5509418852479425712, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7087678266692831140, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
-      propertyPath: maxload
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324588201307299103, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 81
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324588201307299103, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -152
-      objectReference: {fileID: 0}
-    - target: {fileID: 8563512079671450372, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
-      propertyPath: goal
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8563512079671450372, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
       propertyPath: HiveLocation
       value: 
       objectReference: {fileID: 1593979350}
-    - target: {fileID: 8563512079671450372, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
-      propertyPath: goalCollider
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8563512079671450372, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
-      propertyPath: selectedSpecie
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8789816062651979064, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
       propertyPath: HiveLocation
       value: 
       objectReference: {fileID: 1593979350}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 5073918838095259921, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 740ba95ab4368c64189bc901e59b410b, type: 3}
