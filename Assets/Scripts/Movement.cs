@@ -15,14 +15,14 @@ public class Movement : MonoBehaviour {
 	float maxSpeed = 50.0f;
 	Vector3 moveForce = Vector3.zero;
 	Vector3 rotateForce = Vector3.zero;
-	Boolean accelerate = false;
-	Boolean reverse = false;
-	Boolean ascend = false;
-	Boolean descend = false;
-	Boolean strleft = false;
-	Boolean strright = false;
-	Boolean strfleft = false;
-	Boolean strfright = false;
+	bool accelerate = false;
+	bool reverse = false;
+	bool ascend = false;
+	bool descend = false;
+	bool strleft = false;
+	bool strright = false;
+	bool strfleft = false;
+	bool strfright = false;
 
 	void Start() {
 		rb = GetComponent<Rigidbody>();

@@ -19,12 +19,14 @@ public class AutoMove : MonoBehaviour {
 	bool reverse = false;
 	bool ascend = false;
 	bool descend = false;
+
 	void Start() {
 		rb = GetComponent<Rigidbody>();
 		// rb.transform.position = HiveLocation.position;
 		maxMoveSpeed = moveSpeed * 20;
 		maxRotateSpeed = rotateSpeed * 10;
 	}
+
 	private void Update() {
 		if (rb != null) {
 			// Apply movement
@@ -125,7 +127,7 @@ public class AutoMove : MonoBehaviour {
 	public void TurnTowards(Transform goal) {
 		rb.transform.LookAt(goal);
 	}
-	public void rotateTowards(Vector3 to, float turn_speed = 2.0f) {
+	public void RotateTowards(Vector3 to, float turn_speed = 2.0f) {
 		Quaternion _lookRotation =
 			Quaternion.LookRotation((to - transform.position).normalized);
 		transform.rotation =

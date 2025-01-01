@@ -260,17 +260,18 @@ public class Beehave : MonoBehaviour
 	private void MoveTowards(Transform t)
 	{
 		postDist = Vector3.Distance(transform.position, t.position);
-		engine.rotateTowards(t.position);
+		engine.RotateTowards(t.position);
 		engine.MoveForward(true);
-		engine.rotateTowards(t.position);
+		// To avoid orbiting around the target we perform one extra rotation
+		engine.RotateTowards(t.position);
 		if (postDist < 0.9)
 		{
-			engine.rotateTowards(t.position * 8);
+			engine.RotateTowards(t.position * 8);
 			// Check if the zone is still in list
 			// To avoid chasing dead targets
 			if (!Hitzones.Contain(t))
 			{
-				// Debug.Log("Trying to reach dead hitzone");
+				Debug.LogWarning("Trying to reach dead hitzone");
 				getGoalLists();
 				getNextGoal();
 			}
