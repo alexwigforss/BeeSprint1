@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HighlightFlower : MonoBehaviour
-{
+public class HighlightFlower : MonoBehaviour {
 	public bool selected = false;
 	[SerializeField]
 	Material normalbasemat;
@@ -11,22 +10,17 @@ public class HighlightFlower : MonoBehaviour
 	Material highlightbasemat;
 
 	// Method to highlight the selected flower
-	public bool HighlightSelected()
-	{
-		if (selected)
-		{
+	public bool HighlightSelected() {
+		if (selected) {
 			UnlightSelected();
 			return false;
 		}
 		selected = true;
-		foreach (Transform flower in transform)
-		{
+		foreach (Transform flower in transform) {
 			Transform grass = flower.Find("Grass");
-			if (grass != null)
-			{
+			if (grass != null) {
 				Renderer grassRenderer = grass.GetComponent<Renderer>();
-				if (grassRenderer != null)
-				{
+				if (grassRenderer != null) {
 					grassRenderer.material = highlightbasemat;
 				}
 			}
@@ -35,17 +29,13 @@ public class HighlightFlower : MonoBehaviour
 	}
 
 	// Method to unhighlight the selected flower
-	public void UnlightSelected()
-	{
+	public void UnlightSelected() {
 		selected = false;
-		foreach (Transform flower in transform)
-		{
+		foreach (Transform flower in transform) {
 			Transform grass = flower.Find("Grass");
-			if (grass != null)
-			{
+			if (grass != null) {
 				Renderer grassRenderer = grass.GetComponent<Renderer>();
-				if (grassRenderer != null)
-				{
+				if (grassRenderer != null) {
 					grassRenderer.material = normalbasemat;
 				}
 			}

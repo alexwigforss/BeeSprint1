@@ -1,15 +1,10 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
-using UnityEngine.Windows;
 
-public class CameraChooser : MonoBehaviour
-{
-    [SerializeField]
-    Camera TopDownCamera;
+public class CameraChooser : MonoBehaviour {
+	[SerializeField]
+	Camera TopDownCamera;
 	[SerializeField]
 	AudioListener tdAudioListener;
 	[SerializeField]
@@ -17,34 +12,22 @@ public class CameraChooser : MonoBehaviour
 	[SerializeField]
 	AudioListener tbAudioListener;
 	public PlayerInput playerInput;
-
-	Transform toptrans;
-	Transform beetrans;
-
 	bool manageMode;
-
 	bool canSwitch = true;
 	float switchCooldown = 0.5f; // Cooldown time in seconds
 
-	void Start()
-    {
+	void Start() {
 		manageMode = false;
 		Debug.Log("Camera choose started");
-		toptrans = TopDownCamera.transform;
-		beetrans = ThirdBeePerspectiveCamera.transform;
-
-		if (playerInput == null)
-		{
+		if (playerInput == null) {
 			playerInput = GetComponent<PlayerInput>();
 		}
 		playerInput.SwitchCurrentActionMap("InGameBeePov");
 
 	}
 
-	public void HandleTabPressed(InputAction.CallbackContext context)
-	{
-		if (context.started && canSwitch)
-		{
+	public void HandleTabPressed(InputAction.CallbackContext context) {
+		if (context.started && canSwitch) {
 			manageMode = !manageMode;
 			ChangeCamera();
 			StartCoroutine(SwitchCooldown());
@@ -64,26 +47,24 @@ public class CameraChooser : MonoBehaviour
 			playerInput.SwitchCurrentActionMap("GuiButtons");
 			return;
 		}
-		tdAudioListener.enabled=true;
+		tdAudioListener.enabled = true;
 		ThirdBeePerspectiveCamera.enabled = true;
 		ThirdBeePerspectiveCamera.tag = "MainCamera";
 
 		TopDownCamera.enabled = false;
 		TopDownCamera.tag = "Untagged";
-		tbAudioListener.enabled=false;
+		tbAudioListener.enabled = false;
 
 		playerInput.SwitchCurrentActionMap("InGameBeePov");
 	}
 
-	private IEnumerator SwitchCooldown()
-	{
+	private IEnumerator SwitchCooldown() {
 		canSwitch = false;
 		yield return new WaitForSeconds(switchCooldown);
 		canSwitch = true;
 	}
 
-	public void SwitchToActionMap(string actionMapName)
-	{
+	public void SwitchToActionMap(string actionMapName) {
 		playerInput.SwitchCurrentActionMap(actionMapName);
 	}
 }
