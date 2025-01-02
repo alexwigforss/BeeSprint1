@@ -18,6 +18,7 @@ public class FlowerSpawner : MonoBehaviour {
 	public float minSpawndDist = 1.0f;
 	public float maxSpawndDist = 2.0f;
 	public string targetTag = "Spike";
+	[HideInInspector]
 	public int ID = 0;
 
 	[SerializeReference]

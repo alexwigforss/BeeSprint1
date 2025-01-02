@@ -12,7 +12,6 @@ public class LPanel : Menu {
 
 	protected override List<Sprite> GetSprites() {
 		List<Sprite> sprites = new();
-		TextMeshProUGUI tmp = new();
 		Texture2D texture = icon;
 		if (texture != null) {
 			Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
@@ -22,7 +21,7 @@ public class LPanel : Menu {
 						int noOfBeesInGroup = 0;
 						GameObject spriteObject = GetBeeIcon(sprite, item);
 						spriteObjects.Add(spriteObject); // Store the reference
-						tmp = GetIconText(spriteObject);
+						TextMeshProUGUI tmp = GetIconText(spriteObject);
 						foreach (Transform subitem in item) {
 							noOfBeesInGroup++;
 						}
@@ -84,6 +83,7 @@ public class LPanel : Menu {
 		image.sprite = sprite;
 		return spriteObject;
 	}
+
 	int storedIndex = -1;
 	public void SetSpriteSelected(int index) {
 		if (index >= 0 && index < spriteObjects.Count) {

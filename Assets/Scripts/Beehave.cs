@@ -200,7 +200,9 @@ public class Beehave : MonoBehaviour {
 			getGoalLists();
 			getNextRandomGoal();
 		}
-		target = goal.transform;
+		if (goal != null) {
+			target = goal.transform;
+		}
 	}
 
 	private void MoveTowards(Transform t) {
