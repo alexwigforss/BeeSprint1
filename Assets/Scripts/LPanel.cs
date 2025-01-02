@@ -114,7 +114,7 @@ public class LPanel : Menu {
 				Debug.LogError("Image component not found on the GameObject.");
 			}
 		} else {
-			Debug.LogError("Index out of range.");
+			Debug.LogWarning("Index out of range on SetNewSpriteSelected.");
 		}
 	}
 
@@ -128,7 +128,7 @@ public class LPanel : Menu {
 				Debug.LogError("Image component not found on the GameObject.");
 			}
 		} else {
-			Debug.LogError("Index out of range.");
+			Debug.LogWarning("Index out of range on UnSetSpriteSelected.");
 		}
 	}
 }
