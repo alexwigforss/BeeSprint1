@@ -4,16 +4,25 @@ public class Flapper : MonoBehaviour {
 	private bool upwards = false;
 	private int noOfSteps = 3;
 	private int step;
-	private Transform mainCamera;
+	private Transform mainCameraTransform;
 	[SerializeField] private float lodDistance = 20.0f;
 
 	private void Start() {
 		step = noOfSteps;
-		mainCamera = Camera.main.transform;
+		mainCameraTransform = Camera.main.transform;
 	}
 
 	void Update() {
-		if (Vector3.Distance(transform.position, mainCamera.position) > lodDistance) {
+		// Check if the main camera has changed
+		if (Camera.main != null && mainCameraTransform != Camera.main.transform) {
+			mainCameraTransform = Camera.main.transform;
+		}
+
+		if (mainCameraTransform == null) {
+			return; // No main camera found
+		}
+
+		if (Vector3.Distance(transform.position, mainCameraTransform.position) > lodDistance) {
 			return;
 		}
 
