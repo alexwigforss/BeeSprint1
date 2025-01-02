@@ -14,7 +14,7 @@ public class TopDownCamMove : MonoBehaviour {
 
 	void Start() {
 		// Set the initial position of the parent GameObject
-		transform.parent.position = new Vector3(0, 45, 0);
+		// transform.parent.position = new Vector3(0, 45, -2.5f);
 	}
 
 	private void Update() {
