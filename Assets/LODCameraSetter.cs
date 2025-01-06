@@ -5,11 +5,11 @@ public class LODCameraSetter : MonoBehaviour {
     private LODGroup lodGroup;
 
     void Awake() {
-        Debug.Log("LODCameraSetter Awake");
+        // Debug.Log("LODCameraSetter Awake");
     }
 
     void Start() {
-        Debug.Log("LODCameraSetter Start");
+        // Debug.Log("LODCameraSetter Start");
         Initialize();
     }
 
