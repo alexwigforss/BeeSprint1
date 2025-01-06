@@ -635,7 +635,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 152884162}
         m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: HandleStrifeLeft
+        m_MethodName: HandleStrafeLeft
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -651,7 +651,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 152884162}
         m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: HandleStrifeRight
+        m_MethodName: HandleStrafeRight
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

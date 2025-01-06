@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Xml;
 using System;
 
 public class Collision : MonoBehaviour {
@@ -40,11 +38,6 @@ public class Collision : MonoBehaviour {
 		}
 	}
 
-
-	// Update is called once per frame
-	void Update() {
-
-	}
 	public void OnCollisionEnter(UnityEngine.Collision collision) {
 		if (collision.gameObject.name.Equals("World")) {
 			transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Flapper>().enabled = false;
@@ -84,7 +77,7 @@ public class Collision : MonoBehaviour {
 			if (totalLoad < maxload) {
 				if (random.Next(0, 2) == 0) { pollen++; } else { nectar++; }
 			}
-			calcTotalLoad();
+			CalcTotalLoad();
 			UpdatePlayerText();
 			//Debug.Log("Drone collected pollen " + pollen);
 		} else if (other.CompareTag("Nest")) {
@@ -93,7 +86,7 @@ public class Collision : MonoBehaviour {
 		}
 	}
 
-	private void calcTotalLoad() {
+	private void CalcTotalLoad() {
 		totalLoad = pollen + nectar + propolis + water;
 	}
 
@@ -127,7 +120,7 @@ public class Collision : MonoBehaviour {
 				break;
 			}
 			water++;
-			calcTotalLoad();
+			CalcTotalLoad();
 			UpdatePlayerText();
 			//Debug.Log("Post Increasing" + water);
 			yield return new WaitForSeconds(loadspeed);
@@ -143,7 +136,7 @@ public class Collision : MonoBehaviour {
 				break;
 			}
 			propolis++;
-			calcTotalLoad();
+			CalcTotalLoad();
 			UpdatePlayerText();
 			//Debug.Log("Post Increasing" + water);
 			yield return new WaitForSeconds(loadspeed);
@@ -173,7 +166,7 @@ public class Collision : MonoBehaviour {
 				water--;
 				Resources.wat++;
 			}
-			calcTotalLoad();
+			CalcTotalLoad();
 			UpdatePlayerText();
 			yield return new WaitForSeconds(loadspeed);
 		}

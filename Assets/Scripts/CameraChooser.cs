@@ -14,7 +14,6 @@ public class CameraChooser : MonoBehaviour {
 	public PlayerInput playerInput;
 	bool manageMode;
 	bool canSwitch = true;
-	float switchCooldown = 0.5f; // Cooldown time in seconds
 
 	void Start() {
 		manageMode = false;
@@ -60,7 +59,7 @@ public class CameraChooser : MonoBehaviour {
 
 	private IEnumerator SwitchCooldown() {
 		canSwitch = false;
-		yield return new WaitForSeconds(switchCooldown);
+		yield return new WaitForSeconds(0.0f);
 		canSwitch = true;
 	}
 
