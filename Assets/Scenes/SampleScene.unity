@@ -207,7 +207,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
+  m_fontSize: 27.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1272,11 +1272,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: childNoOfSeeds
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: betweenSpawnTimeMillis
-      value: 500
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1468,11 +1468,11 @@ PrefabInstance:
       objectReference: {fileID: 1493363844}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: childNoOfSeeds
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: betweenSpawnTimeMillis
-      value: 500
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2568,11 +2568,11 @@ PrefabInstance:
       objectReference: {fileID: 1493363844}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: childNoOfSeeds
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: betweenSpawnTimeMillis
-      value: 500
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3752,11 +3752,11 @@ PrefabInstance:
       objectReference: {fileID: 1493363844}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: childNoOfSeeds
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: betweenSpawnTimeMillis
-      value: 500
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3905,11 +3905,11 @@ PrefabInstance:
       objectReference: {fileID: 1493363844}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: childNoOfSeeds
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3298178625851695287, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: betweenSpawnTimeMillis
-      value: 500
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 3977948723118590307, guid: 71274ea2b9bfbcb4597b819447fd62bf, type: 3}
       propertyPath: m_LocalPosition.x
