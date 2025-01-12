@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class ClickHandler : MonoBehaviour {
-	int selectedFlowerSpecie = -1;
+	private int selectedFlowerSpecie = -1;
 	public enum Layer { Default = 0, TransparentFX = 1, IgnoreRaycast = 2, Water = 4, UI = 5, Clickable = 6 }
 	private InputAction leftMouseClick, rightMouseClick;
 

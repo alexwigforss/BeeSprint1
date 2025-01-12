@@ -8,6 +8,7 @@ public class Flapper : MonoBehaviour {
 	[SerializeField] private float lodDistance = 20.0f;
 
 	private void Start() {
+		//Debug.Log("Flapper Start");
 		step = noOfSteps;
 		mainCameraTransform = Camera.main.transform;
 	}
