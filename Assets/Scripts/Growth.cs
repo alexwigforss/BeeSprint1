@@ -40,6 +40,7 @@ public class Growth : MonoBehaviour {
 	}
 
 	void Update() {
+
 		if (phase == 0) {
 			OvaryColide.enabled = false;
 			if (transform.localScale.x < 1f) {
@@ -74,6 +75,7 @@ public class Growth : MonoBehaviour {
 				Destroy(gameObject);
 			}
 		}
+
 	}
 
 	private void InitWilt() {
