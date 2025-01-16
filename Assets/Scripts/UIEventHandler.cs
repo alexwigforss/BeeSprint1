@@ -39,8 +39,7 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler {
 		Transform trans = drones.transform.GetChild(index);
 		GameObject go = trans.gameObject;
 
-		ISelectiveMemory memory = go.GetComponent<ISelectiveMemory>();
-		if (memory != null) {
+		if (go.TryGetComponent<ISelectiveMemory>(out var memory)) {
 			return memory;
 		} else {
 			Debug.Log("SelectiveMemory not found");
