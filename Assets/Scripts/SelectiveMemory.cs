@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SelectiveMemory : MonoBehaviour {
-	// Chosed HashSet to avoid duplicate values
-	// public List<int> memory = new List<int>();
+public class SelectiveMemory : MonoBehaviour, ISelectiveMemory {
 	private HashSet<int> memory;
 
 	private void Awake() {
@@ -23,11 +21,14 @@ public class SelectiveMemory : MonoBehaviour {
 	public bool ContainsSpecie(int value) {
 		return memory.Contains(value);
 	}
+
 	public int[] GetSpecies() {
 		return memory.ToArray();
 	}
+
 	public void PrintSpecies() {
-		string result = string.Join(", ", memory);
-		Debug.Log(result);
+		foreach (var specie in memory) {
+			Debug.Log(specie);
+		}
 	}
 }
