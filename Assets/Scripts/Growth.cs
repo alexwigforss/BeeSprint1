@@ -17,7 +17,7 @@ public class Growth : MonoBehaviour {
 	public string targetTag = "Spike";
 	GameObject targetObject;
 	new Renderer renderer;
-	private int phase = 0;
+	private int state = 0;
 	private Vector3 scaleChange;
 	public float radius;
 	public bool imortal = false;
@@ -40,36 +40,39 @@ public class Growth : MonoBehaviour {
 	}
 
 	void Update() {
-		if (phase == 0) {
+		StateOfGrowth();
+	}
+
+	private void StateOfGrowth() {
+		if (state == 0) {
 			OvaryColide.enabled = false;
 			if (transform.localScale.x < 1f) {
-				transform.localScale += scaleChange * 5 * Time.deltaTime;
+				transform.localScale += 5 * Time.deltaTime * scaleChange;
 			} else {
-				phase++;
+				state++;
 			}
-		} else if (phase == 1) {
+		} else if (state == 1) {
 			if (hitzone.activeSelf == false) {
 				hitzone.SetActive(true);
 				Hitzones.HitPositions[spawnById].Add(hitzone.transform);
 				statsText.text = Hitzones.PtrintHitListCount().ToString();
 			}
-
 			OvaryColide.enabled = true;
 			if (petalTrans.localScale.x < 1f) {
-				petalTrans.localScale += scaleChange * 2 * Time.deltaTime;
+				petalTrans.localScale += 2 * Time.deltaTime * scaleChange;
 			} else {
-				phase++;
+				state++;
 			}
 		}
 		if (imortal) {
 			return;
-		} else if (phase == 2 && !wilt) {
+		} else if (state == 2 && !wilt) {
 			InitWilt();
 			wilt = true;
-		} else if (phase == 2) {
+		} else if (state == 2) {
 			OvaryColide.enabled = false;
 			if (transform.localScale.x > 0f) {
-				transform.localScale -= scaleChange * 5 * Time.deltaTime;
+				transform.localScale -= 5 * Time.deltaTime * scaleChange;
 			} else {
 				Destroy(gameObject);
 			}

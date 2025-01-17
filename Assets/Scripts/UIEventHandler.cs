@@ -28,18 +28,18 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler {
 					}
 				}
 			} else {
-				// TODO is unselected so remove its id from chossen Bgrup if there is one.
 				Debug.Log("HighlightFlower component not found on grandchild.");
 			}
-		} else { Debug.Log("Spawner with ID not found."); }
+		} else {
+			Debug.Log("Spawner with ID not found.");
+		}
 	}
 
-	SelectiveMemory GetBeeMemory(int index) {
+	ISelectiveMemory GetBeeMemory(int index) {
 		Transform trans = drones.transform.GetChild(index);
 		GameObject go = trans.gameObject;
 
-		SelectiveMemory memory = go.GetComponent<SelectiveMemory>();
-		if (memory != null) {
+		if (go.TryGetComponent<ISelectiveMemory>(out var memory)) {
 			return memory;
 		} else {
 			Debug.Log("SelectiveMemory not found");
@@ -53,8 +53,12 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler {
 			leftPanelRef = grandchildTransform.GetComponent<LPanel>();
 			if (leftPanelRef != null) {
 				Debug.Log("LPanel component found on grandchild.");
-			} else { Debug.Log("LPanel component not found on grandchild."); }
-		} else { Debug.Log("Grandchild not found."); }
+			} else {
+				Debug.Log("LPanel component not found on grandchild.");
+			}
+		} else {
+			Debug.Log("Grandchild not found.");
+		}
 	}
 
 	void HighlightSprite(Image image) {
@@ -103,79 +107,41 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler {
 		}
 	}
 
-
 	public void OnPointerClick(PointerEventData eventData) {
 		GameObject clickedObject = eventData.pointerCurrentRaycast.gameObject;
 		Debug.Log("UI Element Clicked: " + clickedObject.name);
 
-		// If click was on image
 		if (clickedObject.TryGetComponent<Image>(out var clickedImage)) {
-			if (clickedImage.tag == "Icon") {
-				Debug.Log("Icon CLICKED");
-				SpawnBee();
-				EnableSpheres(selectedBeeGroup);
-				leftPanelRef.SetSpriteSelected(selectedBeeGroup);
-			} else if (selectedBeeGroup >= 0) {
-				Sprite clickedSprite = clickedImage.sprite;
-				Debug.Log("Clicked Sprite: " + clickedSprite.name + ", " + clickedSprite.texture.ToString());
-				Transform matchingChild = FindChildWithMatchingTexture(flowerSpawners.transform, clickedSprite.texture);
-				if (matchingChild != null) {
-					Debug.Log("Found matching child: " + matchingChild.name);
-					HighlightFlowerBase(matchingChild);
-					HighlightSprite(clickedImage);
-				} else {
-					Debug.Log("No matching child found.");
-				}
+			HandleImageClick(clickedImage);
+		} else if (clickedObject.GetComponent<TextMeshProUGUI>()) {
+			HandleTextClick(clickedObject);
+		}
+	}
+
+	private void HandleImageClick(Image clickedImage) {
+		if (clickedImage.tag == "Icon") {
+			Debug.Log("Icon CLICKED");
+			SpawnBee();
+			EnableSpheres(selectedBeeGroup);
+			leftPanelRef.SetSpriteSelected(selectedBeeGroup);
+		} else if (selectedBeeGroup >= 0) {
+			Sprite clickedSprite = clickedImage.sprite;
+			Debug.Log("Clicked Sprite: " + clickedSprite.name + ", " + clickedSprite.texture.ToString());
+			Transform matchingChild = FindChildWithMatchingTexture(flowerSpawners.transform, clickedSprite.texture);
+			if (matchingChild != null) {
+				Debug.Log("Found matching child: " + matchingChild.name);
+				HighlightFlowerBase(matchingChild);
+				HighlightSprite(clickedImage);
+			} else {
+				Debug.Log("No matching child found.");
 			}
 		}
+	}
 
-		// Else click was on TMP or panel ()
-		else if (clickedObject.GetComponent<TextMeshProUGUI>()) {
-			Debug.Log("BAM Bee tmp clicked");
-			GetSelectedBeeByTMPChild(clickedObject);
-			UnHighlightAllImages();
-		}
-
-		void GetSelectedBeeByTMPChild(GameObject clickedObject) {
-			// Get the parent of the clicked object
-			Transform parentTransform = clickedObject.transform.parent;
-			if (parentTransform != null) {
-				// Get the grandparent of the clicked object
-				Transform grandparentTransform = parentTransform.parent;
-				if (grandparentTransform != null) {
-					// Get the index of the parent under the grandparent
-					int parentIndex = parentTransform.GetSiblingIndex();
-					int prioSelected = selectedBeeGroup;
-					//From none to one selected
-					if (selectedBeeGroup < 0) {
-						selectedBeeGroup = parentIndex;
-						EnableSpheres(parentIndex);
-						ShowSelectSpecies(parentIndex);
-						leftPanelRef.SetSpriteSelected(parentIndex);
-					}
-					// None selected
-					else if (selectedBeeGroup == parentIndex) {
-						leftPanelRef.UnSetSpriteSelected(selectedBeeGroup);
-						DisableSpheres(selectedBeeGroup);
-						UnselectAllSpecies();
-						selectedBeeGroup = -1;
-					}
-					// Another selected
-					else if (selectedBeeGroup != parentIndex) {
-						selectedBeeGroup = parentIndex;
-						// Unselect previous
-						leftPanelRef.UnSetSpriteSelected(prioSelected);
-						DisableSpheres(prioSelected);
-						UnselectAllSpecies();
-						// Select current
-						ShowSelectSpecies(parentIndex);
-						EnableSpheres(parentIndex);
-						leftPanelRef.SetSpriteSelected(selectedBeeGroup);
-					} else { Debug.Log("This shloud not happen"); }
-					Debug.Log("Parent's index under the grandparent: " + selectedBeeGroup);
-				} else { Debug.Log("Grandparent not found."); }
-			} else { Debug.Log("Parent not found."); }
-		}
+	private void HandleTextClick(GameObject clickedObject) {
+		Debug.Log("BAM Bee tmp clicked");
+		GetSelectedBeeByTMPChild(clickedObject);
+		UnHighlightAllImages();
 	}
 
 	void SpawnBee() {
@@ -204,7 +170,6 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler {
 	}
 
 	private void ShowSelectSpecies(int parentIndex) {
-
 		foreach (Transform spawner in flowerSpawners.transform) {
 			foreach (Transform flower in spawner) {
 				HighlightFlower hlf = flower.GetComponent<HighlightFlower>();
@@ -213,7 +178,9 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler {
 					if (GetBeeMemory(selectedBeeGroup).ContainsSpecie(fs.ID)) {
 						hlf.HighlightSelected();
 					}
-				} else { Debug.LogWarning("MyScript component not found on " + flower.name); }
+				} else {
+					Debug.LogWarning("MyScript component not found on " + flower.name);
+				}
 			}
 		}
 	}
@@ -221,14 +188,14 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler {
 	private void UnselectAllSpecies() {
 		foreach (Transform spawner in flowerSpawners.transform) {
 			foreach (Transform flower in spawner) {
-				// Get the script component on the child
 				HighlightFlower hlf = flower.GetComponent<HighlightFlower>();
 				if (hlf != null) {
-					// Set the variable on the script
 					if (hlf.selected == true) {
 						hlf.HighlightSelected();
 					}
-				} else { Debug.LogWarning("MyScript component not found on " + flower.name); }
+				} else {
+					Debug.LogWarning("MyScript component not found on " + flower.name);
+				}
 			}
 		}
 	}
@@ -237,7 +204,9 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler {
 		Transform group = drones.transform.GetChild(parentIndex);
 		foreach (Transform drone in group) {
 			BeeSelection bs = drone.GetComponent<BeeSelection>();
-			if (bs != null) { bs.EnableSphere(); }
+			if (bs != null) {
+				bs.EnableSphere();
+			}
 		}
 		Debug.Log("Spheres enabled at index: " + parentIndex);
 	}
@@ -246,7 +215,9 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler {
 		Transform group = drones.transform.GetChild(parentIndex);
 		foreach (Transform drone in group) {
 			BeeSelection bs = drone.GetComponent<BeeSelection>();
-			if (bs != null) { bs.DisableSphere(); }
+			if (bs != null) {
+				bs.DisableSphere();
+			}
 		}
 	}
 
@@ -263,6 +234,43 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler {
 			}
 		}
 		return null;
+	}
+
+	private void GetSelectedBeeByTMPChild(GameObject clickedObject) {
+		Transform parentTransform = clickedObject.transform.parent;
+		if (parentTransform != null) {
+			Transform grandparentTransform = parentTransform.parent;
+			if (grandparentTransform != null) {
+				int parentIndex = parentTransform.GetSiblingIndex();
+				int prioSelected = selectedBeeGroup;
+				if (selectedBeeGroup < 0) {
+					selectedBeeGroup = parentIndex;
+					EnableSpheres(parentIndex);
+					ShowSelectSpecies(parentIndex);
+					leftPanelRef.SetSpriteSelected(parentIndex);
+				} else if (selectedBeeGroup == parentIndex) {
+					leftPanelRef.UnSetSpriteSelected(selectedBeeGroup);
+					DisableSpheres(selectedBeeGroup);
+					UnselectAllSpecies();
+					selectedBeeGroup = -1;
+				} else if (selectedBeeGroup != parentIndex) {
+					selectedBeeGroup = parentIndex;
+					leftPanelRef.UnSetSpriteSelected(prioSelected);
+					DisableSpheres(prioSelected);
+					UnselectAllSpecies();
+					ShowSelectSpecies(parentIndex);
+					EnableSpheres(parentIndex);
+					leftPanelRef.SetSpriteSelected(selectedBeeGroup);
+				} else {
+					Debug.Log("This should not happen");
+				}
+				Debug.Log("Parent's index under the grandparent: " + selectedBeeGroup);
+			} else {
+				Debug.Log("Grandparent not found.");
+			}
+		} else {
+			Debug.Log("Parent not found.");
+		}
 	}
 }
 
