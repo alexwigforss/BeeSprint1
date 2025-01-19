@@ -1,49 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BeeSelection : MonoBehaviour
-{
+/// <summary>
+/// The BeeSelection class is responsible for managing the selection sphere of a NPC bee in the game.
+/// The selection sphere is a transparent sphere used to indicate the selected bees in the game.
+/// </summary>
+public class BeeSelection : MonoBehaviour {
 	[SerializeField] GameObject ssphere;
 
-	void Start()
-	{
-		if (ssphere != null)
-		{
-			ssphere.SetActive(false);
-		}
-		else
-		{
-			Debug.LogWarning("ssphere is not assigned.");
-		}
-	}
-
-	/// <summary>
-	/// Returns False if already active
-	/// </summary>
-	/// <returns></returns>
-	public void EnableSphere()
-	{
-		if (ssphere != null)
-		{
+	public void EnableSphere() {
+		if (ssphere != null) {
 			ssphere.SetActive(true);
-			// Debug.Log("ssphere has been enabled.");
-		}
-		else
-		{
+		} else {
 			Debug.LogWarning("ssphere is not assigned in the Inspector.");
 		}
 	}
 
-	public void DisableSphere()
-	{
-		if (ssphere != null)
-		{
+	public void DisableSphere() {
+		if (ssphere != null) {
 			ssphere.SetActive(false);
-			// Debug.Log("ssphere has been disabled.");
-		}
-		else
-		{
+		} else {
 			Debug.LogWarning("ssphere is not assigned in the Inspector.");
 		}
 	}

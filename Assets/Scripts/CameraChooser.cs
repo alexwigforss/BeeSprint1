@@ -2,6 +2,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// The CameraChooser class is responsible for managing switch between the top-down and third-person camera views.
+/// </summary>
+/// <remarks>
+/// No audio in the game so far but the class takes audio listeners as references for later use.
 public class CameraChooser : MonoBehaviour {
 	[SerializeField]
 	Camera TopDownCamera;
@@ -25,6 +30,10 @@ public class CameraChooser : MonoBehaviour {
 
 	}
 
+	/// <summary>
+	/// TabPressed is called when the player presses the Tab key.
+	/// </summary>
+	/// <param name="context"></param>
 	public void HandleTabPressed(InputAction.CallbackContext context) {
 		if (context.started && canSwitch) {
 			manageMode = !manageMode;
@@ -33,6 +42,10 @@ public class CameraChooser : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// ChangeCamera switches between the top-down and third-person camera views.
+	/// By enabling and disabling the cameras and audio listeners.
+	/// </summary>
 	private void ChangeCamera() {
 		if (manageMode) {
 			tbAudioListener.enabled = false;
@@ -57,12 +70,21 @@ public class CameraChooser : MonoBehaviour {
 		playerInput.SwitchCurrentActionMap("InGameBeePov");
 	}
 
+	/// <summary>
+	///	Cooldown for switching between the top-down and third-person camera views.
+	///	</summary>
+	///	<remarks>
+	///	Not longer needed in this context but kept for future reference.
+	///	</remarks>
 	private IEnumerator SwitchCooldown() {
 		canSwitch = false;
 		yield return new WaitForSeconds(0.0f);
 		canSwitch = true;
 	}
 
+	/// <summary>
+	/// Switches the current action map of the player input because the both views have different control schemes.
+	/// </summary>
 	public void SwitchToActionMap(string actionMapName) {
 		playerInput.SwitchCurrentActionMap(actionMapName);
 	}

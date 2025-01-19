@@ -1,5 +1,8 @@
 using UnityEngine;
-
+/// <summary>
+/// Methods for moving the NPCs by sending on or off bools to difrent movement forces.
+/// </summary>
+/// NOTE: TODO: Make abstract parent class to share with Movement.cs
 public class AutoMove : MonoBehaviour {
 	Rigidbody rb;
 	public Transform HiveLocation;
@@ -74,7 +77,7 @@ public class AutoMove : MonoBehaviour {
 		}
 		rb.transform.Rotate(rotateForce * Time.deltaTime);
 	}
-
+	
 	public void Ascend(bool startstop) {
 		if (startstop) { ascend = true; } else if (!startstop) { ascend = false; }
 	}
@@ -99,7 +102,6 @@ public class AutoMove : MonoBehaviour {
 	public void MoveBackward(bool startstop) {
 		if (startstop) { reverse = true; } else if (!startstop) { reverse = false; }
 	}
-	// NUMPAD
 	public void PitchUp(bool startstop) {
 		if (startstop && rotateForce.x < maxRotateSpeed) {
 			rotateForce.x += rotateSpeed;
@@ -133,5 +135,4 @@ public class AutoMove : MonoBehaviour {
 		transform.rotation =
 			Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * turn_speed);
 	}
-
 }

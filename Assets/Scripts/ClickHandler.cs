@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// The ClickHandler class is responsible for handling mouse clicks in the game.
+/// </summary>
 public class ClickHandler : MonoBehaviour {
-	private int selectedFlowerSpecie = -1;
+	// private int selectedFlowerSpecie = -1;
 	public enum Layer { Default = 0, TransparentFX = 1, IgnoreRaycast = 2, Water = 4, UI = 5, Clickable = 6 }
 	private InputAction leftMouseClick, rightMouseClick;
 
@@ -21,33 +24,33 @@ public class ClickHandler : MonoBehaviour {
 		rightMouseClick.Enable();
 	}
 
+	/// <summary>
+	/// Coroutines that waits for the end of the frame before calling LeftMouseClicked.
+	/// </summary>
+	/// <remarks>
+	/// Waiting for the end of the frame helps ensure that all necessary updates and events are processed,
+	/// leading to more reliable and accurate click detection.
+	/// </remarks>
 	private IEnumerator DeferredLeftMouseClicked() {
 		yield return new WaitForEndOfFrame();
 		LeftMouseClicked();
 	}
-
 	private IEnumerator DeferredRightMouseClicked() {
 		yield return new WaitForEndOfFrame();
 		RightMouseClicked();
 	}
 
-	private void LeftMouseClicked() {
-		DetectClickedObject();
-	}
-
-	private void RightMouseClicked() {
-		DetectClickedObject();
-	}
+	private void LeftMouseClicked() => DetectClickedObject();
+	private void RightMouseClicked() => DetectClickedObject();
 
 	private void DetectClickedObject() {
-		// Check if the pointer is over a UI element
+		// Check if the pointer is over a UI element if not return early.
 		if (EventSystem.current.IsPointerOverGameObject()) {
 			return;
 		}
 
 		Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-		RaycastHit hit;
-		if (Physics.Raycast(ray, out hit)) {
+		if (Physics.Raycast(ray, out RaycastHit hit)) {
 			GameObject clickedObject = hit.collider.gameObject;
 			// Clickable zones in scene
 			if (clickedObject.layer == (int)Layer.Clickable) {
@@ -55,11 +58,9 @@ public class ClickHandler : MonoBehaviour {
 				Transform parentTransform = clickedObject.transform.parent;
 				if (parentTransform != null) {
 					// Get the Growth component from the parent
-					Growth parentGrowth = parentTransform.GetComponent<Growth>();
-					if (parentGrowth != null) {
+					if (parentTransform.TryGetComponent<Growth>(out var parentGrowth)) {
 						// Access the id variable from the Growth component
 						int parentId = parentGrowth.spawnById;
-						selectedFlowerSpecie = parentGrowth.spawnById;
 						Debug.Log("Parent's ID: " + parentId);
 						HighlightFlowerBase(parentId);
 					} else {
@@ -72,13 +73,15 @@ public class ClickHandler : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Highlights the flowers base of the clicked group.
+	/// </summary>
+	/// <param name="id"></param>
 	private void HighlightFlowerBase(int id) {
 		Transform grandchild = GetGrandchildWithId(flowerSpawners.transform, id);
 		if (grandchild != null) {
 			Debug.Log("Found grandchild with ID " + id + ": " + grandchild.name);
-
-			HighlightFlower highlightFlower = grandchild.GetComponent<HighlightFlower>();
-			if (highlightFlower != null) {
+			if (grandchild.TryGetComponent<HighlightFlower>(out var highlightFlower)) {
 				highlightFlower.HighlightSelected();
 			} else {
 				Debug.Log("HighlightFlower component not found on grandchild.");
@@ -88,6 +91,12 @@ public class ClickHandler : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Gets the flower specie (grandchild) with the specified ID.
+	/// </summary>
+	/// <param name="parent"></param>
+	/// <param name="id"></param>
+	/// <returns></returns>
 	Transform GetGrandchildWithId(Transform parent, int id) {
 		foreach (Transform child in parent) {
 			foreach (Transform grandchild in child) {
