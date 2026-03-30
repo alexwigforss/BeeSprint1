@@ -8,6 +8,8 @@ I simulationen växlar du sömlöst mellan att styra ett enskilt bi i tredjepers
 
 De autonoma arbetsbina agerar utifrån de instruktioner de får, medan floran de interagerar med följer egna livscykler. Växterna sås naturligt i närheten av sina artfränder och genomgår faser från tillväxt till blomning och slutligen vissnande, vilket skapar en ständigt föränderlig spelplan som kräver strategisk anpassning.
 
+[![Se demovideon på YouTube](https://img.youtube.com/vi/ZEPvDb8WuP4/0.jpg)](https://www.youtube.com/watch?v=ZEPvDb8WuP4)
+
 ## 🛠 Tekniska vägval
 Eftersom målet var att skapa en bas för framtida utbyggnad, lades stor vikt vid en modulär arkitektur enligt *Single Responsibility Principle*. För att simuleringen ska kunna skalas upp till stora svärmar utan att prestandan dyker, implementerades ett skräddarsytt system för målsökning. Istället för att förlita mig på kostsam Raycasting använder jag ett listbaserat system för binas navigation, vilket visat sig vara betydligt mer effektivt för beräkningarna.
 
@@ -19,6 +21,14 @@ Arbetet med prototypen har varit en djupdykning i praktisk spelutveckling. Det h
 Framöver ligger fokus på att öka den biologiska komplexiteten. Det innefattar allt från ett klassystem för drönare (scouter, vakter och krigare) till mer dynamiska miljöfaktorer som dygnsvariationer och naturliga fiender som getingar. Genom att introducera korspollinering hoppas jag kunna simulera den enorma mångfald som finns i naturen, där spelarens agerande direkt påverkar den genetiska sammansättningen på ängen.
 
 ---
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/99786729-9e94-41f8-8487-d55dd3049e20" alt="Skärmbild 2024-09-23 105019" width="48%" />
+  <img src="https://github.com/user-attachments/assets/b16e7748-aa34-4316-bb8d-c8b951620c81" alt="Skärmbild 2025-01-06 221448" width="48%" />
+</p>
+
+---
+
 **Teknisk stack:** Unity Engine & C# (Visual Studio), Blender för modellering, Git för versionshantering.
 
 *Dokumentationen är framtagen i samarbete med språkmodellen Gemini, med projektets tekniska rapport som underlag.*
